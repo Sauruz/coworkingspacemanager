@@ -11,7 +11,8 @@ function show_members() {
     $usersTable->prepare_items();
 
     echo '<div class="wrap">';
-    echo '<h1>Members</h1>';
+    echo '<h1 class="wp-heading-inline">Members</h1>';
+    echo ' <a href="?page=add-member" class="page-title-action">Add Member</a>';
     $usersTable->display();
     echo '</div>';
 
