@@ -6,17 +6,19 @@
 function show_member_add() {
     //must check that the user has the required capability 
     if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
+        csm_error('You do not have sufficient permissions to access this page', true);
     }
     
     //Add the member
     if (isset($_POST['action']) && $_POST['action'] === 'addmember') {
+        $data = $_POST;
         $CsmMember = new CsmMember;
         try {
             $CsmMember->create($_POST);
-            echo '<div class="updated"><p><strong>Member was added</strong></p></div>';
+            csm_update($_POST['first_name'] . ' was added');
+            $data = array();
         } catch (\Exception $e) {
-            echo '<div class="error"><p><strong>' . $e->getMessage() . '</strong></p></div>';
+            csm_error($e->getMessage());
         }
     }
     

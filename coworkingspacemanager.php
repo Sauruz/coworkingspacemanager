@@ -41,6 +41,14 @@ include(CSM_PLUGIN_PATH . 'backend/subscriptions.php');
 //Functions
 include(CSM_PLUGIN_PATH . 'functions.php');
 
+
+function register_session(){
+    if( !session_id() ) {
+        session_start();
+    }
+}
+add_action('init','register_session');
+
 register_activation_hook( __FILE__, 'create_csm_tables' );
 register_activation_hook( __FILE__, 'dummy_user' );
 
