@@ -15,16 +15,11 @@ if ($_REQUEST['identifier']) {
             try {
                 $CsmMember->update($member['identifier'], $_POST);
                 csm_set_update($_POST['last_name'] . ', ' .$_POST['first_name'] . ' was updated');
-                /**
-                 * Hacky AF but whatever, this is Wordpress and wp_redirect gives a bug.
-                 */
-                 echo'<script> window.location="admin.php?page=coworking-space-manager"; </script> ';
+                 hacky_redirect();
             } catch (\Exception $e) {
                 csm_error($e->getMessage());
             }
         }
-        
-
         include(CSM_PLUGIN_PATH . 'views/backend/member-edit.view.php');
     }
 } else {

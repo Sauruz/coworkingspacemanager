@@ -26,7 +26,7 @@ function csm_error($err, $die = false) {
  * @param type $mes
  */
 function csm_update($mes) {
-     echo '<div class="updated"><p><strong>' .$mes . '</strong></p></div>';
+    echo '<div class="updated"><p><strong>' . $mes . '</strong></p></div>';
 }
 
 /**
@@ -42,9 +42,16 @@ function csm_set_update($mes) {
  */
 function csm_get_update() {
     if (isset($_SESSION['update_message']) && !empty($_SESSION['update_message'])) {
-       csm_update($_SESSION['update_message']);
-       $_SESSION['update_message'] = '';
+        csm_update($_SESSION['update_message']);
+        $_SESSION['update_message'] = '';
     }
+}
+
+/**
+ * Hacky AF but whatever, this is Wordpress and wp_redirect gives a bug.
+ */
+function hacky_redirect() {
+    echo'<script> window.location="admin.php?page=' . PLUGIN_SLUG . '"; </script> ';
 }
 
 ?>

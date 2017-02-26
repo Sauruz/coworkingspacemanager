@@ -2,6 +2,9 @@
 
 class CsmMember {
 
+    public $db;
+    public $gump;
+    
     function __construct() {
         global $wpdb;
         $this->db = $wpdb;
@@ -164,6 +167,22 @@ class CsmMember {
             } else {
                 throw new Exception("Email already exist");
             }
+        }
+    }
+    
+    /**
+     * Delete a member
+     * @param type $identifier
+     * @return type
+     */
+    public function delete($identifier) {
+        $member = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'csm_members WHERE identifier = "' . $identifier . '"', ARRAY_A);
+        if (!empty($member)) {
+            $this->db->delete($this->db->prefix . "csm_members", array('identifier' => $identifier));
+            return $member;
+        }
+        else {
+             throw new Exception("No member found with identifier: " . $identifier);
         }
     }
 
