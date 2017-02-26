@@ -40,6 +40,7 @@ class CsmMember {
                 . "profession, "
                 . "bio, "
                 . "photo, "
+                . "(SELECT subscription_type FROM wp_csm_subscriptions WHERE subscription_start < CURDATE() AND subscription_end > CURDATE() AND member_identifier = " . $this->db->prefix . "csm_members.identifier LIMIT 0,1) AS membership_status, "
                 . "created_at "
                 . "FROM " . $this->db->prefix . "csm_members "
                 . "ORDER BY " . $order . " " . $orderby . " "

@@ -68,6 +68,21 @@ class MembersTable extends WP_List_Table {
                 /* $1%s */ $item['email']
         );
     }
+    
+    function column_membership_status($item) {
+        if ($item['membership_status']) {
+            return '<span class="label label-success">Active</span>';
+        }
+        else {
+            return '<span class="label label-default">Inactive</span>';
+        }
+    }
+    
+    function column_membership_type($item) {
+        if ($item['membership_status']) {
+            return $item['membership_status'];
+        }
+    }
 
     /*
      * Render created_at column
@@ -83,7 +98,9 @@ class MembersTable extends WP_List_Table {
             'last_name' => 'Name',
             'email' => 'Email',
             'profession' => 'Profession',
-            'created_at' => 'Member since',
+            'membership_status' => 'Membership Status',
+            'membership_type' => 'Membership Type',
+            'created_at' => 'Member Since',
         );
         return $columns;
     }
@@ -93,6 +110,8 @@ class MembersTable extends WP_List_Table {
             'last_name' => array('last_name', false),
             'email' => array('email', false),
             'profession' => array('profession', false),
+            'membership_status' => array('membership_status', false),
+             'membership_type' => array('membership_type', false),
             'created_at' => array('created_at', false)
         );
         return $sortable_columns;
