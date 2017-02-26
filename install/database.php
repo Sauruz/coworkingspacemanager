@@ -21,7 +21,7 @@ function create_csm_tables() {
                 last_name VARCHAR(100) NOT NULL,
                 email VARCHAR(100) NOT NULL,
                 profession VARCHAR(100) NOT NULL,
-                description LONGTEXT NULL,
+                bio LONGTEXT NULL,
                 photo LONGTEXT NULL,
                 updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -77,13 +77,13 @@ function create_csm_tables() {
  * Add dummy users to database
  */
 function dummy_user() {
-    $user = new CsmUser();
+    $user = new CsmMember();
         $user->create(array(
             'first_name' => 'Hank',
             'last_name' => 'Neville',
             'email' => 'hankneville@example.com',
             'profession' => 'Online marketeer',
-            'description' => 'I am an online marketeer',
+            'bio' => 'I am an online marketeer',
             'photo' => ''
         ));
 
@@ -92,7 +92,7 @@ function dummy_user() {
             'last_name' => 'Rus',
             'email' => 'Guidorus@example.com',
             'profession' => 'Software developer',
-            'description' => 'I am a software developer',
+            'bio' => 'I am a software developer',
             'photo' => ''
         ));
 
@@ -101,7 +101,7 @@ function dummy_user() {
             'last_name' => 'Crush',
             'email' => 'jimcrush@example.com',
             'profession' => 'Entrepeneur',
-            'description' => 'I am a enterpeneur',
+            'bio' => 'I am a enterpeneur',
             'photo' => ''
         ));
 }

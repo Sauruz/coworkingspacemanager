@@ -5,28 +5,23 @@ function show_members() {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
 
-    //Create an instance of our package class...
-    $usersTable = new UsersTable();
-    //Fetch, prepare, sort, and filter our data...
-    $usersTable->prepare_items();
-
-    echo '<div class="wrap">';
-    echo '<h1 class="wp-heading-inline">Members</h1>';
-    echo ' <a href="?page=add-member" class="page-title-action">Add Member</a>';
-    $usersTable->display();
-    echo '</div>';
-
-//    $user = new CsmUser();
-//    try {
-//        $user->create(array(
-//            'first_name' => 'Bram dfgdfg dfg dfg dfggfdgd dfg ddfgg ',
-//            'last_name' => 'van der Velde',
-//            'email' => 'Bramdfgdfg@hotmail.com',
-//            'description' => 'Ik ben een software developer',
-//            'photo' => 'hoi'
-//        ));
-//    } catch (Exception $e) {
-//        //Give error 
-//        echo $e->getMessage();
-//    }
+    /**
+     * EDIT A MEMBER
+     */
+    if ($_REQUEST['action'] && $_REQUEST['action'] === 'edit') {
+        if ($_REQUEST['identifier']) {
+            echo 'edit ' . $_REQUEST['identifier'];
+        } else {
+            wp_die('No identifier specified.');
+        }
+    } else
+    /**
+     * MEMBERS TABLE
+     */ {
+        //Create an instance of our package class...
+        $membersTable = new MembersTable();
+        //Fetch, prepare, sort, and filter our data...
+        $membersTable->prepare_items();
+        include(CSM_PLUGIN_PATH . 'views/backend/members.view.php');
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class UsersTable extends WP_List_Table {
+class MembersTable extends WP_List_Table {
    
     function __construct(){
         global $status, $page;
@@ -44,8 +44,8 @@ class UsersTable extends WP_List_Table {
         
         //Build row actions
         $actions = array(
-            'edit'      => sprintf('<a href="?page=%s&action=%s&movie=%s">Edit</a>',$_REQUEST['page'],'edit',$item['ID']),
-            'delete'    => sprintf('<a href="?page=%s&action=%s&movie=%s">Delete</a>',$_REQUEST['page'],'delete',$item['ID']),
+            'edit'      => sprintf('<a href="?page=%s&action=%s&identifier=%s">Edit</a>',$_REQUEST['page'],'edit',$item['identifier']),
+            'delete'    => sprintf('<a href="?page=%s&action=%s&identifier=%s">Delete</a>',$_REQUEST['page'],'delete',$item['identifier']),
         );
         
         //Return the title contents
@@ -95,18 +95,16 @@ class UsersTable extends WP_List_Table {
 
     function get_bulk_actions() {
         $actions = array(
-            'delete'    => 'Delete'
+            'delete'    => 'Delete',
         );
         return $actions;
     }
 
     function process_bulk_action() {
-        
         //Detect when a bulk action is being triggered...
         if( 'delete'===$this->current_action() ) {
             wp_die('Items deleted (or they would be if we had items to delete)!');
         }
-        
     }
 
     function prepare_items() {
@@ -120,7 +118,7 @@ class UsersTable extends WP_List_Table {
 
         $current_page = $this->get_pagenum();
         
-        $Users = new CsmUser;
+        $Users = new CsmMember;
         $members = $Users->all(
                 (($current_page-1)*$per_page), 
                 $per_page, 
