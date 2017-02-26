@@ -5826,5 +5826,9 @@ body {
   font-size: 13px;
   display: block; }
 
+.nav-tabs {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 /*@import "fonts/flaticon";
 @import "fonts/icomoon"; */

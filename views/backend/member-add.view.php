@@ -1,10 +1,13 @@
 <div class="wrap">
+    <h1 class="wp-heading-inline">Add Member</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="?page=<?php echo PLUGIN_SLUG;?>">Members</a></li>
+        <li class="active"><a href="">Add Member</a></li>
+    </ul>
+    
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
             <div class="panel">
-                <div class="panel-heading">
-                    <h1>Add member</h1>
-                </div>
                 <div class="panel-body">
                     <form action="" method="post">
                         <input name="action" type="hidden" value="addmember">

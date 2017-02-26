@@ -1,10 +1,14 @@
 <div class="wrap">
+    <h1 class="wp-heading-inline">Edit member <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#">Members</a></li>
+        <li><a href="?page=csm-add-member">Add Member</a></li>
+        <li class="active"><a href="#">Edit member <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></a></li>
+    </ul>
+    
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
             <div class="panel">
-                <div class="panel-heading">
-                    <h1>Edit member <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
-                </div>
                 <div class="panel-body">
                     <form action="" method="post">
                         <input name="action" type="hidden" value="editmember">
