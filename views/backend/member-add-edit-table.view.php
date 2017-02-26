@@ -1,44 +1,30 @@
-<table class="form-table">
-    <tbody>
-        <tr class="form-required">
-            <th scope="row">
-                <label for="first_name">First Name <span class="description">(required)</span></label>
-            </th>
-            <td>
-                <input name="first_name" type="text" id="first_name" value="<?php form_value($data, 'first_name'); ?>">
-            </td>
-        </tr>
-        <tr class="form-required">
-            <th scope="row">
-                <label for="last_name">Last Name <span class="description">(required)</span></label>
-            </th>
-            <td>
-                <input name="last_name" type="text" id="last_name" value="<?php form_value($data, 'last_name'); ?>">
-            </td>
-        </tr>
-        <tr class="form-required">
-            <th scope="row">
-                <label for="email">Email <span class="description">(required)</span></label>
-            </th>
-            <td>
-                <input name="email" type="email" id="email" value="<?php form_value($data, 'email'); ?>">
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">
-                <label for="profession">Profession</label>
-            </th>
-            <td>
-                <input name="profession" type="text" id="profession" value="<?php form_value($data, 'profession'); ?>">
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">
-                <label for="bio">Bio</label>
-            </th>
-            <td>
-                <textarea name="bio" id="bio"><?php form_value($data, 'bio'); ?></textarea>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <label for="first_name">First Name <span class="description">(required)</span></label><br>
+        <input name="first_name" class="form-control" type="text" id="first_name" value="<?php form_value($data, 'first_name'); ?>"><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <label for="last_name">Last Name <span class="description">(required)</span></label><br>
+        <input name="last_name" class="form-control" type="text" id="last_name" value="<?php form_value($data, 'last_name'); ?>"><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <label for="email">Email <span class="description">(required)</span></label><br>
+        <input name="email" class="form-control" type="email" id="email" value="<?php form_value($data, 'email'); ?>"><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <label for="profession">Profession</label><br>
+        <input name="profession" class="form-control" type="text" id="profession" value="<?php form_value($data, 'profession'); ?>"><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <label for="bio">Bio</label><br>
+        <textarea name="bio" class="form-control" id="bio" rows="6"><?php form_value($data, 'bio'); ?></textarea><br>
+    </div>
+</div>

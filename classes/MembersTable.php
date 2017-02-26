@@ -71,10 +71,10 @@ class MembersTable extends WP_List_Table {
     
     function column_membership_status($item) {
         if ($item['membership_status']) {
-            return '<span class="label label-success">Active</span>';
+            return '<span class="label label-success label-member-active">Active</span>';
         }
         else {
-            return '<span class="label label-default">Inactive</span>';
+            return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
         }
     }
     
@@ -131,7 +131,7 @@ class MembersTable extends WP_List_Table {
             if (isset($_REQUEST['identifier'])) {
                 try {
                     $member = $this->csmMember->delete($_REQUEST['identifier']);
-                    csm_update($member['last_name'] . ', ' . $member['first_name'] . ' was deleted');
+                    csm_update($member['first_name'] . ' ' . $member['last_name'] . ' was deleted');
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
                 }
@@ -142,7 +142,7 @@ class MembersTable extends WP_List_Table {
                     $res = "";
                     foreach ($_REQUEST['member'] as $identifier) {
                         $member = $this->csmMember->delete($identifier);
-                        $res .= $member['last_name'] . ', ' . $member['first_name'] . ' was deleted<br>';
+                        $res .= $member['first_name'] . ' ' . $member['last_name'] . ' was deleted<br>';
                     }
                     csm_update($res);
                 } catch (\Exception $e) {
@@ -164,7 +164,7 @@ class MembersTable extends WP_List_Table {
         $current_page = $this->get_pagenum();
 
         $members = $this->csmMember->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'ASC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'last_name'
+                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'membership_status'
         );
         $total_items = $this->csmMember->count();
         $this->items = $members;

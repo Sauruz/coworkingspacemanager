@@ -27,6 +27,16 @@ if(!class_exists('WP_List_Table')){
 
 define( 'CSM_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
+//Styles & javascript
+function your_css_and_js() {
+wp_register_style('your_css_and_js', plugins_url('dist/css/styles.css',__FILE__ ));
+wp_enqueue_style('your_css_and_js');
+//wp_register_script( 'your_css_and_js', plugins_url('your_script.js',__FILE__ ));
+//wp_enqueue_script('your_css_and_js');
+}
+add_action( 'admin_init','your_css_and_js');
+
+
 //Autoload composer file
 require CSM_PLUGIN_PATH . 'vendor/autoload.php';
 
