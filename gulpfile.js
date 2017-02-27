@@ -22,8 +22,8 @@ var htmlmin = require('gulp-htmlmin');
 var stripDebug = require('gulp-strip-debug');
 
 var paths = {
-    scripts: ['src/js/**/*.js'],
-    sass: 'src/scss/**/*.scss',
+    scripts: 'src/js/**/*.js',
+    sass: 'src/scss/**/*.scss'
 };
 
 function handleError(err) {
@@ -54,7 +54,9 @@ gulp.task('css', function () {
             .pipe(sass())
             .pipe(concat('scss-files.scss'));
 
-    var cssStream = gulp.src([])
+    var cssStream = gulp.src([
+        'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
+    ])
             .pipe(concat('css-files.css'));
 
     var mergedStream = merge(scssStream, cssStream)
@@ -79,11 +81,18 @@ gulp.task('css', function () {
  */
 
 var bowerComponents = [
-    'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+    'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+    'bower_components/angular/angular.min.js',
+    'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'bower_components/moment/min/moment.min.js'
 ];
 
 gulp.task('js', function () {
     return gulp.src(bowerComponents.concat([
+        'src/js/App.js',
+        'src/js/Ctrl.js',
+        paths.scripts
     ]))
             .pipe(plumber({errorHandler: onError}))
             .pipe(concat('app.js'))
@@ -132,7 +141,7 @@ gulp.task('fonts', function () {
 
 
 gulp.task('watch', function () {
-    gulp.watch(paths.scripts, ['app']);
+    gulp.watch(paths.scripts, ['js']);
     gulp.watch(paths.sass, ['css']);
 });
 

@@ -25,9 +25,9 @@ if ($_REQUEST['identifier']) {
                 try {
                     $response = $CsmMembership->create(array(
                         'member_identifier' => $_REQUEST['identifier'],
-                        'plan_id' => $_POST['plan_id'],
-                        'plan_start' => '2017-02-20',
-                        'plan_end' => '2017-03-20',
+                        'plan_id' => $plan['plan_id'],
+                        'plan_start' => $_POST['plan_start'],
+                        'plan_end' => date('Y-m-d', (strtotime($_POST['plan_start']) + ($plan['days'] * 60 * 60 * 24))),
                         'price' => $plan['price'],
                         'vat' => 0,
                         'price_total' => $plan['price']
