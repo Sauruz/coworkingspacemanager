@@ -32,17 +32,38 @@ function create_csm_tables() {
 	) $charset_collate;";
     dbDelta($members_sql);
 
-    //subscription types
-    $table_subscription_types = $wpdb->prefix . 'csm_plans';
-    $subscription_types_sql = "CREATE TABLE $table_subscription_types (
+    //Workplaces
+    $table_workplaces = $wpdb->prefix . 'csm_workplaces';
+    $workplaces_sql = "CREATE TABLE $table_workplaces (
 		id INT(11) NOT NULL AUTO_INCREMENT,
                 name VARCHAR(100) NOT NULL,
-                price INT(11) NOT NULL,
+                capacity INT(11) NOT NULL, 
+                created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`)
 	) $charset_collate;";
-    dbDelta($subscription_types_sql);
+    dbDelta($workplaces_sql);
+
+    //Membership Plans
+    $table_membership_plans = $wpdb->prefix . 'csm_plans';
+    $membership_plans_sql = "CREATE TABLE $table_membership_plans (
+		id INT(11) NOT NULL AUTO_INCREMENT,
+                workplace_id INT(11) NOT NULL,
+                name VARCHAR(100) NOT NULL,
+                price INT(11) NOT NULL, 
+                days INT(11) NOT NULL, 
+                created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+                PRIMARY KEY (`id`),
+                CONSTRAINT `workplace_foreign` FOREIGN KEY (`workplace_id`) REFERENCES $table_workplaces (`id`) ON DELETE CASCADE
+	) $charset_collate;";
+    dbDelta($membership_plans_sql);
 
 
+    //Spaces
+    /**
+     * Board room
+     * Meeting room
+     * Skype room etc.
+     */
     //Memberships
     $table_membership = $wpdb->prefix . 'csm_memberships';
     $memberships_sql = "CREATE TABLE $table_membership (
@@ -67,18 +88,19 @@ function create_csm_tables() {
 	) $charset_collate;";
     dbDelta($memberships_sql);
 
-
-
     add_option('csm_db_version', $csm_db_version);
 }
 
 /**
  * Add dummy users to database
  */
-function dummy_user() {
-    $user = new CsmMember();
-    try {
-        $user->create(array(
+function dummy_data() {
+    global $wpdb;
+    $membercheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_members", ARRAY_A);
+
+    if (empty($membercheck)) {
+        $CsmMember = new CsmMember();
+        $CsmMember->create(array(
             'first_name' => 'Hank',
             'last_name' => 'Neville',
             'email' => 'hankneville@example.com',
@@ -86,12 +108,8 @@ function dummy_user() {
             'bio' => 'I am an online marketeer',
             'photo' => ''
         ));
-    } catch (Exception $e) {
-        
-    };
 
-    try {
-        $user->create(array(
+        $CsmMember->create(array(
             'first_name' => 'Guido',
             'last_name' => 'Rus',
             'email' => 'Guidorus@example.com',
@@ -99,12 +117,8 @@ function dummy_user() {
             'bio' => 'I am a software developer',
             'photo' => ''
         ));
-    } catch (Exception $e) {
-        
-    };
 
-    try {
-        $user->create(array(
+        $CsmMember->create(array(
             'first_name' => 'Jim',
             'last_name' => 'Crush',
             'email' => 'jimcrush@example.com',
@@ -112,9 +126,56 @@ function dummy_user() {
             'bio' => 'I am a enterpeneur',
             'photo' => ''
         ));
-    } catch (Exception $e) {
+    }
+
+
+    //Add workplace
+    $workplacecheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_workplace", ARRAY_A);
+    $planscheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_plans", ARRAY_A);
+    if (empty($workplacecheck) && empty($planscheck)) {
+        $CsmWorkplace = new CsmWorkplace();
+
+        $CsmWorkplace->create(array(
+            'name' => 'Hot Desk',
+            'capacity' => 45,
+        ));
+
+        $CsmWorkplace->create(array(
+            'name' => 'Dedicated Desk',
+            'capacity' => 10,
+        ));
+
+        $CsmWorkplace->create(array(
+            'name' => 'Private Office',
+            'capacity' => 2,
+        ));
+
         
-    };
+        $workplaceid = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "csm_workplace LIMIT 0,1");
+
+        //Add plans
+        $CsmPlan = new CsmPlan();
+        $CsmPlan->create(array(
+            'workplace_id' => 1,
+            'name' => 'Day',
+            'price' => 10,
+            'days' => 1,
+        ));
+
+        $CsmPlan->create(array(
+            'workplace_id' => 1,
+            'name' => 'Week',
+            'price' => 60,
+            'days' => 7,
+        ));
+
+        $CsmPlan->create(array(
+            'workplace_id' => 1,
+            'name' => 'Month',
+            'price' => 200,
+            'days' => 30,
+        ));
+    }
 }
 
 ?>

@@ -12,7 +12,7 @@ function show_member_add() {
     //Add the member
     if (isset($_POST['action']) && $_POST['action'] === 'addmember') {
         $data = $_POST;
-        $CsmMember = new CsmMember;
+        $CsmMember = new CsmMember();
         try {
             $CsmMember->create($_POST);
             csm_set_update( $_POST['first_name'] . ' ' . $_POST['last_name'] . ' was added');

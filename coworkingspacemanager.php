@@ -42,6 +42,9 @@ require CSM_PLUGIN_PATH . 'vendor/autoload.php';
 
 //Models
 include(CSM_PLUGIN_PATH . 'models/Member.php');
+include(CSM_PLUGIN_PATH . 'models/Membership.php');
+include(CSM_PLUGIN_PATH . 'models/Plan.php');
+include(CSM_PLUGIN_PATH . 'models/Workplace.php');
 
 //Install
 include(CSM_PLUGIN_PATH . 'install/database.php');
@@ -60,7 +63,7 @@ include(CSM_PLUGIN_PATH . 'functions.php');
 add_action('init','register_session');
 
 register_activation_hook( __FILE__, 'create_csm_tables' );
-register_activation_hook( __FILE__, 'dummy_user' );
+register_activation_hook( __FILE__, 'dummy_data' );
 
 
 

@@ -7,7 +7,7 @@ class MembersTable extends WP_List_Table {
     function __construct() {
         global $status, $page;
 
-        $this->csmMember = new CsmMember;
+        $this->csmMember = new CsmMember();
         //Set parent defaults
         parent::__construct(array(
             'singular' => 'member', //singular name of the listed records
