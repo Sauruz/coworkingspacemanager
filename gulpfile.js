@@ -79,10 +79,10 @@ gulp.task('css', function () {
  */
 
 var bowerComponents = [
-    'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+    'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
 ];
 
-gulp.task('app', function () {
+gulp.task('js', function () {
     return gulp.src(bowerComponents.concat([
     ]))
             .pipe(plumber({errorHandler: onError}))
@@ -91,7 +91,7 @@ gulp.task('app', function () {
             //only uglify if gulp is ran with '--type production'
             .pipe(gutil.env.type === 'production' ? stripDebug() : gutil.noop())
             .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
-            .pipe(gulp.dest('public/js'))
+            .pipe(gulp.dest('dist/js'))
             .pipe(notify({
                 'title': 'Javascript',
                 'message': 'Javascript compiled and compressed',
@@ -111,12 +111,10 @@ gulp.task('app', function () {
 gulp.task('fonts', function () {
     return gulp.src([
         'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
-        'bower_components/font-awesome/fonts/*',
-        'resources/assets/fonts/*',
-        'resources/assets/fonts/*/**'
+        'bower_components/font-awesome/fonts/*'
     ])
             .pipe(flatten())
-            .pipe(gulp.dest('public/fonts'))
+            .pipe(gulp.dest('dist/fonts'))
             .pipe(notify({
                 'title': 'Fonts',
                 'message': 'Fonts copied',
@@ -139,5 +137,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', function() {
-    runSequence(['app', 'css']);    
+    runSequence(['js','fonts', 'css']);    
 });

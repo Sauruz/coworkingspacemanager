@@ -1,7 +1,7 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">Edit member <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
     <ul class="nav nav-tabs">
-        <li><a href="#">Members</a></li>
+        <li><a href="?page=<?php echo PLUGIN_SLUG;?>">Members</a></li>
         <li><a href="?page=csm-add-member">Add Member</a></li>
         <li class="active"><a href="#">Edit member <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></a></li>
     </ul>

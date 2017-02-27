@@ -33,7 +33,7 @@ function create_csm_tables() {
     dbDelta($members_sql);
     
     //subscription types
-    $table_subscription_types = $wpdb->prefix . 'csm_subscription_types';
+    $table_subscription_types = $wpdb->prefix . 'csm_plans';
     $subscription_types_sql = "CREATE TABLE $table_subscription_types (
 		id INT(11) NOT NULL AUTO_INCREMENT,
                 name VARCHAR(100) NOT NULL,
@@ -43,15 +43,15 @@ function create_csm_tables() {
     dbDelta($subscription_types_sql);
     
 
-    //subscription 
-    $table_subscriptions = $wpdb->prefix . 'csm_subscriptions';
-    $subscriptions_sql = "CREATE TABLE $table_subscriptions (
+    //Memberships
+    $table_membership = $wpdb->prefix . 'csm_memberships';
+    $memberships_sql = "CREATE TABLE $table_membership (
 		id INT(11) NOT NULL AUTO_INCREMENT,
                 identifier VARCHAR(100) NOT NULL,
                 member_identifier VARCHAR(100) NOT NULL,
-                subscription_type VARCHAR(10) NULL,
-                subscription_start DATE DEFAULT '0000-00-00' NOT NULL,
-                subscription_end DATE DEFAULT '0000-00-00' NOT NULL,
+                plan VARCHAR(10) NULL,
+                plan_start DATE DEFAULT '0000-00-00' NOT NULL,
+                plan_end DATE DEFAULT '0000-00-00' NOT NULL,
                 status VARCHAR(20) DEFAULT 'pending' NOT NULL,
                 payment BOOLEAN DEFAULT 0 NOT NULL,
                 payment_method VARCHAR(20) NULL,
@@ -66,7 +66,7 @@ function create_csm_tables() {
                 KEY `sub_identifier_foreign` (`member_identifier`),
                 CONSTRAINT `sub_identifier_foreign` FOREIGN KEY (`member_identifier`) REFERENCES $table_members (`identifier`) ON DELETE CASCADE
 	) $charset_collate;";
-    dbDelta($subscriptions_sql);
+    dbDelta($memberships_sql);
 
 
 

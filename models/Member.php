@@ -40,9 +40,17 @@ class CsmMember {
                 . "profession, "
                 . "bio, "
                 . "photo, "
-                . "(SELECT subscription_type FROM wp_csm_subscriptions WHERE subscription_start < CURDATE() AND subscription_end > CURDATE() AND member_identifier = " . $this->db->prefix . "csm_members.identifier LIMIT 0,1) AS membership_status, "
+                . "plan, "
+                . "plan_start, "
+                . "plan_end, "
+                . "payment, "
+                . "payment_method, "
+                . "invoice_sent, "
                 . "created_at "
                 . "FROM " . $this->db->prefix . "csm_members "
+                . "LEFT JOIN "
+                . "(SELECT member_identifier, plan, plan_start, plan_end, payment, payment_method, invoice_sent FROM wp_csm_memberships WHERE plan_start < CURDATE() AND plan_end > CURDATE() ORDER BY plan_end DESC LIMIT 0,1) ms "
+                . "ON (identifier = ms.member_identifier) "
                 . "ORDER BY " . $order . " " . $orderby . " "
                 . "LIMIT " . $offset . "," . $limit;
         return $this->db->get_results($query, ARRAY_A);

@@ -18,11 +18,33 @@ class MembersTable extends WP_List_Table {
 
     function column_default($item, $column_name) {
         switch ($column_name) {
-            case 'first_name':
-            case 'profession':
-                return $item[$column_name];
+            case 'email':
+                return sprintf(
+                        '<a href="mailto:%1$s">%1$s</a>',
+                        /* $1%s */ $item['email']
+                );
+            case 'payment':
+                if ($item['payment']) {
+                    return '<i class="fa fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . $item['payment_method'];
+                } else {
+                    if ($item['plan']) {
+                        return '<i class="fa fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
+                    } else {
+                        return '';
+                    }
+                }
+            case 'invoice_sent': 
+                if ($item['invoice_sent']) {
+                    return '<i class="fa fa-lg fa-check-circle text-success" aria-hidden="true"></i>';
+                } else {
+                    if ($item['plan']) {
+                        return '<i class="fa fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
+                    } else {
+                        return '';
+                    }
+                }
             default:
-                return print_r($item, true); //Show the whole array for troubleshooting purposes
+                return $item[$column_name];
         }
     }
 
@@ -58,38 +80,12 @@ class MembersTable extends WP_List_Table {
         );
     }
 
-    /*
-     * Render email column
-     */
-
-    function column_email($item) {
-        return sprintf(
-                '<a href="mailto:%1$s">%1$s</a>',
-                /* $1%s */ $item['email']
-        );
-    }
-    
     function column_membership_status($item) {
-        if ($item['membership_status']) {
+        if ($item['plan']) {
             return '<span class="label label-success label-member-active">Active</span>';
-        }
-        else {
+        } else {
             return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
         }
-    }
-    
-    function column_membership_type($item) {
-        if ($item['membership_status']) {
-            return $item['membership_status'];
-        }
-    }
-
-    /*
-     * Render created_at column
-     */
-
-    function column_created_at($item) {
-        return $item['created_at'];
     }
 
     function get_columns() {
@@ -97,10 +93,11 @@ class MembersTable extends WP_List_Table {
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'last_name' => 'Name',
             'email' => 'Email',
-            'profession' => 'Profession',
             'membership_status' => 'Membership Status',
-            'membership_type' => 'Membership Type',
-            'created_at' => 'Member Since',
+            'plan' => 'Plan',
+            'plan_end' => 'Plan Ends On',
+            'payment' => 'Payment Status',
+            'invoice_sent' => 'Invoice Sent'
         );
         return $columns;
     }
@@ -109,10 +106,11 @@ class MembersTable extends WP_List_Table {
         $sortable_columns = array(
             'last_name' => array('last_name', false),
             'email' => array('email', false),
-            'profession' => array('profession', false),
-            'membership_status' => array('membership_status', false),
-             'membership_type' => array('membership_type', false),
-            'created_at' => array('created_at', false)
+            'membership_status' => array('plan', false),
+            'plan' => array('plan', false),
+            'plan_end' => array('plan_end', false),
+            'payment' => array('plan_end', false),
+            'invoice_sent' => array('invoice_sent', false),
         );
         return $sortable_columns;
     }
@@ -164,7 +162,7 @@ class MembersTable extends WP_List_Table {
         $current_page = $this->get_pagenum();
 
         $members = $this->csmMember->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'membership_status'
+                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'plan'
         );
         $total_items = $this->csmMember->count();
         $this->items = $members;
