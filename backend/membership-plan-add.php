@@ -7,35 +7,28 @@ if ($_REQUEST['identifier']) {
         csm_error('No user found with identifier ' . $_REQUEST['identifier'], true);
     } else {
         $data = $member;
+        
+       
 
-//        $CsmMembership = new CsmMemberShip();
-//
-//        try {
-//            $response = $CsmMembership->create(array(
-//                'member_identifier' => $_REQUEST['identifier'],
-//                'plan' => 'Month',
-//                'plan_start' => '2017-02-20',
-//                'plan_end' => '2017-03-20',
-//                'price' => 100,
-//                'vat' => 0,
-//                'price_total' => 100
-//            ));
-//            if ($response !== 1) {
-//                csm_error('Something went wrong');
-//            }
-//        } catch (\Exception $e) {
-//            csm_error($e->getMessage());
-//        }
-        
-        $CsmPlan = new CsmPlan();
-        
-        $CsmPlan->create(array(
-            'name' => 'Day',
-            'price' => 10,
-            'days' => 1,
-        ));
-        
-        
+        $CsmMembership = new CsmMemberShip();
+
+        try {
+            $response = $CsmMembership->create(array(
+                'member_identifier' => $_REQUEST['identifier'],
+                'plan_id' => 1,
+                'plan_start' => '2017-02-20',
+                'plan_end' => '2017-03-20',
+                'price' => 100,
+                'vat' => 0,
+                'price_total' => 100
+            ));
+            if ($response !== 1) {
+                csm_error('Something went wrong');
+            }
+        } catch (\Exception $e) {
+            csm_error($e->getMessage());
+        }
+
         //Edit the member
         if (isset($_POST['action']) && $_POST['action'] === 'editmember') {
             $data = $_POST;

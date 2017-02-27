@@ -25,23 +25,29 @@ class MembersTable extends WP_List_Table {
                 );
             case 'payment':
                 if ($item['payment']) {
-                    return '<i class="fa fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . $item['payment_method'];
+                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . $item['payment_method'];
                 } else {
                     if ($item['plan']) {
-                        return '<i class="fa fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
+                        return '<i class="fa fa-fw fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
                     } else {
                         return '';
                     }
                 }
-            case 'invoice_sent': 
+            case 'invoice_sent':
                 if ($item['invoice_sent']) {
-                    return '<i class="fa fa-lg fa-check-circle text-success" aria-hidden="true"></i>';
+                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i>';
                 } else {
                     if ($item['plan']) {
-                        return '<i class="fa fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
+                        return '<i class="fa fa-fw fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
                     } else {
                         return '';
                     }
+                }
+            case 'plan':
+                if ($item['plan']) {
+                    return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan'] . ' <i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
+                } else {
+                    return '';
                 }
             default:
                 return $item[$column_name];

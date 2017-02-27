@@ -87,7 +87,7 @@ class CsmMembership {
 
         $this->gump->validation_rules(array(
             'member_identifier' => 'required|max_len,100',
-            'plan' => 'required|max_len,100',
+            'plan_id' => 'required|numeric',
             'plan_start' => 'required|date',
             'plan_end' => 'required|date',
             'price' => 'required|numeric',
@@ -97,7 +97,7 @@ class CsmMembership {
 
         $this->gump->filter_rules(array(
             'member_identifier' => 'trim|sanitize_string',
-            'plan' => 'trim|sanitize_string',
+            'plan_id' => 'trim|sanitize_string',
             'plan_start' => 'trim|sanitize_string',
             'plan_end' => 'trim|sanitize_string',
             'price' => 'trim|sanitize_string',
@@ -117,7 +117,7 @@ class CsmMembership {
             return $this->db->insert($this->db->prefix . "csm_memberships", array(
                         'identifier' => $this->create_identifier(),
                         'member_identifier' => $data['member_identifier'],
-                        'plan' => $data['plan'],
+                        'plan_id' => $data['plan_id'],
                         'plan_start' => $data['plan_start'],
                         'plan_end' => $data['plan_end'],
                         'price' => $data['price'],
