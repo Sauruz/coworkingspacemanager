@@ -10,6 +10,11 @@ function show_members() {
      */
     if ($_REQUEST['action'] && $_REQUEST['action'] === 'editmember') {
         include(CSM_PLUGIN_PATH . 'backend/member-edit.php');
+    } else if ($_REQUEST['action'] && $_REQUEST['action'] === 'add-membership-plan')
+    /**
+     * NEW MEMBERSHIP
+     */ {
+        include(CSM_PLUGIN_PATH . 'backend/membership-plan-add.php');
     } else
     /**
      * MEMBERS TABLE

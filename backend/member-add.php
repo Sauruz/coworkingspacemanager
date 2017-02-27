@@ -15,7 +15,7 @@ function show_member_add() {
         $CsmMember = new CsmMember;
         try {
             $CsmMember->create($_POST);
-            csm_set_update($_POST['last_name'] . ', ' . $_POST['first_name'] . ' was added');
+            csm_set_update( $_POST['first_name'] . ' ' . $_POST['last_name'] . ' was added');
             hacky_redirect();
         } catch (\Exception $e) {
             csm_error($e->getMessage());

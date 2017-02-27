@@ -1,27 +1,29 @@
-@import "bootstrap";
+.bootstrap-wrapper {
+
+    @import "bootstrap";
 
 
-//########################################################
-// BOWER LIBS
-//########################################################
+    //########################################################
+    // BOWER LIBS
+    //########################################################
 
-@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "bower_components/font-awesome/scss/font-awesome.scss";
-@import "main";
-
-
-//########################################################
-// FONTS
-//########################################################
-
-/*@import "fonts/flaticon";
-@import "fonts/icomoon"; */
-
-//########################################################
-// ASSETS
-//########################################################
+    @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+    @import "bower_components/font-awesome/scss/font-awesome.scss";
+    @import "main"; 
 
 
+    //########################################################
+    // FONTS
+    //########################################################
+
+    /*@import "fonts/flaticon";
+    @import "fonts/icomoon"; */
+
+    //########################################################
+    // ASSETS
+    //########################################################
+
+}
 
 
 

@@ -31,7 +31,7 @@ function create_csm_tables() {
                 
 	) $charset_collate;";
     dbDelta($members_sql);
-    
+
     //subscription types
     $table_subscription_types = $wpdb->prefix . 'csm_plans';
     $subscription_types_sql = "CREATE TABLE $table_subscription_types (
@@ -41,7 +41,7 @@ function create_csm_tables() {
                 PRIMARY KEY (`id`)
 	) $charset_collate;";
     dbDelta($subscription_types_sql);
-    
+
 
     //Memberships
     $table_membership = $wpdb->prefix . 'csm_memberships';
@@ -52,7 +52,6 @@ function create_csm_tables() {
                 plan VARCHAR(10) NULL,
                 plan_start DATE DEFAULT '0000-00-00' NOT NULL,
                 plan_end DATE DEFAULT '0000-00-00' NOT NULL,
-                status VARCHAR(20) DEFAULT 'pending' NOT NULL,
                 payment BOOLEAN DEFAULT 0 NOT NULL,
                 payment_method VARCHAR(20) NULL,
                 payment_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
@@ -78,6 +77,7 @@ function create_csm_tables() {
  */
 function dummy_user() {
     $user = new CsmMember();
+    try {
         $user->create(array(
             'first_name' => 'Hank',
             'last_name' => 'Neville',
@@ -86,7 +86,11 @@ function dummy_user() {
             'bio' => 'I am an online marketeer',
             'photo' => ''
         ));
+    } catch (Exception $e) {
+        
+    };
 
+    try {
         $user->create(array(
             'first_name' => 'Guido',
             'last_name' => 'Rus',
@@ -95,7 +99,11 @@ function dummy_user() {
             'bio' => 'I am a software developer',
             'photo' => ''
         ));
+    } catch (Exception $e) {
+        
+    };
 
+    try {
         $user->create(array(
             'first_name' => 'Jim',
             'last_name' => 'Crush',
@@ -104,6 +112,9 @@ function dummy_user() {
             'bio' => 'I am a enterpeneur',
             'photo' => ''
         ));
+    } catch (Exception $e) {
+        
+    };
 }
 
 ?>

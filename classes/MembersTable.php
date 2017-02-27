@@ -75,7 +75,7 @@ class MembersTable extends WP_List_Table {
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ $item['last_name'] . '<span style="color:silver">, ' . $item['first_name'] . '</span>',
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&action=%s&identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', $_REQUEST['page'], 'editmember', $item['identifier']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }
@@ -92,11 +92,11 @@ class MembersTable extends WP_List_Table {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'last_name' => 'Name',
-            'email' => 'Email',
+//            'email' => 'Email',
             'membership_status' => 'Membership Status',
-            'plan' => 'Plan',
-            'plan_end' => 'Plan Ends On',
-            'payment' => 'Payment Status',
+            'plan' => 'Membership Plan',
+            'plan_end' => 'Membership Expires',
+            'payment' => 'Payment',
             'invoice_sent' => 'Invoice Sent'
         );
         return $columns;
@@ -105,7 +105,7 @@ class MembersTable extends WP_List_Table {
     function get_sortable_columns() {
         $sortable_columns = array(
             'last_name' => array('last_name', false),
-            'email' => array('email', false),
+//            'email' => array('email', false),
             'membership_status' => array('plan', false),
             'plan' => array('plan', false),
             'plan_end' => array('plan_end', false),
