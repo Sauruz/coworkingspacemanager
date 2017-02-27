@@ -73,11 +73,10 @@ class CsmMember {
                     . "INNER JOIN " . $this->db->prefix . "csm_workplaces "
                     . "ON " . $this->db->prefix . "csm_plans.workplace_id = " . $this->db->prefix . "csm_workplaces.id "
                     . "WHERE plan_start <= CURDATE() AND plan_end > CURDATE() "
-                    . "ORDER BY plan_end DESC LIMIT 0,1) ms "
+                    . "ORDER BY plan_end DESC) ms "
                 . "ON (identifier = ms.member_identifier) "
                 . "ORDER BY " . $order . " " . $orderby . " "
                 . "LIMIT " . $offset . "," . $limit;
-        
         return $this->db->get_results($query, ARRAY_A);
     }
     
