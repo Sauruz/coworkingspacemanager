@@ -932,15 +932,15 @@ app.directive('addMembershipPlan', function ($locale, $timeout) {
                 format: "yyyy-mm-dd",
                 startDate: vm.startDate,
                 todayHighlight: true,
-                autoclose: true,
-//                container: '.bootstrap-wrapper' 
+                autoclose: true
             }).on('changeDate', function (e) {
                 $timeout(function () {
-                    var startDate = moment(e.date).format('YYYY-MM-DD');
-                    vm.endDate = moment(startDate).add(vm.selectedPlan.days, 'days').format('YYYY-MM-DD');
+                    vm.startDate = moment(e.date).format('YYYY-MM-DD');
+                    vm.endDate = moment(vm.startDate).add(vm.selectedPlan.days, 'days').format('YYYY-MM-DD');
                     vm.selectedPlan.total_price = vm.selectedPlan.price + ((vm.selectedPlan.price / 100) * vm.vat);
                 });
             });
+            $('#plan_start').datepicker('setDate', new Date());
             
             $scope.$watch('vm.selectedPlan.days', function(newValue, oldValue) {
                 vm.endDate = moment(vm.startDate).add(vm.selectedPlan.days, 'days').format('YYYY-MM-DD');

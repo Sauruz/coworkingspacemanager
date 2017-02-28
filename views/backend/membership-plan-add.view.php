@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="plan_start">Start date <span class="description">(required)</span></label><br>
-                                    <input name="plan_start" class="form-control" type="text" id="plan_start"><br>
+                                    <input name="plan_start" class="form-control" type="text" id="plan_start" placeholder="yyyy-mm-dd"><br>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="plan_start">End date</label><br>
