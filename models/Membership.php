@@ -2,12 +2,14 @@
 
 class CsmMembership {
 
-    public $db;
-    public $gump;
+    private $db;
+    private $gump;
+    private $csmplan;
 
     function __construct() {
         global $wpdb;
         $this->db = $wpdb;
+        $this->csmplan = new CsmPlan();
         /**
          * Use gump library to validate input
          * https://github.com/Wixel/GUMP
@@ -124,27 +126,74 @@ class CsmMembership {
                         'vat' => $data['vat'],
                         'price_total' => $data['price_total'],
                         'created_at' => current_time('mysql'),
-                            )   
+                            )
             );
         }
     }
-    
+
+    /**
+     * Create a simple membership
+     * Only have to give a membership_identifier, plan_id and plan_start
+     * @param type $data
+     * @return type
+     * @throws Exception
+     */
+    public function create_simple($data) {
+        $plan = $this->csmplan->get($data['plan_id']);
+        if (empty($plan)) {
+            throw new Exception('Something went wrong. Membership plan does not exist');
+        } else {
+
+            $this->gump->validation_rules(array(
+                'member_identifier' => 'required|max_len,100',
+                'plan_id' => 'required|numeric',
+                'plan_start' => 'required|date',
+                'vat' => 'required|numeric'
+            ));
+
+            $validated_data = $this->gump->run($data);
+            if ($validated_data === false) {
+                $errArr = $this->gump->get_readable_errors();
+                $errString = "";
+                foreach ($errArr as $k => $err) {
+                    $errString .= $err . '<br>';
+                }
+                throw new Exception($errString);
+            } else {
+                $response = $this->create(array(
+                    'member_identifier' => $data['identifier'],
+                    'plan_id' => $plan['plan_id'],
+                    'plan_start' => $data['plan_start'],
+                    'plan_end' => date('Y-m-d', (strtotime($data['plan_start']) + ($plan['days'] * 60 * 60 * 24))),
+                    'price' => $plan['price'],
+                    'vat' => $plan['vat'],
+                    'price_total' => $plan['price'] + (($plan['price'] / 100) * $plan['vat'])
+                ));
+                if ($response !== 1) {
+                    throw new Exception('Something went wrong');
+                } else {
+                    return $response;
+                }
+            }
+        }
+    }
+
     /**
      * Create new identifier
      * @return string
      */
     public function create_identifier() {
-        $query = "SELECT identifier FROM " . $this->db->prefix . "csm_memberships WHERE identifier LIKE '%" . date('Y'). "%' ORDER BY identifier DESC LIMIT 0,1";
+        $query = "SELECT identifier FROM " . $this->db->prefix . "csm_memberships WHERE identifier LIKE '%" . date('Y') . "%' ORDER BY identifier DESC LIMIT 0,1";
         $new_identifier = date('Y') . '-00001';
         $last_identifier = $this->db->get_var($query);
-        
+
         if (!empty($last_identifier)) {
             $end = intval(end(explode('-', $last_identifier)));
             $next_number = $end + 1;
             $num_padded = sprintf("%05d", $next_number);
             $new_identifier = date('Y') . '-' . $num_padded;
         }
-       return $new_identifier;
+        return $new_identifier;
     }
 
     /**

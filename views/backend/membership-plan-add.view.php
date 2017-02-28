@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="plan_start">Start date <span class="description">(required)</span></label><br>
-                                    <input name="plan_start" class="form-control" type="text" id="plan_start" ng-value="vm.startDate"><br>
+                                    <input name="plan_start" class="form-control" type="text" id="plan_start"><br>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="plan_start">End date</label><br>
@@ -49,13 +49,16 @@
                             </div>
                              <div class="row">
                                 <div class="col-md-6">
+                                    <label for="vat">VAT </label><br>
+                                     <select class="form-control" id="vat" name="vat"
+                                            ng-options="vat + '%' for vat in vm.vatPercentages"
+                                            ng-model="vm.vat">
+                                    </select><br>
+                                </div>
+                                 <div class="col-md-6">
                                     <label for="price">Price</label><br>
                                     <div class="form-control-static">{{vm.selectedPlan.price | currency}}</div>
                                 </div>
-<!--                                <div class="col-md-6">
-                                    <label for="vat">VAT </label><br>
-                                    <input name="vat" class="form-control" type="text" id="vat" value="<?php form_value($data, 'vat'); ?>"><br>
-                                </div>-->
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><hr></div>
@@ -68,7 +71,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Total price</label><br>
-                                    <div class="form-control-static">{{vm.selectedPlan.price | currency}}</div>
+                                    <div class="form-control-static">{{vm.selectedPlan.total_price | currency}}</div>
                                 </div>
                             </div>
 
