@@ -5,7 +5,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="#">Profile</a></li>
         <li><a href="?page=<?php echo $_REQUEST['page'];?>&action=add-membership-plan&identifier=<?php echo $data['identifier'];?>">Add Membership Plan</a></li>
-        <li><a href="?page=<?php echo $_REQUEST['page'];?>&action=membershiphistory&identifier=<?php echo $data['identifier'];?>">Membership History</a></li>
+        <li><a href="?page=<?php echo $_REQUEST['page'];?>&action=membership-history&identifier=<?php echo $data['identifier'];?>">Membership History</a></li>
     </ul>
     
     <div class="row">

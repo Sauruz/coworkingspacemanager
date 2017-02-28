@@ -15,6 +15,11 @@ function show_members() {
      * NEW MEMBERSHIP
      */ {
         include(CSM_PLUGIN_PATH . 'backend/membership-plan-add.php');
+    } else if ($_REQUEST['action'] && $_REQUEST['action'] === 'membership-history')
+    /**
+     * MEMBERSHIP HISTORY
+     */ {
+        include(CSM_PLUGIN_PATH . 'backend/membership-history.php');
     } else
     /**
      * MEMBERS TABLE

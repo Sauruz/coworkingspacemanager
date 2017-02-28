@@ -53,6 +53,7 @@ include(CSM_PLUGIN_PATH . 'install/database.php');
 
 //Classes
 include(CSM_PLUGIN_PATH . 'classes/MembersTable.php');
+include(CSM_PLUGIN_PATH . 'classes/MembershipTable.php');
 
 //Pages
 include(CSM_PLUGIN_PATH . 'backend/members.php');

@@ -5,7 +5,7 @@
         <ul class="nav nav-tabs">
             <li><a href="?page=<?php echo $_REQUEST['page']; ?>&action=editmember&identifier=<?php echo $data['identifier']; ?>">Profile</a></li>
             <li class="active"><a href="#">Add Membership Plan</a></li>
-            <li><a href="?page=<?php echo $_REQUEST['page']; ?>&action=membershiphistory&identifier=<?php echo $data['identifier']; ?>">Membership History</a></li>
+            <li><a href="?page=<?php echo $_REQUEST['page']; ?>&action=membership-history&identifier=<?php echo $data['identifier']; ?>">Membership History</a></li>
         </ul>
         
         <script>
@@ -51,13 +51,13 @@
                                 <div class="col-md-6">
                                     <label for="vat">VAT </label><br>
                                      <select class="form-control" id="vat" name="vat"
-                                            ng-options="vat + '%' for vat in vm.vatPercentages"
+                                            ng-options="vat + '%' for vat in vm.vatPercentages track by vat"
                                             ng-model="vm.vat">
                                     </select><br>
                                 </div>
                                  <div class="col-md-6">
                                     <label for="price">Price</label><br>
-                                    <div class="form-control-static">{{vm.selectedPlan.price | currency}}</div>
+                                    <div class="form-control-static" ng-bind="vm.selectedPlan.price | currency"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Total price</label><br>
-                                    <div class="form-control-static">{{vm.selectedPlan.total_price | currency}}</div>
+                                    <div class="form-control-static" ng-bind="vm.selectedPlan.total_price | currency"></div>
                                 </div>
                             </div>
 

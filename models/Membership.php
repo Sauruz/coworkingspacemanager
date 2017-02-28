@@ -26,35 +26,32 @@ class CsmMembership {
     }
 
     /**
-     * get all users
+     * get all Memberships
      * @param type $offset
      * @param type $limit
      * @param type $orderby
      * @param type $order
      * @return type
      */
-    public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC') {
+    public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC', $member_identifier = false) {
         $query = "SELECT "
                 . "identifier, "
-                . "first_name, "
-                . "last_name, "
-                . "email, "
-                . "profession, "
-                . "bio, "
-                . "photo, "
-                . "plan, "
+                . "plan_id, "
                 . "plan_start, "
                 . "plan_end, "
                 . "payment, "
                 . "payment_method, "
+                . "payment_at, "
+                . "price, "
+                . "vat, "
+                . "price_total, "
                 . "invoice_sent, "
                 . "created_at "
-                . "FROM " . $this->db->prefix . "csm_members "
-                . "LEFT JOIN "
-                . "(SELECT member_identifier, plan, plan_start, plan_end, payment, payment_method, invoice_sent FROM wp_csm_memberships WHERE plan_start < CURDATE() AND plan_end > CURDATE() ORDER BY plan_end DESC LIMIT 0,1) ms "
-                . "ON (identifier = ms.member_identifier) "
+                . "FROM " . $this->db->prefix . "csm_memberships "
                 . "ORDER BY " . $order . " " . $orderby . " "
                 . "LIMIT " . $offset . "," . $limit;
+        
+        echo $query;
         return $this->db->get_results($query, ARRAY_A);
     }
 
@@ -143,7 +140,6 @@ class CsmMembership {
         if (empty($plan)) {
             throw new Exception('Something went wrong. Membership plan does not exist');
         } else {
-
             $this->gump->validation_rules(array(
                 'member_identifier' => 'required|max_len,100',
                 'plan_id' => 'required|numeric',
@@ -161,7 +157,7 @@ class CsmMembership {
                 throw new Exception($errString);
             } else {
                 $response = $this->create(array(
-                    'member_identifier' => $data['identifier'],
+                    'member_identifier' => $data['member_identifier'],
                     'plan_id' => $plan['plan_id'],
                     'plan_start' => $data['plan_start'],
                     'plan_end' => date('Y-m-d', (strtotime($data['plan_start']) + ($plan['days'] * 60 * 60 * 24))),

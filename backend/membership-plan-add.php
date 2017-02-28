@@ -22,7 +22,8 @@ if ($_REQUEST['identifier']) {
                 $CsmMembership->create_simple(array(
                     'member_identifier' => $_REQUEST['identifier'],
                     'plan_id' => $_POST['plan_id'],
-                    'plan_start' => $_POST['plan_start']
+                    'plan_start' => $_POST['plan_start'],
+                    'vat' => $_POST['vat']
                 ));
 
                 csm_set_update('Membership plan added');

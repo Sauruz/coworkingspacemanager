@@ -20,7 +20,7 @@ app.directive('addMembershipPlan', function ($locale, $timeout) {
                 startDate: vm.startDate,
                 todayHighlight: true,
                 autoclose: true,
-                container: '.bootstrap-wrapper'
+//                container: '.bootstrap-wrapper' 
             }).on('changeDate', function (e) {
                 $timeout(function () {
                     var startDate = moment(e.date).format('YYYY-MM-DD');
