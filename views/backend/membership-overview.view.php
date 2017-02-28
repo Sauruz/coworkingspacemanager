@@ -3,9 +3,9 @@
 
     <div class="bootstrap-wrapper">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#">Membership Overview</a></li>
-            <li><a href="?page=<?php echo $_REQUEST['page']; ?>&action=add-membership-plan&identifier=<?php echo $data['identifier']; ?>">Add Membership Plan</a></li>
-            <li><a href="?page=<?php echo $_REQUEST['page']; ?>&action=editmember&identifier=<?php echo $data['identifier']; ?>">Profile of <?php echo $data['first_name'];?></a></li>
+            <li class="active"><a href="?page=csm-membership-overview&member_identifier=<?php echo $data['identifier']; ?>">Membership Overview</a></li>
+            <li><a href="?page=csm-membership-add&member_identifier=<?php echo $data['identifier']; ?>">Add Membership Plan</a></li>
+            <li><a href="?page=csm-edit-member&member_identifier=<?php echo $data['identifier']; ?>">Profile of <?php echo $data['first_name'];?></a></li>
         </ul>
        
          <form id="members-filter" method="get">

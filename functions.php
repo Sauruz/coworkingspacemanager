@@ -50,8 +50,12 @@ function csm_get_update() {
 /**
  * Hacky AF but whatever, this is Wordpress and wp_redirect gives a bug.
  */
-function hacky_redirect() {
-    echo'<script> window.location="admin.php?page=' . PLUGIN_SLUG . '"; </script> ';
+function hacky_redirect($page = false) {
+    if ($page) {
+        echo'<script> window.location="admin.php?page=' . $page . '"; </script> ';
+    } else {
+        echo'<script> window.location="admin.php?page=' . PLUGIN_SLUG . '"; </script> ';
+    }
 }
 
 ?>

@@ -5,30 +5,10 @@ function show_members() {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
 
-    /**
-     * EDIT A MEMBER
-     */
-    if ($_REQUEST['action'] && $_REQUEST['action'] === 'editmember') {
-        include(CSM_PLUGIN_PATH . 'backend/member-edit.php');
-    } else if ($_REQUEST['action'] && $_REQUEST['action'] === 'add-membership-plan')
-    /**
-     * NEW MEMBERSHIP
-     */ {
-        include(CSM_PLUGIN_PATH . 'backend/membership-plan-add.php');
-    } else if ($_REQUEST['action'] && ($_REQUEST['action'] === 'membership-overview' || $_REQUEST['action'] === 'delete-membership'))
-    /**
-     * MEMBERSHIP HISTORY
-     */ {
-        include(CSM_PLUGIN_PATH . 'backend/membership-overview.php');
-    } else
-    /**
-     * MEMBERS TABLE
-     */ {
-        //Create an instance of our package class...
-        $membersTable = new MembersTable();
-        //Fetch, prepare, sort, and filter our data...
-        $membersTable->prepare_items();
-        csm_get_update();
-        include(CSM_PLUGIN_PATH . 'views/backend/members.view.php');
-    }
+    //Create an instance of our package class...
+    $membersTable = new MembersTable();
+    //Fetch, prepare, sort, and filter our data...
+    $membersTable->prepare_items();
+    csm_get_update();
+    include(CSM_PLUGIN_PATH . 'views/backend/members.view.php');
 }

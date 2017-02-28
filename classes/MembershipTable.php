@@ -46,7 +46,7 @@ class MembershipTable extends WP_List_Table {
 
         //Build row actions
         $actions = array(
-            'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s&membership_identifier=%s">Delete</a>', $_REQUEST['page'], 'delete-membership', $_REQUEST['identifier'], $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s&membership_identifier=%s">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['identifier'], $item['identifier']),
         );
 
         //Return the title contents
@@ -93,20 +93,17 @@ class MembershipTable extends WP_List_Table {
 
     function get_bulk_actions() {
         $actions = array(
-            'delete-membership' => 'Delete',
+            'delete' => 'Delete',
         );
         return $actions;
     }
 
     function process_bulk_action() {
         //Detect when a bulk action is being triggered...
-        if ('delete-membership' === $this->current_action()) {
-            
-            echo 'test';
-              print_p($_REQUEST['membership']);
+        if ('delete' === $this->current_action()) {
             
             //Single member delete action
-            if (isset($_REQUEST['identifier'])) {
+            if (isset($_REQUEST['membership_identifier'])) {
                 try {
                     $membership = $this->csmMembership->delete($_REQUEST['membership_identifier']);
                     csm_update($_REQUEST['membership_identifier'] . ' was deleted');
@@ -116,12 +113,8 @@ class MembershipTable extends WP_List_Table {
             }
             //Delete multiple members
             else {
-               
                 try {
                     $res = "";
-                    
-                   
-                    
                     foreach ($_REQUEST['membership'] as $identifier) {
                         $membership = $this->csmMembership->delete($identifier);
                         $res .= $identifier . ' was deleted was deleted<br>';
@@ -149,7 +142,7 @@ class MembershipTable extends WP_List_Table {
                 (($current_page - 1) * $per_page), $per_page, 
                 !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', 
                 !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier',
-                $_REQUEST['identifier']
+                $_REQUEST['member_identifier']
         );
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;
