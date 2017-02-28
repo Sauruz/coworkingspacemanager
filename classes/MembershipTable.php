@@ -46,7 +46,7 @@ class MembershipTable extends WP_List_Table {
 
         //Build row actions
         $actions = array(
-            'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s&membership_identifier=%s">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['identifier'], $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&member_identifier=%s&identifier=%s">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['member_identifier'], $item['identifier']),
         );
 
         //Return the title contents
@@ -92,6 +92,8 @@ class MembershipTable extends WP_List_Table {
     }
 
     function get_bulk_actions() {
+//        echo'test';
+//        die;
         $actions = array(
             'delete' => 'Delete',
         );
@@ -99,14 +101,16 @@ class MembershipTable extends WP_List_Table {
     }
 
     function process_bulk_action() {
+        
+        
         //Detect when a bulk action is being triggered...
         if ('delete' === $this->current_action()) {
             
             //Single member delete action
-            if (isset($_REQUEST['membership_identifier'])) {
+            if (isset($_REQUEST['identifier'])) {
                 try {
-                    $membership = $this->csmMembership->delete($_REQUEST['membership_identifier']);
-                    csm_update($_REQUEST['membership_identifier'] . ' was deleted');
+                    $membership = $this->csmMembership->delete($_REQUEST['identifier']);
+                    csm_update($_REQUEST['identifier'] . ' was deleted');
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
                 }

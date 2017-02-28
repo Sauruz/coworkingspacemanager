@@ -8,9 +8,10 @@
             <li><a href="?page=csm-edit-member&member_identifier=<?php echo $data['identifier']; ?>">Profile of <?php echo $data['first_name'];?></a></li>
         </ul>
        
-         <form id="members-filter" method="get">
+         <form id="memberships-filter" method="get">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
             <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+            <input type="hidden" name="member_identifier" value="<?php echo $_REQUEST['member_identifier'] ?>" />
             <?php $MembershipTable->display(); ?>
         </form>
       
