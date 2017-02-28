@@ -10,14 +10,16 @@ class MembershipTable extends WP_List_Table {
         $this->csmMembership = new CsmMembership();
         //Set parent defaults
         parent::__construct(array(
-            'singular' => 'member', //singular name of the listed records
-            'plural' => 'members', //plural name of the listed records
+            'singular' => 'membership', //singular name of the listed records
+            'plural' => 'memberships', //plural name of the listed records
             'ajax' => false        //does this table support ajax?
         ));
     }
 
     function column_default($item, $column_name) {
         switch ($column_name) {
+            case 'member_identifier':
+                    return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan_name'] . ' <i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
             default:
                 return $item[$column_name];
         }
@@ -44,18 +46,18 @@ class MembershipTable extends WP_List_Table {
 
         //Build row actions
         $actions = array(
-            'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s">Delete</a>', $_REQUEST['page'], 'delete-membership', $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s&membership_identifier=%s">Delete</a>', $_REQUEST['page'], 'delete-membership', $_REQUEST['identifier'], $item['identifier']),
         );
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<span class="row-title">' . $item['identifier'] . '</span>', $_REQUEST['page'], 'editmember', $item['identifier']),
+                /* $1%s */ sprintf('<span class="row-title">' . $item['identifier'] . '</span>', $_REQUEST['page']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }
 
     function column_membership_status($item) {
-        if ($item['plan']) {
+        if ((strtotime($item['plan_start']) <= time()) && (strtotime($item['plan_end']) > time())) {
             return '<span class="label label-success label-member-active">Active</span>';
         } else {
             return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
@@ -65,11 +67,11 @@ class MembershipTable extends WP_List_Table {
     function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
-            'identifier' => 'Membership nr.',
+            'identifier' => 'Membership Nr.',
+            'membership_status' => 'Membership Status',
             'member_identifier' => 'Membership Plan',
-            'plan_id' => 'Plan id',
-            'plan_start' => 'Plan start',
-            'plan_end' => 'Plan end',
+            'plan_start' => 'Starts',
+            'plan_end' => 'Expires',
             'price' => 'Price',
             'invoice_sent' => 'Invoice Sent'
         );
@@ -79,8 +81,8 @@ class MembershipTable extends WP_List_Table {
     function get_sortable_columns() {
         $sortable_columns = array(
             'identifier' => array('identifier', false),
+            'membership_status' => array('plan_start', false),
             'member_identifier' => array('member_identifier', false),
-            'plan_id' => array('plan_id', false),
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
             'price' => array('price', false),
@@ -91,30 +93,38 @@ class MembershipTable extends WP_List_Table {
 
     function get_bulk_actions() {
         $actions = array(
-            'delete' => 'Delete',
+            'delete-membership' => 'Delete',
         );
         return $actions;
     }
 
     function process_bulk_action() {
         //Detect when a bulk action is being triggered...
-        if ('delete' === $this->current_action()) {
+        if ('delete-membership' === $this->current_action()) {
+            
+            echo 'test';
+              print_p($_REQUEST['membership']);
+            
             //Single member delete action
             if (isset($_REQUEST['identifier'])) {
                 try {
-                    $member = $this->csmMember->delete($_REQUEST['identifier']);
-                    csm_update($member['first_name'] . ' ' . $member['last_name'] . ' was deleted');
+                    $membership = $this->csmMembership->delete($_REQUEST['membership_identifier']);
+                    csm_update($_REQUEST['membership_identifier'] . ' was deleted');
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
                 }
             }
             //Delete multiple members
             else {
+               
                 try {
                     $res = "";
-                    foreach ($_REQUEST['member'] as $identifier) {
-                        $member = $this->csmMember->delete($identifier);
-                        $res .= $member['first_name'] . ' ' . $member['last_name'] . ' was deleted<br>';
+                    
+                   
+                    
+                    foreach ($_REQUEST['membership'] as $identifier) {
+                        $membership = $this->csmMembership->delete($identifier);
+                        $res .= $identifier . ' was deleted was deleted<br>';
                     }
                     csm_update($res);
                 } catch (\Exception $e) {
@@ -135,11 +145,14 @@ class MembershipTable extends WP_List_Table {
 
         $current_page = $this->get_pagenum();
 
-        $members = $this->csmMembership->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier'
+        $memberships = $this->csmMembership->all(
+                (($current_page - 1) * $per_page), $per_page, 
+                !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', 
+                !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier',
+                $_REQUEST['identifier']
         );
         $total_items = $this->csmMembership->count();
-        $this->items = $members;
+        $this->items = $memberships;
 
         $this->set_pagination_args(array(
             'total_items' => $total_items, //WE have to calculate the total number of items

@@ -34,24 +34,36 @@ class CsmMembership {
      * @return type
      */
     public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC', $member_identifier = false) {
+
+        $where = "";
+        if ($member_identifier) {
+            $where = "WHERE " . $this->db->prefix . "csm_memberships.member_identifier = '" . $member_identifier . "' ";
+        }
+
         $query = "SELECT "
-                . "identifier, "
-                . "plan_id, "
-                . "plan_start, "
-                . "plan_end, "
-                . "payment, "
-                . "payment_method, "
-                . "payment_at, "
-                . "price, "
-                . "vat, "
-                . "price_total, "
-                . "invoice_sent, "
-                . "created_at "
+                . $this->db->prefix . "csm_memberships.identifier, "
+                . $this->db->prefix . "csm_memberships.plan_id, "
+                . $this->db->prefix . "csm_memberships.plan_start, "
+                . $this->db->prefix . "csm_memberships.plan_end, "
+                . $this->db->prefix . "csm_memberships.payment, "
+                . $this->db->prefix . "csm_memberships.payment_method, "
+                . $this->db->prefix . "csm_memberships.payment_at, "
+                . $this->db->prefix . "csm_memberships.price, "
+                . $this->db->prefix . "csm_memberships.vat, "
+                . $this->db->prefix . "csm_memberships.price_total, "
+                . $this->db->prefix . "csm_memberships.invoice_sent, "
+                . $this->db->prefix . "csm_plans.name AS plan_name, "
+                . $this->db->prefix . "csm_plans.days AS plan_days, "
+                . $this->db->prefix . "csm_workplaces.name AS workplace_name, "
+                . $this->db->prefix . "csm_memberships.created_at "
                 . "FROM " . $this->db->prefix . "csm_memberships "
+                . "INNER JOIN " . $this->db->prefix . "csm_plans "
+                . "ON " . $this->db->prefix . "csm_memberships.plan_id = " . $this->db->prefix . "csm_plans.id "
+                . "INNER JOIN " . $this->db->prefix . "csm_workplaces "
+                . "ON " . $this->db->prefix . "csm_plans.workplace_id = " . $this->db->prefix . "csm_workplaces.id "
+                . $where
                 . "ORDER BY " . $order . " " . $orderby . " "
                 . "LIMIT " . $offset . "," . $limit;
-        
-        echo $query;
         return $this->db->get_results($query, ARRAY_A);
     }
 
@@ -192,69 +204,19 @@ class CsmMembership {
         return $new_identifier;
     }
 
-    /**
-     * Update a member
-     * @param type $identifier
-     * @param type $data
-     * @return type
-     * @throws Exception
-     */
-    public function update($identifier, $data) {
-        $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
-
-        $this->gump->validation_rules(array(
-            'first_name' => 'required|max_len,100',
-            'last_name' => 'required|max_len,100',
-            'email' => 'required|valid_email'
-        ));
-
-        $this->gump->filter_rules(array(
-            'first_name' => 'trim|sanitize_string',
-            'last_name' => 'trim|sanitize_string',
-            'email' => 'trim|sanitize_email',
-            'profession' => 'trim|sanitize_string',
-            'bio' => 'trim|sanitize_string'
-        ));
-
-        $validated_data = $this->gump->run($data);
-        if ($validated_data === false) {
-            $errArr = $this->gump->get_readable_errors();
-            $errString = "";
-            foreach ($errArr as $k => $err) {
-                $errString .= $err . '<br>';
-            }
-            throw new Exception($errString);
-        } else {
-            $user = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'csm_members WHERE email="' . $data['email'] . ' AND identifier != "' . $identifier . '"', ARRAY_A);
-            if (empty($user)) {
-                return $this->db->update($this->db->prefix . "csm_members", array(
-                            'first_name' => $data['first_name'],
-                            'last_name' => $data['last_name'],
-                            'email' => $data['email'],
-                            'bio' => $data['bio'],
-                            'profession' => $data['profession'],
-                            'photo' => $data['photo'],
-                            'created_at' => current_time('mysql'),
-                                ), array('identifier' => $identifier)
-                );
-            } else {
-                throw new Exception("Email already exist");
-            }
-        }
-    }
 
     /**
-     * Delete a member
+     * Delete a membership
      * @param type $identifier
      * @return type
      */
     public function delete($identifier) {
-        $member = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'csm_members WHERE identifier = "' . $identifier . '"', ARRAY_A);
-        if (!empty($member)) {
-            $this->db->delete($this->db->prefix . "csm_members", array('identifier' => $identifier));
-            return $member;
+        $membership = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'csm_memberships WHERE identifier = "' . $identifier . '"', ARRAY_A);
+        if (!empty($membership)) {
+            $this->db->delete($this->db->prefix . "csm_memberships", array('identifier' => $identifier));
+            return $membership;
         } else {
-            throw new Exception("No member found with identifier: " . $identifier);
+            throw new Exception("No membership found with number: " . $identifier);
         }
     }
 

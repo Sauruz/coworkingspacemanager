@@ -12,7 +12,7 @@ if ($_REQUEST['identifier']) {
         $MembershipTable->prepare_items();
         csm_get_update();
         
-        include(CSM_PLUGIN_PATH . 'views/backend/membership-history.view.php');
+        include(CSM_PLUGIN_PATH . 'views/backend/membership-overview.view.php');
     }
 } else {
     csm_error('No identifier specified', true);

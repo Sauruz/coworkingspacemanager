@@ -81,7 +81,7 @@ class MembersTable extends WP_List_Table {
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&action=%s&identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', $_REQUEST['page'], 'editmember', $item['identifier']),
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&action=%s&identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', $_REQUEST['page'], 'membership-overview', $item['identifier']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }
