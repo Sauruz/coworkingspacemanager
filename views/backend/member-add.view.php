@@ -3,8 +3,8 @@
 
     <div class="bootstrap-wrapper">
         <ul class="nav nav-tabs">
-            <li><a href="?page=<?php echo PLUGIN_SLUG; ?>">All Members</a></li>
-            <li class="active"><a href="">Add Member</a></li>
+            <li><a href="?page=<?php echo PLUGIN_SLUG; ?>"><i class="fa fa-fw fa-users" aria-hidden="true"></i> All Members</a></li>
+            <li class="active"><a href=""><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a></li>
         </ul>
 
         <div class="row">
