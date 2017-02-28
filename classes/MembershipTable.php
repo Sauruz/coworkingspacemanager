@@ -19,7 +19,19 @@ class MembershipTable extends WP_List_Table {
     function column_default($item, $column_name) {
         switch ($column_name) {
             case 'member_identifier':
-                    return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan_name'] . ' <i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
+                return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
+            case 'payment':
+                if ($item['payment']) {
+                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> Paid';
+                } else {
+                    return '<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Send reminder</button>';
+                }
+            case 'invoice_sent':
+                if ($item['invoice_sent']) {
+                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> Invoice sent';
+                } else {
+                    return '<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Send invoice</button>';
+                }
             default:
                 return $item[$column_name];
         }
@@ -59,6 +71,8 @@ class MembershipTable extends WP_List_Table {
     function column_membership_status($item) {
         if ((strtotime($item['plan_start']) <= time()) && (strtotime($item['plan_end']) > time())) {
             return '<span class="label label-success label-member-active">Active</span>';
+        } else if ((strtotime($item['plan_start']) > time()) && (strtotime($item['plan_end']) > time())) {
+            return '<span class="label label-info label-member-active">Pending</span>';
         } else {
             return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
         }
@@ -68,11 +82,12 @@ class MembershipTable extends WP_List_Table {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'identifier' => 'Membership Nr.',
-            'membership_status' => 'Membership Status',
-            'member_identifier' => 'Membership Plan',
+            'membership_status' => 'Status',
+            'member_identifier' => 'Plan',
             'plan_start' => 'Starts',
             'plan_end' => 'Expires',
             'price' => 'Price',
+            'payment' => 'Payment',
             'invoice_sent' => 'Invoice Sent'
         );
         return $columns;
@@ -86,6 +101,7 @@ class MembershipTable extends WP_List_Table {
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
             'price' => array('price', false),
+            'payment' => array('payment', false),
             'invoice_sent' => array('invoice_sent', false),
         );
         return $sortable_columns;
@@ -101,11 +117,11 @@ class MembershipTable extends WP_List_Table {
     }
 
     function process_bulk_action() {
-        
-        
+
+
         //Detect when a bulk action is being triggered...
         if ('delete' === $this->current_action()) {
-            
+
             //Single member delete action
             if (isset($_REQUEST['identifier'])) {
                 try {
@@ -143,10 +159,7 @@ class MembershipTable extends WP_List_Table {
         $current_page = $this->get_pagenum();
 
         $memberships = $this->csmMembership->all(
-                (($current_page - 1) * $per_page), $per_page, 
-                !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', 
-                !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier',
-                $_REQUEST['member_identifier']
+                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', $_REQUEST['member_identifier']
         );
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;

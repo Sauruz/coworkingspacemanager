@@ -1,10 +1,10 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline">Add Member</h1>
+    <h1 class="wp-heading-inline"><strong>Add Member</strong></h1>
 
     <div class="bootstrap-wrapper">
         <ul class="nav nav-tabs">
             <li><a href="?page=<?php echo PLUGIN_SLUG; ?>"><i class="fa fa-fw fa-users" aria-hidden="true"></i> All Members</a></li>
-            <li class="active"><a href=""><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a></li>
+            <li class="active"><a href="?page=csm-add-member"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a></li>
         </ul>
 
         <div class="row">

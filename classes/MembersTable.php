@@ -23,29 +23,21 @@ class MembersTable extends WP_List_Table {
                         '<a href="mailto:%1$s">%1$s</a>',
                         /* $1%s */ $item['email']
                 );
-            case 'payment':
-                if ($item['payment']) {
-                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . $item['payment_method'];
+            case 'payments_open':
+                if ($item['payments_open']) {
+                    return '<i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> ' . $item['payments_open'] . ($item['payments_open'] > 1 ? ' payments to receive' : ' payment to receive');
                 } else {
-                    if ($item['plan']) {
-                        return '<i class="fa fa-fw fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
-                    } else {
-                        return '';
-                    }
+                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> All paid';
                 }
-            case 'invoice_sent':
-                if ($item['invoice_sent']) {
-                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i>';
+            case 'invoices_open':
+                if ($item['invoices_open']) {
+                    return '<i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> ' . $item['invoices_open'] . ($item['invoices_open'] > 1 ? ' invoices to send' : ' invoice to send');
                 } else {
-                    if ($item['plan']) {
-                        return '<i class="fa fa-fw fa-lg fa-minus-circle text-danger" aria-hidden="true"></i> not yet';
-                    } else {
-                        return '';
-                    }
+                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> No invoices to send';
                 }
             case 'plan':
                 if ($item['plan']) {
-                    return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan'] . ' <i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
+                    return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
                 } else {
                     return '';
                 }
@@ -81,14 +73,16 @@ class MembersTable extends WP_List_Table {
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>','csm-membership-overview', $item['identifier']),
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', 'csm-membership-overview', $item['identifier']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }
 
     function column_membership_status($item) {
-        if ($item['plan']) {
+        if ((strtotime($item['plan_start']) <= time()) && (strtotime($item['plan_end']) > time())) {
             return '<span class="label label-success label-member-active">Active</span>';
+        } else if ((strtotime($item['plan_start']) > time()) && (strtotime($item['plan_end']) > time())) {
+            return '<span class="label label-info label-member-active">Pending</span>';
         } else {
             return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
         }
@@ -102,8 +96,8 @@ class MembersTable extends WP_List_Table {
             'membership_status' => 'Membership Status',
             'plan' => 'Membership Plan',
             'plan_end' => 'Membership Expires',
-            'payment' => 'Payment',
-            'invoice_sent' => 'Invoice Sent'
+            'payments_open' => 'Payments',
+            'invoices_open' => 'Invoices'
         );
         return $columns;
     }
@@ -115,8 +109,8 @@ class MembersTable extends WP_List_Table {
             'membership_status' => array('plan', false),
             'plan' => array('plan', false),
             'plan_end' => array('plan_end', false),
-            'payment' => array('plan_end', false),
-            'invoice_sent' => array('invoice_sent', false),
+            'payments_open' => array('payments_open', false),
+            'invoices_open' => array('invoices_open', false),
         );
         return $sortable_columns;
     }
