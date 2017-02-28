@@ -19,7 +19,7 @@ class MembershipTable extends WP_List_Table {
     function column_default($item, $column_name) {
         switch ($column_name) {
             case 'member_identifier':
-                return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
+                return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
             case 'payment':
                 if ($item['payment']) {
                     return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> Paid';
@@ -86,7 +86,7 @@ class MembershipTable extends WP_List_Table {
             'member_identifier' => 'Plan',
             'plan_start' => 'Starts',
             'plan_end' => 'Expires',
-            'price' => 'Price',
+            'price_total' => 'Price',
             'payment' => 'Payment',
             'invoice_sent' => 'Invoice Sent'
         );
@@ -100,7 +100,7 @@ class MembershipTable extends WP_List_Table {
             'member_identifier' => array('member_identifier', false),
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
-            'price' => array('price', false),
+            'price_total' => array('price', false),
             'payment' => array('payment', false),
             'invoice_sent' => array('invoice_sent', false),
         );

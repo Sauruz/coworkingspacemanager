@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Show members page
+ */
 function show_members() {
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);

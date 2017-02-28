@@ -61,7 +61,7 @@ include(CSM_PLUGIN_PATH . 'backend/member-add.php');
 include(CSM_PLUGIN_PATH . 'backend/member-edit.php');
 include(CSM_PLUGIN_PATH . 'backend/membership-overview.php');
 include(CSM_PLUGIN_PATH . 'backend/membership-add.php');
-include(CSM_PLUGIN_PATH . 'backend/subscriptions.php');
+include(CSM_PLUGIN_PATH . 'backend/settings.php');
 
 //Functions
 include(CSM_PLUGIN_PATH . 'functions.php');
@@ -83,5 +83,9 @@ function csm_menu() {
     add_submenu_page('_doesnt_exist', 'Edit Member', 'Edit Member', 'manage_options', 'csm-edit-member', 'show_member_edit');
     add_submenu_page('_doesnt_exist', 'Membership Overview', 'Membership Overview', 'manage_options', 'csm-membership-overview', 'show_membership_overview');
     add_submenu_page('_doesnt_exist', 'Add Membership Plan', 'Add Membership Plan', 'manage_options', 'csm-membership-add', 'show_membership_add');
-    add_submenu_page(PLUGIN_SLUG, 'All Memberships', 'All Memberships', 'manage_options', 'csm-memberships', 'show_memberships');
+    
+    add_submenu_page(PLUGIN_SLUG, 'Calendar', 'Calendar', 'manage_options', 'csm-calendar', 'show_calendar');
+    
+    add_submenu_page(PLUGIN_SLUG, 'General Settings', 'Settings', 'manage_options', 'csm-settings', 'show_settings');
+    add_submenu_page(PLUGIN_SLUG, 'Plans', 'Plans', 'manage_options', 'csm-settings-plans', 'show_settings_plans');
 }

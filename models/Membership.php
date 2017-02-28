@@ -148,6 +148,7 @@ class CsmMembership {
      * @throws Exception
      */
     public function create_simple($data) {
+        
         $plan = $this->csmplan->get($data['plan_id']);
         if (empty($plan)) {
             throw new Exception('Something went wrong. Membership plan does not exist');
@@ -175,7 +176,7 @@ class CsmMembership {
                     'plan_end' => date('Y-m-d', (strtotime($data['plan_start']) + ($plan['days'] * 60 * 60 * 24))),
                     'price' => $plan['price'],
                     'vat' => $plan['vat'],
-                    'price_total' => $plan['price'] + (($plan['price'] / 100) * $plan['vat'])
+                    'price_total' => $plan['price'] + (($plan['price'] / 100) * $data['vat'])
                 ));
                 if ($response !== 1) {
                     throw new Exception('Something went wrong');

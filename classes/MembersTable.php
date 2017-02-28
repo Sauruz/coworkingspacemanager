@@ -27,17 +27,17 @@ class MembersTable extends WP_List_Table {
                 if ($item['payments_open']) {
                     return '<i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> ' . $item['payments_open'] . ($item['payments_open'] > 1 ? ' payments to receive' : ' payment to receive');
                 } else {
-                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> All paid';
+                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> 0 payments to receive';
                 }
             case 'invoices_open':
                 if ($item['invoices_open']) {
                     return '<i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> ' . $item['invoices_open'] . ($item['invoices_open'] > 1 ? ' invoices to send' : ' invoice to send');
                 } else {
-                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> No invoices to send';
+                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> 0 invoices to send';
                 }
             case 'plan':
                 if ($item['plan']) {
-                    return '<strong><i class="fa fa-fw fa-calendar text-success" aria-hidden="true"></i> ' . $item['plan'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
+                    return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
                 } else {
                     return '';
                 }
