@@ -8,6 +8,7 @@ function show_membership_overview() {
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
+ 
 
     if ($_REQUEST['member_identifier']) {
         $CsmMember = new CsmMember();

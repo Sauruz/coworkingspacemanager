@@ -20,6 +20,12 @@ class MembershipTable extends WP_List_Table {
         switch ($column_name) {
             case 'member_identifier':
                 return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
+            case 'plan_start':
+                return '<span ng-bind="' . (strtotime($item['plan_start']) * 1000) . ' | date : \'mediumDate\'">' . $item['plan_start'] . '</span>';
+            case 'plan_end':
+                return '<span ng-bind="' . (strtotime($item['plan_end']) * 1000) . ' | date : \'mediumDate\'">' . $item['plan_end'] . '</span>';
+            case 'price_total':
+                return '<span ng-bind="' . $item['price_total'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price_total'] . '</span>';
             case 'payment':
                 if ($item['payment']) {
                     return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . date('Y-m-d', strtotime($item['payment_at'])) . '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:silver">' . $item['payment_method'] . '</span>';

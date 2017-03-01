@@ -7,14 +7,10 @@ function show_settings() {
     
     include(CSM_PLUGIN_PATH . '/backend/assets/currency-symbols.php');
     
-
    //Edit the settings
     if (isset($_POST['action']) && $_POST['action'] === 'change-settings') {
         update_option('csm-currency', $_POST['currency']);
-        
-        
         csm_update('Settings updated');
-       
     }
     
     include(CSM_PLUGIN_PATH . 'views/backend/settings.view.php');

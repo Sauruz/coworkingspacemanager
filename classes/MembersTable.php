@@ -41,6 +41,12 @@ class MembersTable extends WP_List_Table {
                 } else {
                     return '';
                 }
+            case 'plan_end':
+                if ($item['plan_end']) {
+                    return '<span ng-bind="' . (strtotime($item['plan_end']) * 1000) . ' | date : \'mediumDate\'">' . $item['plan_end'] . '</span>';
+                } else {
+                    return '';
+                }
             default:
                 return $item[$column_name];
         }

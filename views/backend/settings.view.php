@@ -16,9 +16,8 @@
                                     <label for="currency">Currency</label><br>
                                     <select name="currency" id="currency" class="form-control">
                                         <?php
-                                        $current_currency = get_option('csm-currency');
                                         foreach ($currency_symbols as $k => $symbol) {
-                                            $selected = ($current_currency === $k) ? "selected" : "";
+                                            $selected = (CSM_CURRENCY === $k) ? "selected" : "";
                                             echo '<option value="' . $k . '" ' . $selected . '>' . $k . ' (' . html_entity_decode($symbol) . ')</option>';
                                         }
                                         ?>

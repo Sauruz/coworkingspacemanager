@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="plan_start">End date</label><br>
-                                    <div class="form-control-static" ng-bind="vm.endDate"></div>
+                                    <div class="form-control-static" ng-bind="vm.endDate | date : 'mediumDate'"></div>
                                 </div>
                             </div>
                              <div class="row">
@@ -53,7 +53,7 @@
                                 </div>
                                  <div class="col-md-6">
                                     <label for="price">Price</label><br>
-                                    <div class="form-control-static" ng-bind="vm.selectedPlan.price | currency"></div>
+                                    <div class="form-control-static" ng-bind="vm.selectedPlan.price | currency : '<?php echo CSM_CURRENCY_SYMBOL;?>'"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Total price</label><br>
-                                    <div class="form-control-static" ng-bind="vm.selectedPlan.total_price | currency"></div>
+                                    <div class="form-control-static" ng-bind="vm.selectedPlan.total_price | currency : '<?php echo CSM_CURRENCY_SYMBOL;?>'"></div>
                                 </div>
                             </div>
 

@@ -1,8 +1,12 @@
 <?php
 
 global $csm_db_version;
-define('PLUGIN_SLUG', 'coworking-space-manager');
 $csm_db_version = '1.0';
+define('PLUGIN_SLUG', 'coworking-space-manager');
+//define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
+
+define('CMS_LOCALE', 'nl-nl');
+
 
 /*
   Plugin Name: Coworking Space Manager
@@ -34,13 +38,24 @@ function csm_style() {
     wp_enqueue_style('csm_style');
     wp_register_script('csm_js', plugins_url('dist/js/app.js', __FILE__));
     wp_enqueue_script('csm_js');
+    wp_register_script('i18n', plugins_url('dist/js/i18n/angular-locale_' . CMS_LOCALE . '.js', __FILE__));
+    wp_enqueue_script('i18n');
 }
-
 add_action('admin_init', 'csm_style');
 
 
 //Autoload composer file
 require CSM_PLUGIN_PATH . 'vendor/autoload.php';
+
+//Assets
+include(CSM_PLUGIN_PATH . '/backend/assets/currency-symbols.php');
+
+//Standard CSM Settings Settings
+define('CSM_CURRENCY', get_option('csm-currency'));
+define('CSM_CURRENCY_SYMBOL', html_entity_decode($currency_symbols[CSM_CURRENCY]));
+
+//Functions
+include(CSM_PLUGIN_PATH . 'functions.php');
 
 //Models
 include(CSM_PLUGIN_PATH . 'models/Member.php');
@@ -63,8 +78,6 @@ include(CSM_PLUGIN_PATH . 'backend/membership-overview.php');
 include(CSM_PLUGIN_PATH . 'backend/membership-add.php');
 include(CSM_PLUGIN_PATH . 'backend/settings.php');
 
-//Functions
-include(CSM_PLUGIN_PATH . 'functions.php');
 
 add_action('init', 'register_session');
 
@@ -93,7 +106,4 @@ function csm_menu() {
     
     add_submenu_page(PLUGIN_SLUG, 'Email Templates', 'Email Templates', 'manage_options', 'csm-email-templates', 'show_email-templates');
 }
-
-
-
 

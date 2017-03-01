@@ -21,6 +21,7 @@ var clean = require('gulp-clean');
 var htmlmin = require('gulp-htmlmin');
 var stripDebug = require('gulp-strip-debug');
 
+
 var paths = {
     scripts: 'src/js/**/*.js',
     sass: 'src/scss/**/*.scss'
@@ -41,6 +42,26 @@ var onError = function (err) {
     this.emit('end');
 };
 
+/**
+ * ######################################################################
+ * CLEAN
+ * ######################################################################
+ */
+gulp.task('clean', function () {
+    return gulp.src('dist', {read: false})
+        .pipe(clean());
+});
+
+/**
+ * ######################################################################
+ * COPY
+ * ######################################################################
+ */
+gulp.task('copy-i18n', function() {
+    gulp.src('./bower_components/angular-i18n/**/*')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('./dist/js/i18n'));
+});
 
 /**
  * ######################################################################
@@ -146,5 +167,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', function() {
-    runSequence(['js','fonts', 'css']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n']);    
 });
