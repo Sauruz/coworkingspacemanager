@@ -65,5 +65,4 @@ function hacky_redirect($page = false) {
 function tab_active($slug) {
     echo !empty($_GET['page']) && $_GET['page'] === $slug ? 'active' : '';
 }
-
 ?>
