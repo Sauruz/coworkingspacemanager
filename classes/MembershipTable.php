@@ -22,13 +22,13 @@ class MembershipTable extends WP_List_Table {
                 return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
             case 'payment':
                 if ($item['payment']) {
-                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> Paid';
+                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . date('Y-m-d', strtotime($item['payment_at'])) . '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:silver">' . $item['payment_method'] . '</span>';
                 } else {
                     return '<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Send reminder</button>';
                 }
             case 'invoice_sent':
                 if ($item['invoice_sent']) {
-                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> Invoice sent';
+                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> ' . date('Y-m-d', strtotime($item['invoice_sent_at']));
                 } else {
                     return '<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Send invoice</button>';
                 }

@@ -70,6 +70,7 @@ add_action('init', 'register_session');
 
 register_activation_hook(__FILE__, 'create_csm_tables');
 register_activation_hook(__FILE__, 'dummy_data');
+register_activation_hook(__FILE__, 'default_options');
 
 
 
@@ -86,6 +87,13 @@ function csm_menu() {
     
     add_submenu_page(PLUGIN_SLUG, 'Calendar', 'Calendar', 'manage_options', 'csm-calendar', 'show_calendar');
     
-    add_submenu_page(PLUGIN_SLUG, 'General Settings', 'Settings', 'manage_options', 'csm-settings', 'show_settings');
+    add_submenu_page(PLUGIN_SLUG, 'Settings', 'Settings', 'manage_options', 'csm-settings', 'show_settings');
     add_submenu_page(PLUGIN_SLUG, 'Plans', 'Plans', 'manage_options', 'csm-settings-plans', 'show_settings_plans');
+    add_submenu_page(PLUGIN_SLUG, 'Workspaces', 'Workplaces', 'manage_options', 'csm-settings-plans', 'show_settings_workplaces');
+    
+    add_submenu_page(PLUGIN_SLUG, 'Email Templates', 'Email Templates', 'manage_options', 'csm-email-templates', 'show_email-templates');
 }
+
+
+
+

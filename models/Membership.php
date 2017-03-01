@@ -52,6 +52,7 @@ class CsmMembership {
                 . $this->db->prefix . "csm_memberships.vat, "
                 . $this->db->prefix . "csm_memberships.price_total, "
                 . $this->db->prefix . "csm_memberships.invoice_sent, "
+                . $this->db->prefix . "csm_memberships.invoice_sent_at, "
                 . $this->db->prefix . "csm_plans.name AS plan_name, "
                 . $this->db->prefix . "csm_plans.days AS plan_days, "
                 . $this->db->prefix . "csm_workplaces.name AS workplace_name, "

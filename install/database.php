@@ -80,6 +80,7 @@ function create_csm_tables() {
                 vat INT(11) NULL,
                 price_total INT(11) NULL,
                 invoice_sent BOOLEAN DEFAULT 0 NOT NULL,
+                invoice_sent_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY identifier_key (identifier),
@@ -191,6 +192,11 @@ function dummy_data() {
             'price_total' => $plan['price']
         ));
     }
+}
+
+    //Set standard options for Coworking Space Manages
+function default_options() {
+    update_option('csm-currency', 'USD');
 }
 
 ?>
