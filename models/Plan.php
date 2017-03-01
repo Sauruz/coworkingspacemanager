@@ -19,7 +19,7 @@ class CsmPlan {
      * Get all plans
      * @return type
      */
-    public function all() {
+    public function all($offset = 0, $limit = 10, $orderby = 'plan_name', $order = 'ASC') {
         $query = "SELECT "
                 . $this->db->prefix . "csm_plans.id as plan_id, "
                 . $this->db->prefix . "csm_plans.name as plan_name, "
@@ -28,8 +28,18 @@ class CsmPlan {
                 . "days "
                 . "FROM " . $this->db->prefix . "csm_plans "
                 . "INNER JOIN " . $this->db->prefix . "csm_workplaces "
-                . "ON " . $this->db->prefix . "csm_workplaces.id = " . $this->db->prefix . "csm_plans.workplace_id";
+                . "ON " . $this->db->prefix . "csm_workplaces.id = " . $this->db->prefix . "csm_plans.workplace_id "
+                . "ORDER BY " . $order . " " . $orderby . " "
+                . "LIMIT " . $offset . "," . $limit;
         return $this->db->get_results($query, ARRAY_A);
+    }
+    
+    /**
+     * Count Plans
+     * @return type
+     */
+    public function count() {
+        return $this->db->get_var("SELECT COUNT(*) FROM " . $this->db->prefix . "csm_plans");
     }
 
     /**

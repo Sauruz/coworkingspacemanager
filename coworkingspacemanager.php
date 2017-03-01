@@ -69,6 +69,7 @@ include(CSM_PLUGIN_PATH . 'install/database.php');
 //Classes
 include(CSM_PLUGIN_PATH . 'classes/MembersTable.php');
 include(CSM_PLUGIN_PATH . 'classes/MembershipTable.php');
+include(CSM_PLUGIN_PATH . 'classes/PlansTable.php');
 
 //Pages
 include(CSM_PLUGIN_PATH . 'backend/members.php');
@@ -77,7 +78,7 @@ include(CSM_PLUGIN_PATH . 'backend/member-edit.php');
 include(CSM_PLUGIN_PATH . 'backend/membership-overview.php');
 include(CSM_PLUGIN_PATH . 'backend/membership-add.php');
 include(CSM_PLUGIN_PATH . 'backend/settings.php');
-
+include(CSM_PLUGIN_PATH . 'backend/plans.php');
 
 add_action('init', 'register_session');
 
@@ -101,8 +102,10 @@ function csm_menu() {
     add_submenu_page(PLUGIN_SLUG, 'Calendar', 'Calendar', 'manage_options', 'csm-calendar', 'show_calendar');
     
     add_submenu_page(PLUGIN_SLUG, 'Settings', 'Settings', 'manage_options', 'csm-settings', 'show_settings');
-    add_submenu_page(PLUGIN_SLUG, 'Plans', 'Plans', 'manage_options', 'csm-settings-plans', 'show_settings_plans');
-    add_submenu_page(PLUGIN_SLUG, 'Workspaces', 'Workplaces', 'manage_options', 'csm-settings-plans', 'show_settings_workplaces');
+    
+    add_submenu_page(PLUGIN_SLUG, 'Plans', 'Plans', 'manage_options', 'csm-plans', 'show_plans');
+    
+    add_submenu_page(PLUGIN_SLUG, 'Workplaces', 'Workplaces', 'manage_options', 'csm-workplaces', 'show_settings_workplaces');
     
     add_submenu_page(PLUGIN_SLUG, 'Email Templates', 'Email Templates', 'manage_options', 'csm-email-templates', 'show_email-templates');
 }
