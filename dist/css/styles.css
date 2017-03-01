@@ -6597,6 +6597,20 @@
     margin-bottom: 20px; }
   .bootstrap-wrapper .widefat td {
     padding: 8px 10px !important; }
+  .bootstrap-wrapper .days-circle {
+    float: left;
+    display: block;
+    border-radius: 30px;
+    min-width: 35px;
+    height: 35px;
+    border: 2px solid #555;
+    text-align: center;
+    font-weight: bold;
+    line-height: 31px; }
+  .bootstrap-wrapper .note {
+    color: #939393;
+    font-style: italic;
+    line-height: 30px; }
 
 .dropdown-menu {
   position: absolute !important;

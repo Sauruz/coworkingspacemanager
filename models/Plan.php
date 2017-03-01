@@ -19,7 +19,7 @@ class CsmPlan {
      * Get all plans
      * @return type
      */
-    public function all($offset = 0, $limit = 10, $orderby = 'plan_name', $order = 'ASC') {
+    public function all($offset = 0, $limit = 10, $order = 'ASC', $orderby = 'plan_name') {
         $query = "SELECT "
                 . $this->db->prefix . "csm_plans.id as plan_id, "
                 . $this->db->prefix . "csm_plans.name as plan_name, "
@@ -29,11 +29,11 @@ class CsmPlan {
                 . "FROM " . $this->db->prefix . "csm_plans "
                 . "INNER JOIN " . $this->db->prefix . "csm_workplaces "
                 . "ON " . $this->db->prefix . "csm_workplaces.id = " . $this->db->prefix . "csm_plans.workplace_id "
-                . "ORDER BY " . $order . " " . $orderby . " "
+                . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
         return $this->db->get_results($query, ARRAY_A);
     }
-    
+
     /**
      * Count Plans
      * @return type
@@ -95,6 +95,29 @@ class CsmPlan {
                         'created_at' => current_time('mysql')
                             )
             );
+        }
+    }
+
+    /**
+     * Delete a plan
+     * A plan cannot be deleted if a membership has this plan
+     * @param type $identifier
+     * @return type
+     */
+    public function delete($id) {
+        $plan = $this->get($id);
+        if (!empty($plan)) {
+
+            $this->db->delete($this->db->prefix . "csm_plans", array('id' => $id));
+            if ($this->db->last_error) {
+                throw new Exception("Can not delete " . $plan['workplace_name'] . '  &bull; ' . $plan['plan_name'] .". "
+                        . "One or more members are using this plan. "
+                        . "Delete these membership plans first, before deleting the plan.");
+            } else {
+                return $plan;
+            }
+        } else {
+            throw new Exception("No plan found with id: " . $id);
         }
     }
 

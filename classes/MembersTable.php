@@ -73,7 +73,7 @@ class MembersTable extends WP_List_Table {
 
         //Build row actions
         $actions = array(
-            'edit' => sprintf('<a href="?page=%s&member_identifier=%s">Edit</a>', 'csm-edit-member', $item['identifier']),
+            'edit' => sprintf('<a href="?page=%s&member_identifier=%s">Edit</a>', 'csm-profile', $item['identifier']),
             'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
         );
 

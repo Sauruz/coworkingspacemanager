@@ -3,7 +3,7 @@
 /**
  * Edit a member
  */
-function show_member_edit() {
+function show_profile() {
     //must check that the user has the required capability 
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
@@ -29,7 +29,7 @@ function show_member_edit() {
                     csm_error($e->getMessage());
                 }
             }
-            include(CSM_PLUGIN_PATH . 'views/backend/member-edit.view.php');
+            include(CSM_PLUGIN_PATH . 'views/backend/profile.view.php');
         }
     } else {
         csm_error('No member identifier specified', true);

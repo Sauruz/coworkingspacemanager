@@ -19,10 +19,21 @@ class CsmWorkplace {
      * Get all plans
      * @return type
      */
-    public function all() {
-        $query = "SELECT "
-                . "FROM " . $this->db->prefix . "csm_workplaces";
+    public function all($offset = 0, $limit = 10, $order = 'ASC',$orderby = 'name') {
+        $query = "SELECT * "
+                . "FROM " . $this->db->prefix . "csm_workplaces "
+                . "ORDER BY " . $orderby . " " . $order . " "
+                . "LIMIT " . $offset . "," . $limit;
+        
         return $this->db->get_results($query, ARRAY_A);
+    }
+    
+    /**
+     * Count Plans
+     * @return type
+     */
+    public function count() {
+        return $this->db->get_var("SELECT COUNT(*) FROM " . $this->db->prefix . "csm_workplaces");
     }
     
     /**
