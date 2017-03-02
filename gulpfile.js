@@ -63,6 +63,12 @@ gulp.task('copy-i18n', function() {
     .pipe(gulp.dest('./dist/js/i18n'));
 });
 
+gulp.task('calendar-locales', function() {
+    gulp.src('./fullcalendar/dist/locale/**/*')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('./dist/js/calendar-locale'));
+});
+
 /**
  * ######################################################################
  * SASS
@@ -106,7 +112,8 @@ var bowerComponents = [
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
     'bower_components/angular/angular.min.js',
     'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
-    'bower_components/moment/min/moment.min.js'
+    'bower_components/moment/min/moment.min.js',
+    'bower_components/fullcalendar/dist/fullcalendar.js'
 ];
 
 gulp.task('js', function () {
@@ -167,5 +174,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales']);    
 });

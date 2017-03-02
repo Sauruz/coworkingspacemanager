@@ -19,6 +19,7 @@
     "angular": "^1.6.2",
     "moment": "^2.17.1",
     "bootstrap-datepicker": "https://github.com/eternicode/bootstrap-datepicker.git",
-    "angular-i18n": "^1.6.2"
+    "angular-i18n": "^1.6.2",
+    "fullcalendar": "^3.2.0"
   }
 }

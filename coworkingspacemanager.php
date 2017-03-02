@@ -85,6 +85,7 @@ include(CSM_PLUGIN_PATH . 'backend/plan-edit.php');
 include(CSM_PLUGIN_PATH . 'backend/workplaces.php');
 include(CSM_PLUGIN_PATH . 'backend/workplace-add.php');
 include(CSM_PLUGIN_PATH . 'backend/workplace-edit.php');
+include(CSM_PLUGIN_PATH . 'backend/calendar.php');
 
 add_action('init', 'register_session');
 
