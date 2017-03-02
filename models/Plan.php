@@ -51,6 +51,7 @@ class CsmPlan {
         $query = "SELECT "
                 . $this->db->prefix . "csm_plans.id as plan_id, "
                 . $this->db->prefix . "csm_plans.name as plan_name, "
+                . $this->db->prefix . "csm_workplaces.id as workplace_id, "
                 . $this->db->prefix . "csm_workplaces.name as workplace_name, "
                 . "price, "
                 . "days "
@@ -61,6 +62,12 @@ class CsmPlan {
         return $this->db->get_row($query, ARRAY_A);
     }
 
+    /**
+     * Create a plan
+     * @param type $data
+     * @return type
+     * @throws Exception
+     */
     public function create($data) {
         $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
 
@@ -99,6 +106,54 @@ class CsmPlan {
     }
 
     /**
+     * Update a plan
+     * @param type $data
+     * @param type $id
+     * @return type
+     * @throws Exception
+     */
+    public function update($data, $id) {
+        $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
+
+        $this->gump->validation_rules(array(
+            'name' => 'required|max_len,100',
+            'workplace_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'days' => 'required|numeric',
+        ));
+
+        $this->gump->filter_rules(array(
+            'name' => 'trim|sanitize_string',
+            'workplace_id' => 'trim|sanitize_string',
+            'price' => 'trim|sanitize_string',
+            'days' => 'trim|sanitize_string',
+        ));
+
+        $validated_data = $this->gump->run($data);
+        if ($validated_data === false) {
+            $errArr = $this->gump->get_readable_errors();
+            $errString = "";
+            foreach ($errArr as $k => $err) {
+                $errString .= $err . '<br>';
+            }
+            throw new Exception($errString);
+        } else {
+            $this->db->update($this->db->prefix . "csm_plans", array(
+                'workplace_id' => $data['workplace_id'],
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'days' => $data['days']
+                    ), array('id' => $id)
+            );
+            if ($this->db->last_error) {
+                throw new Exception('Something went wrong');
+            } else {
+                return $data;
+            }
+        }
+    }
+
+    /**
      * Delete a plan
      * A plan cannot be deleted if a membership has this plan
      * @param type $identifier
@@ -110,9 +165,9 @@ class CsmPlan {
 
             $this->db->delete($this->db->prefix . "csm_plans", array('id' => $id));
             if ($this->db->last_error) {
-                throw new Exception("Can not delete " . $plan['workplace_name'] . '  &bull; ' . $plan['plan_name'] .". "
-                        . "One or more members are using this plan. "
-                        . "Delete these membership plans first, before deleting the plan.");
+                throw new Exception("Can not delete " . $plan['workplace_name'] . '  &bull; ' . $plan['plan_name'] . ". "
+                . "One or more members are using this plan. "
+                . "Delete these membership plans first, before deleting the plan.");
             } else {
                 return $plan;
             }

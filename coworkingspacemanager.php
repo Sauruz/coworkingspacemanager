@@ -81,6 +81,7 @@ include(CSM_PLUGIN_PATH . 'backend/profile.php');
 include(CSM_PLUGIN_PATH . 'backend/settings.php');
 include(CSM_PLUGIN_PATH . 'backend/plans.php');
 include(CSM_PLUGIN_PATH . 'backend/plan-add.php');
+include(CSM_PLUGIN_PATH . 'backend/plan-edit.php');
 include(CSM_PLUGIN_PATH . 'backend/workplaces.php');
 
 add_action('init', 'register_session');
@@ -122,6 +123,7 @@ function csm_menu() {
     
     add_submenu_page(PLUGIN_SLUG, 'Plans', 'Plans', 'manage_options', 'csm-plans', 'show_plans');
     add_submenu_page(PLUGIN_SLUG, 'Add Plan', 'Add Plan', 'manage_options', 'csm-plan-add', 'show_plan_add');
+    add_submenu_page(PLUGIN_SLUG, 'Edit Plan', 'Edit Plan', 'manage_options', 'csm-plan-edit', 'show_plan_edit');
     
     add_submenu_page(PLUGIN_SLUG, 'Workplaces', 'Workplaces', 'manage_options', 'csm-workplaces', 'show_workplaces');
     add_submenu_page(PLUGIN_SLUG, 'Add Workplace', 'Add Workplace', 'manage_options', 'csm-workplace-add', 'show_workplace_add');
