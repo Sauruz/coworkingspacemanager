@@ -49,7 +49,7 @@ class PlansTable extends WP_List_Table {
         //Build row actions
         $actions = array(
             'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-plan-edit', $item['plan_id']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['plan_id']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['workplace_name'] . '  &bull; ' . $item['plan_name'] . '?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['plan_id']),
         );
 
         //Return the title contents

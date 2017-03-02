@@ -64,7 +64,7 @@ class MembershipTable extends WP_List_Table {
 
         //Build row actions
         $actions = array(
-            'delete' => sprintf('<a href="?page=%s&action=%s&member_identifier=%s&identifier=%s">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['member_identifier'], $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&member_identifier=%s&identifier=%s" onclick="return confirm(\'Are you sure you want to delete membership nr. ' . $item['identifier'] . '?\')">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['member_identifier'], $item['identifier']),
         );
 
         //Return the title contents

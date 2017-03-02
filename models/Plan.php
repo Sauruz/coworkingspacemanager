@@ -168,7 +168,7 @@ class CsmPlan {
             if ($this->db->last_error) {
                 throw new Exception("Can not delete " . $plan['workplace_name'] . '  &bull; ' . $plan['plan_name'] . ". "
                 . "One or more members are using this plan. "
-                . "Delete these membership plans first, before deleting the plan.");
+                . "Delete these memberships first, before deleting the plan.");
             } else {
                 return $plan;
             }
