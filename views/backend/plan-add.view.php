@@ -3,6 +3,12 @@
 
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'views/backend/tabbar/plans.tabbar.php'; ?>
+        
+        <?php
+        if (empty($workplaces)) {
+            csm_error('To add a plan you need at least one workplace. There are no workplaces configurated yet. <a href="?page=csm-workplace-add">Click here</a> to add a workplace.');
+        } else {
+            ?>
 
         <div class="row">
             <div class="col-md-6">
@@ -55,5 +61,6 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
