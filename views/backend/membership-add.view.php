@@ -28,6 +28,7 @@
                         <div class="panel-body">
                             <form action="" method="post" add-membership-plan>
                                 <input name="action" type="hidden" value="add-membership-plan">
+                                <input name="vat" type="hidden" value="0">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="plan_id">Membership plan <span class="description">(required)</span></label><br>
@@ -48,19 +49,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="vat">VAT </label><br>
-                                        <select class="form-control" id="vat" name="vat"
-                                                ng-options="vat + '%' for vat in vm.vatPercentages track by vat"
-                                                ng-model="vm.vat">
-                                        </select><br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="price">Price</label><br>
-                                        <div class="form-control-static" ng-bind="vm.selectedPlan.price | currency : '<?php echo CSM_CURRENCY_SYMBOL; ?>'"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-12"><hr></div>
                                     <div class="col-md-6">
                                         <label>Total days</label><br>
@@ -71,12 +59,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label>Total price</label><br>
-                                        <div class="form-control-static" ng-bind="vm.selectedPlan.total_price | currency : '<?php echo CSM_CURRENCY_SYMBOL; ?>'"></div>
+                                        <div class="form-control-static" ng-bind="vm.selectedPlan.price | currency : '<?php echo CSM_CURRENCY_SYMBOL; ?>'"></div>
                                     </div>
                                 </div>
 
                                 <p class="submit">
-                                    <input type="submit" name="createuser" id="createusersub" class="btn btn-primary btn-block" value="Add Membership Plan">
+                                    <input type="submit" name="addmembership" id="createusersub" class="btn btn-primary btn-block" value="Add Membership">
                                 </p>
                             </form>
                         </div>

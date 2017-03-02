@@ -40,7 +40,7 @@ function show_membership_add() {
                     csm_error($e->getMessage());
                 }
             }
-            include(CSM_PLUGIN_PATH . 'views/backend/membership-plan-add.view.php');
+            include(CSM_PLUGIN_PATH . 'views/backend/membership-add.view.php');
         }
     } else {
         csm_error('No member identifier specified', true);
