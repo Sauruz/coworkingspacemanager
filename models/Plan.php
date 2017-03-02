@@ -142,7 +142,8 @@ class CsmPlan {
                 'workplace_id' => $data['workplace_id'],
                 'name' => $data['name'],
                 'price' => $data['price'],
-                'days' => $data['days']
+                'days' => $data['days'],
+                'updated_at' => current_time('mysql')
                     ), array('id' => $id)
             );
             if ($this->db->last_error) {

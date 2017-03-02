@@ -38,6 +38,7 @@ function create_csm_tables() {
 		id INT(11) NOT NULL AUTO_INCREMENT,
                 name VARCHAR(100) NOT NULL,
                 capacity INT(11) NOT NULL, 
+                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`)
 	) $charset_collate;";
@@ -51,6 +52,7 @@ function create_csm_tables() {
                 name VARCHAR(100) NOT NULL,
                 price INT(11) NOT NULL, 
                 days INT(11) NOT NULL, 
+                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`),
                 CONSTRAINT `workplace_foreign` FOREIGN KEY (`workplace_id`) REFERENCES $table_workplaces (`id`)
@@ -80,7 +82,8 @@ function create_csm_tables() {
                 vat INT(11) NULL,
                 price_total INT(11) NULL,
                 invoice_sent BOOLEAN DEFAULT 0 NOT NULL,
-                invoice_sent_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
+                invoice_sent_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
+                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY identifier_key (identifier),

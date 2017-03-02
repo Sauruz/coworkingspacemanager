@@ -10,16 +10,14 @@ class WorkplacesTable extends WP_List_Table {
         $this->csmWorkplace = new CsmWorkplace();
         //Set parent defaults
         parent::__construct(array(
-            'singular' => 'plan', //singular name of the listed records
-            'plural' => 'plans', //plural name of the listed records
+            'singular' => 'workplace', //singular name of the listed records
+            'plural' => 'workplaces', //plural name of the listed records
             'ajax' => false        //does this table support ajax?
         ));
     }
 
     function column_default($item, $column_name) {
         switch ($column_name) {
-            case 'price':
-                return '<span ng-bind="' . $item['price'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price'] . '</span>';
             case 'capacity':
                 return '<div class="days-circle">' . $item['capacity'] . '</div>';
             default:
@@ -48,13 +46,13 @@ class WorkplacesTable extends WP_List_Table {
 
         //Build row actions
         $actions = array(
-            'edit' => sprintf('<a href="?page=%s&plan_id=%s">Edit</a>', 'csm-wordplace-edit', $item['id']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&plan_id=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['id']),
+            'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-workplace-edit', $item['id']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['id']),
         );
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&plan_id=%s" aria-label="">' . $item['name'] . '</a>', 'csm-plan-edit', $item['id']),
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['name'] . '</a>', 'csm-workplace-edit', $item['id']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }
@@ -70,7 +68,6 @@ class WorkplacesTable extends WP_List_Table {
 
     function get_sortable_columns() {
         $sortable_columns = array(
-            'last_name' => array('last_name', false),
             'name' => array('name', false),
             'capacity' => array('capacity', false),
         );
@@ -88,10 +85,10 @@ class WorkplacesTable extends WP_List_Table {
         //Detect when a bulk action is being triggered...
         if ('delete' === $this->current_action()) {
             //Single member delete action
-            if (isset($_REQUEST['identifier'])) {
+            if (isset($_REQUEST['id'])) {
                 try {
-                    $member = $this->csmMember->delete($_REQUEST['identifier']);
-                    csm_update($member['first_name'] . ' ' . $member['last_name'] . ' was deleted');
+                    $workplace = $this->csmWorkplace->delete($_REQUEST['id']);
+                    csm_update($workplace['name'] . ' was deleted');
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
                 }
@@ -100,9 +97,9 @@ class WorkplacesTable extends WP_List_Table {
             else {
                 try {
                     $res = "";
-                    foreach ($_REQUEST['member'] as $identifier) {
-                        $member = $this->csmMember->delete($identifier);
-                        $res .= $member['first_name'] . ' ' . $member['last_name'] . ' was deleted<br>';
+                    foreach ($_REQUEST['workplace'] as $id) {
+                        $workplace = $this->csmWorkplace->delete($id);
+                        $res .= $workplace['name'] . ' was deleted<br>';
                     }
                     csm_update($res);
                 } catch (\Exception $e) {
