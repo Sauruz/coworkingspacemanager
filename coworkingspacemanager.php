@@ -3,9 +3,8 @@
 global $csm_db_version;
 $csm_db_version = '1.0';
 define('PLUGIN_SLUG', 'coworking-space-manager');
-//define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
-
-define('CMS_LOCALE', 'nl-nl');
+define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
+define('CMS_SIMPLE_LOCALE', end(explode('-', CMS_LOCALE)));
 
 
 /*
@@ -40,6 +39,8 @@ function csm_style() {
     wp_enqueue_script('csm_js');
     wp_register_script('i18n', plugins_url('dist/js/i18n/angular-locale_' . CMS_LOCALE . '.js', __FILE__));
     wp_enqueue_script('i18n');
+    wp_register_script('calendar-locale', plugins_url('dist/js/calendar-locale/' . CMS_SIMPLE_LOCALE . '.js', __FILE__));
+    wp_enqueue_script('calendar-locale');
 }
 add_action('admin_init', 'csm_style');
 
@@ -86,6 +87,9 @@ include(CSM_PLUGIN_PATH . 'backend/workplaces.php');
 include(CSM_PLUGIN_PATH . 'backend/workplace-add.php');
 include(CSM_PLUGIN_PATH . 'backend/workplace-edit.php');
 include(CSM_PLUGIN_PATH . 'backend/calendar.php');
+
+//Ajax
+include(CSM_PLUGIN_PATH . 'ajax.php');
 
 add_action('init', 'register_session');
 

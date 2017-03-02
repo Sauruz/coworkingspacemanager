@@ -15513,24 +15513,17 @@ app.controller("Ctrl", [
 $(document).ready(function () {
 
     $('#calendar').fullCalendar({
-        events: [
+        eventSources: [
             {
-                title: 'Guido Jarig',
-                start: '2017-03-21'
-            },
-            {
-                title: 'event2',
-                start: '2010-01-05',
-                end: '2010-01-07'
-            },
-            {
-                title: 'event3',
-                start: '2010-01-09T12:30:00',
-                allDay: false // will make the time show
+                url: 'admin-ajax.php',
+                type: 'POST',
+                data: {
+                    action: 'calendar'
+                }
             }
         ]
-    });
 
+    });
 });
 app.directive('addMembershipPlan', function ($locale, $timeout) {
     return {

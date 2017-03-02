@@ -64,7 +64,7 @@ gulp.task('copy-i18n', function() {
 });
 
 gulp.task('calendar-locales', function() {
-    gulp.src('./fullcalendar/dist/locale/**/*')
+    gulp.src('./bower_components/fullcalendar/dist/locale/**/*')
     // Perform minification tasks, etc here
     .pipe(gulp.dest('./dist/js/calendar-locale'));
 });

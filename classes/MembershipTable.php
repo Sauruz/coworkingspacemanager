@@ -165,7 +165,7 @@ class MembershipTable extends WP_List_Table {
         $current_page = $this->get_pagenum();
 
         $memberships = $this->csmMembership->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', $_REQUEST['member_identifier']
+                (($current_page - 1) * $per_page), $per_page,  !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', $_REQUEST['member_identifier']
         );
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;

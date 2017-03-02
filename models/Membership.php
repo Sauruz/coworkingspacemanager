@@ -33,11 +33,14 @@ class CsmMembership {
      * @param type $order
      * @return type
      */
-    public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC', $member_identifier = false) {
+    public function all($offset = 0, $limit = 10, $orderby = 'identifier', $order = 'ASC', $member_identifier = false, $plan_start = false, $plan_end = false) {
 
         $where = "";
         if ($member_identifier) {
             $where = "WHERE " . $this->db->prefix . "csm_memberships.member_identifier = '" . $member_identifier . "' ";
+        }
+        if ($plan_start && $plan_end) {
+            $where = "WHERE plan_start >= '" .$plan_start . "' AND plan_end <= '" . $plan_end . "' ";
         }
 
         $query = "SELECT "
@@ -45,6 +48,8 @@ class CsmMembership {
                 . $this->db->prefix . "csm_memberships.plan_id, "
                 . $this->db->prefix . "csm_memberships.plan_start, "
                 . $this->db->prefix . "csm_memberships.plan_end, "
+                . $this->db->prefix . "csm_members.first_name, "
+                . $this->db->prefix . "csm_members.last_name, "
                 . $this->db->prefix . "csm_memberships.payment, "
                 . $this->db->prefix . "csm_memberships.payment_method, "
                 . $this->db->prefix . "csm_memberships.payment_at, "
@@ -58,12 +63,14 @@ class CsmMembership {
                 . $this->db->prefix . "csm_workplaces.name AS workplace_name, "
                 . $this->db->prefix . "csm_memberships.created_at "
                 . "FROM " . $this->db->prefix . "csm_memberships "
+                . "INNER JOIN " . $this->db->prefix . "csm_members "
+                . "ON " . $this->db->prefix . "csm_memberships.member_identifier = " . $this->db->prefix . "csm_members.identifier "
                 . "INNER JOIN " . $this->db->prefix . "csm_plans "
                 . "ON " . $this->db->prefix . "csm_memberships.plan_id = " . $this->db->prefix . "csm_plans.id "
                 . "INNER JOIN " . $this->db->prefix . "csm_workplaces "
                 . "ON " . $this->db->prefix . "csm_plans.workplace_id = " . $this->db->prefix . "csm_workplaces.id "
                 . $where
-                . "ORDER BY " . $order . " " . $orderby . " "
+                . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
         return $this->db->get_results($query, ARRAY_A);
     }
