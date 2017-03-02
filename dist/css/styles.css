@@ -6639,3 +6639,8 @@
   background: 0 0;
   color: #e8e8e8;
   cursor: default; }
+
+.coworking-space-menu .wp-submenu li:nth-child(4),
+.coworking-space-menu .wp-submenu li:nth-child(5),
+.coworking-space-menu .wp-submenu li:nth-child(6) {
+  display: none; }
