@@ -7639,11 +7639,12 @@ be a descendant of the grid when it is being dragged.
   color: #e8e8e8;
   cursor: default; }
 
+.coworking-space-menu .wp-submenu li:nth-child(3),
 .coworking-space-menu .wp-submenu li:nth-child(4),
 .coworking-space-menu .wp-submenu li:nth-child(5),
 .coworking-space-menu .wp-submenu li:nth-child(6),
-.coworking-space-menu .wp-submenu li:nth-child(11),
-.coworking-space-menu .wp-submenu li:nth-child(12),
+.coworking-space-menu .wp-submenu li:nth-child(13),
 .coworking-space-menu .wp-submenu li:nth-child(14),
-.coworking-space-menu .wp-submenu li:nth-child(15) {
+.coworking-space-menu .wp-submenu li:nth-child(16),
+.coworking-space-menu .wp-submenu li:nth-child(17) {
   display: none; }
