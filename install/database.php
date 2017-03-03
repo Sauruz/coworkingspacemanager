@@ -38,6 +38,8 @@ function create_csm_tables() {
 		id INT(11) NOT NULL AUTO_INCREMENT,
                 name VARCHAR(100) NOT NULL,
                 capacity INT(11) NOT NULL, 
+                color VARCHAR(100) NOT NULL,
+                features LONGTEXT NULL,
                 updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`)
@@ -111,16 +113,19 @@ function dummy_data() {
         $CsmWorkplace->create(array(
             'name' => 'Hot Desk',
             'capacity' => 45,
+            'color' => '#4FC3F7',
         ));
 
         $CsmWorkplace->create(array(
             'name' => 'Dedicated Desk',
             'capacity' => 10,
+            'color' => '#FF9800'
         ));
 
         $CsmWorkplace->create(array(
             'name' => 'Private Office',
             'capacity' => 2,
+            'color' => '#4CAF50'
         ));
 
 

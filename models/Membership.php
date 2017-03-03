@@ -61,6 +61,7 @@ class CsmMembership {
                 . $this->db->prefix . "csm_plans.name AS plan_name, "
                 . $this->db->prefix . "csm_plans.days AS plan_days, "
                 . $this->db->prefix . "csm_workplaces.name AS workplace_name, "
+                . $this->db->prefix . "csm_workplaces.color, "
                 . $this->db->prefix . "csm_memberships.created_at "
                 . "FROM " . $this->db->prefix . "csm_memberships "
                 . "INNER JOIN " . $this->db->prefix . "csm_members "

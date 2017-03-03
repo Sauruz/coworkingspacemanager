@@ -62,11 +62,13 @@ class CsmWorkplace {
         $this->gump->validation_rules(array(
             'name' => 'required|max_len,100',
             'capacity' => 'required|numeric',
+            'color' => 'required|max_len,7'
         ));
 
         $this->gump->filter_rules(array(
             'name' => 'trim|sanitize_string',
             'capacity' => 'trim|sanitize_string',
+            'color' => 'trim|sanitize_string',
         ));
 
         $validated_data = $this->gump->run($data);
@@ -81,6 +83,7 @@ class CsmWorkplace {
             return $this->db->insert($this->db->prefix . "csm_workplaces", array(
                         'name' => $data['name'],
                         'capacity' => $data['capacity'],
+                        'color' => $data['color'],
                         'created_at' => current_time('mysql')
                             )
             );
