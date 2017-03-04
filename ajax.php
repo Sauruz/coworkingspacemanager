@@ -20,6 +20,7 @@ function calendar() {
             "start" => $v['plan_start'],
             "end" => $v['plan_end'],
             "backgroundColor" => $v['color'],
+            "borderColor" => $v['color'],
             "textColor" => "#fff"
         ));
     }

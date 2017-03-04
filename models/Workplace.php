@@ -52,81 +52,75 @@ class CsmWorkplace {
     }
 
     /**
+     * Validate method for create and update
+     * @param type $data
+     * @return type
+     * @throws Exception
+     */
+    public function validate($data) {
+        $data = $this->gump->sanitize($data);
+        $this->gump->validation_rules(array(
+            'name' => 'required|max_len,100',
+            'capacity' => 'required|numeric',
+            'color' => 'required|max_len,7'
+        ));
+
+        $this->gump->filter_rules(array(
+            'name' => 'trim|sanitize_string',
+            'capacity' => 'trim|sanitize_string',
+            'color' => 'trim|sanitize_string',
+        ));
+
+        $validated_data = $this->gump->run($data);
+        if ($validated_data === false) {
+            $errArr = $this->gump->get_readable_errors();
+            $errString = "";
+            foreach ($errArr as $k => $err) {
+                $errString .= $err . '<br>';
+            }
+            throw new Exception($errString);
+        } else {
+            return $data;
+        }
+    }
+
+    /**
      * Add a desk
      * @param type $data
      * @return type
      * @throws Exception
      */
     public function create($data) {
-        $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
-
-        $this->gump->validation_rules(array(
-            'name' => 'required|max_len,100',
-            'capacity' => 'required|numeric',
-            'color' => 'required|max_len,7'
-        ));
-
-        $this->gump->filter_rules(array(
-            'name' => 'trim|sanitize_string',
-            'capacity' => 'trim|sanitize_string',
-            'color' => 'trim|sanitize_string',
-        ));
-
-        $validated_data = $this->gump->run($data);
-        if ($validated_data === false) {
-            $errArr = $this->gump->get_readable_errors();
-            $errString = "";
-            foreach ($errArr as $k => $err) {
-                $errString .= $err . '<br>';
-            }
-            throw new Exception($errString);
-        } else {
-            return $this->db->insert($this->db->prefix . "csm_workplaces", array(
-                        'name' => $data['name'],
-                        'capacity' => $data['capacity'],
-                        'color' => $data['color'],
-                        'created_at' => current_time('mysql')
-                            )
-            );
-        }
+        $data = $this->validate($data);
+        return $this->db->insert($this->db->prefix . "csm_workplaces", array(
+                    'name' => $data['name'],
+                    'capacity' => $data['capacity'],
+                    'color' => $data['color'],
+                    'created_at' => current_time('mysql')
+                        )
+        );
     }
 
+    /**
+     * Update a workplace
+     * @param type $data
+     * @param type $id
+     * @return type
+     * @throws Exception
+     */
     public function update($data, $id) {
-        $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
-
-        $this->gump->validation_rules(array(
-            'name' => 'required|max_len,100',
-            'capacity' => 'required|numeric',
-            'color' => 'required|max_len,7'
-        ));
-
-        $this->gump->filter_rules(array(
-            'name' => 'trim|sanitize_string',
-            'capacity' => 'trim|sanitize_string',
-            'color' => 'trim|sanitize_string',
-        ));
-
-        $validated_data = $this->gump->run($data);
-        if ($validated_data === false) {
-            $errArr = $this->gump->get_readable_errors();
-            $errString = "";
-            foreach ($errArr as $k => $err) {
-                $errString .= $err . '<br>';
-            }
-            throw new Exception($errString);
+        $data = $this->validate($data);
+        return $this->db->update($this->db->prefix . "csm_workplaces", array(
+                    'name' => $data['name'],
+                    'capacity' => $data['capacity'],
+                    'color' => $data['color'],
+                    'updated_at' => current_time('mysql')
+                        ), array('id' => $id)
+        );
+        if ($this->db->last_error) {
+            throw new Exception('Something went wrong');
         } else {
-            return $this->db->update($this->db->prefix . "csm_workplaces", array(
-                        'name' => $data['name'],
-                        'capacity' => $data['capacity'],
-                        'color' => $data['color'],
-                        'updated_at' => current_time('mysql')
-                            ), array('id' => $id)
-            );
-            if ($this->db->last_error) {
-                throw new Exception('Something went wrong');
-            } else {
-                return $data;
-            }
+            return $data;
         }
     }
 

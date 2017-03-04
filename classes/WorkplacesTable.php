@@ -64,7 +64,7 @@ class WorkplacesTable extends WP_List_Table {
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'name' => 'Workplace',
             'capacity' => 'Capacity',
-            'color' => 'Color'
+            'color' => 'Calendar Background'
         );
         return $columns;
     }

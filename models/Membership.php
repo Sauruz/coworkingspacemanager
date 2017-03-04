@@ -40,7 +40,7 @@ class CsmMembership {
             $where = "WHERE " . $this->db->prefix . "csm_memberships.member_identifier = '" . $member_identifier . "' ";
         }
         if ($plan_start && $plan_end) {
-            $where = "WHERE plan_start >= '" .$plan_start . "' AND plan_end <= '" . $plan_end . "' ";
+            $where = "WHERE plan_start >= '" . $plan_start . "' AND plan_end <= '" . $plan_end . "' ";
         }
 
         $query = "SELECT "
@@ -97,12 +97,12 @@ class CsmMembership {
     }
 
     /**
-     * Create new membership plan
+     * Validate method for create and update
      * @param type $data
      * @return type
      * @throws Exception
      */
-    public function create($data) {
+    public function validate($data) {
         $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
 
         $this->gump->validation_rules(array(
@@ -134,19 +134,30 @@ class CsmMembership {
             }
             throw new Exception($errString);
         } else {
-            return $this->db->insert($this->db->prefix . "csm_memberships", array(
-                        'identifier' => $this->create_identifier(),
-                        'member_identifier' => $data['member_identifier'],
-                        'plan_id' => $data['plan_id'],
-                        'plan_start' => $data['plan_start'],
-                        'plan_end' => $data['plan_end'],
-                        'price' => $data['price'],
-                        'vat' => $data['vat'],
-                        'price_total' => $data['price_total'],
-                        'created_at' => current_time('mysql'),
-                            )
-            );
+            return $data;
         }
+    }
+
+    /**
+     * Create new membership plan
+     * @param type $data
+     * @return type
+     * @throws Exception
+     */
+    public function create($data) {
+        $data = $this->validate($data);
+        return $this->db->insert($this->db->prefix . "csm_memberships", array(
+                    'identifier' => $this->create_identifier(),
+                    'member_identifier' => $data['member_identifier'],
+                    'plan_id' => $data['plan_id'],
+                    'plan_start' => $data['plan_start'],
+                    'plan_end' => $data['plan_end'],
+                    'price' => $data['price'],
+                    'vat' => $data['vat'],
+                    'price_total' => $data['price_total'],
+                    'created_at' => current_time('mysql'),
+                        )
+        );
     }
 
     /**
@@ -157,7 +168,7 @@ class CsmMembership {
      * @throws Exception
      */
     public function create_simple($data) {
-        
+
         $plan = $this->csmplan->get($data['plan_id']);
         if (empty($plan)) {
             throw new Exception('Something went wrong. Membership plan does not exist');
@@ -213,7 +224,6 @@ class CsmMembership {
         }
         return $new_identifier;
     }
-
 
     /**
      * Delete a membership
