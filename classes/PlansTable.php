@@ -126,7 +126,7 @@ class PlansTable extends WP_List_Table {
         $current_page = $this->get_pagenum();
 
         $plans = $this->csmPlan->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'workplace_name'
+                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'ASC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'workplace_name'
         );
         $total_items = $this->csmPlan->count();
         $this->items = $plans;

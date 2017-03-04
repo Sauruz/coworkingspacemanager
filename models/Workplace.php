@@ -44,7 +44,8 @@ class CsmWorkplace {
     public function get($id) {
         $query = "SELECT "
                 . "name, "
-                . "capacity "
+                . "capacity, "
+                . "color "
                 . "FROM " . $this->db->prefix . "csm_workplaces "
                 . "WHERE id = " . $id;
         return $this->db->get_row($query, ARRAY_A);
@@ -96,11 +97,13 @@ class CsmWorkplace {
         $this->gump->validation_rules(array(
             'name' => 'required|max_len,100',
             'capacity' => 'required|numeric',
+            'color' => 'required|max_len,7'
         ));
 
         $this->gump->filter_rules(array(
             'name' => 'trim|sanitize_string',
             'capacity' => 'trim|sanitize_string',
+            'color' => 'trim|sanitize_string',
         ));
 
         $validated_data = $this->gump->run($data);
@@ -115,6 +118,7 @@ class CsmWorkplace {
             return $this->db->update($this->db->prefix . "csm_workplaces", array(
                         'name' => $data['name'],
                         'capacity' => $data['capacity'],
+                        'color' => $data['color'],
                         'updated_at' => current_time('mysql')
                             ), array('id' => $id)
             );

@@ -29,6 +29,7 @@ function show_workplace_edit() {
                 }
             }
 
+            include(CSM_PLUGIN_PATH . 'backend/assets/colors.php');
             include(CSM_PLUGIN_PATH . 'views/backend/workplace-edit.view.php');
         }
     } else {

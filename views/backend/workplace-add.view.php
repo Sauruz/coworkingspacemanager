@@ -23,6 +23,17 @@
                                     <label for="capacity">Capacity <span class="description">(required)</span></label><br>
                                     <input name="capacity" class="form-control" placeholder="Capacity" type="number" min="1" id="capacity" value="<?php form_value($data, 'capacity'); ?>"><br>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="color">Calendar background <span class="description">(required)</span></label><br>
+                                     <select name="color" id="color" class="form-control">
+                                        <?php
+                                        foreach ($colors as $k => $v) {
+                                            $selected = isset($data['color']) && $data['color'] === $k ? 'selected' : '';
+                                            echo '<option value="' . $k . '" style="background: ' . $v . '"; ' . $selected . '>' . $v . '</option>';
+                                        }
+                                        ?>
+                                    </select><br>
+                                </div>
                             </div>
 
 

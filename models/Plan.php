@@ -19,7 +19,7 @@ class CsmPlan {
      * Get all plans
      * @return type
      */
-    public function all($offset = 0, $limit = 10, $order = 'ASC', $orderby = 'plan_name') {
+    public function all($offset = 0, $limit = 10, $order = 'ASC', $orderby = 'workplace_name') {
         $query = "SELECT "
                 . $this->db->prefix . "csm_plans.id as plan_id, "
                 . $this->db->prefix . "csm_plans.name as plan_name, "

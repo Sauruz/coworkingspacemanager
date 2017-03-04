@@ -9,6 +9,7 @@ function show_workplace_add() {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
     
+    
     $CsmWorkplace = new CsmWorkplace();
     $workplaces = $CsmWorkplace->all();
     
@@ -25,5 +26,6 @@ function show_workplace_add() {
         }
     }
     
+    include(CSM_PLUGIN_PATH . 'backend/assets/colors.php');
     include(CSM_PLUGIN_PATH . 'views/backend/workplace-add.view.php');
 }

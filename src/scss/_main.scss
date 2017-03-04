@@ -35,6 +35,17 @@ body {
     padding-right: 5px;
 }
 
+.color-circle {
+    float: left;
+    display: block;
+    border-radius: 30px;
+    width: 35px;
+    height: 35px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #ddd;
+}
+
 .note {
     color: #939393;
     font-style: italic;

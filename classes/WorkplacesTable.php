@@ -20,6 +20,8 @@ class WorkplacesTable extends WP_List_Table {
         switch ($column_name) {
             case 'capacity':
                 return '<div class="days-circle">' . $item['capacity'] . '</div>';
+                case 'color':
+                return '<div class="color-circle" style="background-color: ' . $item['color'] .';"></div>';
             default:
                 return $item[$column_name];
         }
@@ -62,6 +64,7 @@ class WorkplacesTable extends WP_List_Table {
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'name' => 'Workplace',
             'capacity' => 'Capacity',
+            'color' => 'Color'
         );
         return $columns;
     }
@@ -70,6 +73,7 @@ class WorkplacesTable extends WP_List_Table {
         $sortable_columns = array(
             'name' => array('name', false),
             'capacity' => array('capacity', false),
+            'color' => array('color', false),
         );
         return $sortable_columns;
     }
@@ -121,7 +125,7 @@ class WorkplacesTable extends WP_List_Table {
         $current_page = $this->get_pagenum();
 
         $plans = $this->csmWorkplace->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'name'
+                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'ASC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'name'
         );
         $total_items = $this->csmWorkplace->count();
         $this->items = $plans;
