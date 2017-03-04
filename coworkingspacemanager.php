@@ -49,47 +49,47 @@ add_action('admin_init', 'csm_style');
 require CSM_PLUGIN_PATH . 'vendor/autoload.php';
 
 //Assets
-include(CSM_PLUGIN_PATH . '/backend/assets/currency-symbols.php');
+include(CSM_PLUGIN_PATH . '/app/assets/currency-symbols.php');
 
 //Standard CSM Settings Settings
 define('CSM_CURRENCY', get_option('csm-currency'));
 define('CSM_CURRENCY_SYMBOL', html_entity_decode($currency_symbols[CSM_CURRENCY]));
 
 //Functions
-include(CSM_PLUGIN_PATH . 'functions.php');
+include(CSM_PLUGIN_PATH . 'app/assets/functions.php');
 
 //Models
-include(CSM_PLUGIN_PATH . 'models/Member.php');
-include(CSM_PLUGIN_PATH . 'models/Membership.php');
-include(CSM_PLUGIN_PATH . 'models/Plan.php');
-include(CSM_PLUGIN_PATH . 'models/Workplace.php');
+include(CSM_PLUGIN_PATH . 'app/models/member.model.php');
+include(CSM_PLUGIN_PATH . 'app/models/membership.model.php');
+include(CSM_PLUGIN_PATH . 'app/models/plan.model.php');
+include(CSM_PLUGIN_PATH . 'app/models/workplace.model.php');
 
 //Install
 include(CSM_PLUGIN_PATH . 'install/database.php');
 
 //Classes
-include(CSM_PLUGIN_PATH . 'classes/MembersTable.php');
-include(CSM_PLUGIN_PATH . 'classes/MembershipTable.php');
-include(CSM_PLUGIN_PATH . 'classes/PlansTable.php');
-include(CSM_PLUGIN_PATH . 'classes/WorkplacesTable.php');
+include(CSM_PLUGIN_PATH . 'app/tables/members-table.php');
+include(CSM_PLUGIN_PATH . 'app/tables/membership-table.php');
+include(CSM_PLUGIN_PATH . 'app/tables/plans-table.php');
+include(CSM_PLUGIN_PATH . 'app/tables/workplaces-table.php');
 
 //Pages
-include(CSM_PLUGIN_PATH . 'backend/members.php');
-include(CSM_PLUGIN_PATH . 'backend/member-add.php');
-include(CSM_PLUGIN_PATH . 'backend/membership-overview.php');
-include(CSM_PLUGIN_PATH . 'backend/membership-add.php');
-include(CSM_PLUGIN_PATH . 'backend/profile.php');
-include(CSM_PLUGIN_PATH . 'backend/settings.php');
-include(CSM_PLUGIN_PATH . 'backend/plans.php');
-include(CSM_PLUGIN_PATH . 'backend/plan-add.php');
-include(CSM_PLUGIN_PATH . 'backend/plan-edit.php');
-include(CSM_PLUGIN_PATH . 'backend/workplaces.php');
-include(CSM_PLUGIN_PATH . 'backend/workplace-add.php');
-include(CSM_PLUGIN_PATH . 'backend/workplace-edit.php');
-include(CSM_PLUGIN_PATH . 'backend/calendar.php');
+include(CSM_PLUGIN_PATH . 'app/pages/members.php');
+include(CSM_PLUGIN_PATH . 'app/pages/member-add.php');
+include(CSM_PLUGIN_PATH . 'app/pages/membership-overview.php');
+include(CSM_PLUGIN_PATH . 'app/pages/membership-add.php');
+include(CSM_PLUGIN_PATH . 'app/pages/profile.php');
+include(CSM_PLUGIN_PATH . 'app/pages/settings.php');
+include(CSM_PLUGIN_PATH . 'app/pages/plans.php');
+include(CSM_PLUGIN_PATH . 'app/pages/plan-add.php');
+include(CSM_PLUGIN_PATH . 'app/pages/plan-edit.php');
+include(CSM_PLUGIN_PATH . 'app/pages/workplaces.php');
+include(CSM_PLUGIN_PATH . 'app/pages/workplace-add.php');
+include(CSM_PLUGIN_PATH . 'app/pages/workplace-edit.php');
+include(CSM_PLUGIN_PATH . 'app/pages/calendar.php');
 
 //Ajax
-include(CSM_PLUGIN_PATH . 'ajax.php');
+include(CSM_PLUGIN_PATH . 'app/assets/ajax.php');
 
 add_action('init', 'register_session');
 
