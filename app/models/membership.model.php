@@ -97,6 +97,71 @@ class CsmMembership {
     }
 
     /**
+     * Check if workplace is available
+     * @param type $plan_id
+     * @param type $start_date
+     * @param type $end_date
+     * @return boolean
+     * @throws Exception
+     */
+    public function check_workplace_availability($plan_id, $start_date, $end_date) {
+        
+        $plan = $this->csmplan->get($plan_id);
+        
+        $datediff = strtotime($end_date) - strtotime($start_date);
+        $one_day = 60 * 60 * 24;
+        $days = floor($datediff / $one_day);
+
+        $query_count_string = "";
+        $dates_arr = array();
+        for ($x = 0; $x < $days; $x++) {
+            $date = date('Y-m-d', strtotime($start_date) + ($one_day * $x));
+            $query_count_string .= "(SELECT count(*) FROM " . $this->db->prefix . "csm_memberships WHERE plan_start <= '$date' AND plan_end > '$date') AS `$date`, ";
+            array_push($dates_arr, $date);
+        }
+
+        $query = "SELECT "
+                . $query_count_string
+                . $this->db->prefix . "csm_workplaces.name AS workplace_name, "
+                . $this->db->prefix . "csm_workplaces.capacity "
+                . "FROM wp_csm_workplaces "
+                . "WHERE wp_csm_workplaces.id = " . $plan['workplace_id'];
+
+        $result = $this->db->get_row($query, ARRAY_A);
+
+        //Check the dates in results
+        $is_available = true;
+        $not_available_dates = array();
+        foreach ($dates_arr as $k => $v) {
+            if ($result[$v] >= $result['capacity']) {
+                array_push($not_available_dates, $v);
+                $is_available = false;
+            }
+        }
+
+        //Not available string
+        if (!$is_available) {
+            if (count($not_available_dates) > 5) {
+                $errString = $result['workplace_name'] . ' has not enough capacity multiple dates';
+            } else {
+                $errString = $result['workplace_name'] . ' has not enough capacity on the following dates: ';
+                foreach ($not_available_dates as $k => $v) {
+                    if ($k === 0) {
+                        $errString .= $v;
+                    } else if ($k === (count($not_available_dates) - 1)) {
+                        $errString .= ' and ' . $v;
+                    } else {
+                        $errString .= ', ' . $v;
+                    }
+                }
+            }
+            throw new Exception($errString);
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Validate method for create and update
      * @param type $data
      * @return type
@@ -146,6 +211,9 @@ class CsmMembership {
      */
     public function create($data) {
         $data = $this->validate($data);
+        //Check
+        $this->check_workplace_availability($data['plan_id'], $data['plan_start'], $data['plan_end']);
+        
         return $this->db->insert($this->db->prefix . "csm_memberships", array(
                     'identifier' => $this->create_identifier(),
                     'member_identifier' => $data['member_identifier'],
