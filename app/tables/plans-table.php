@@ -1,6 +1,6 @@
 <?php
 
-class PlansTable extends WP_List_Table {
+class PlansTable extends WP_List_Table_Custom {
 
     private $csmPlan;
 

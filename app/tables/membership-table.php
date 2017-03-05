@@ -1,6 +1,6 @@
 <?php
 
-class MembershipTable extends WP_List_Table {
+class MembershipTable extends WP_List_Table_Custom {
 
     private $csmMembership;
 

@@ -147,11 +147,11 @@ class CsmMembership {
                 $errString = $result['workplace_name'] . ' has not enough capacity on the following dates: ';
                 foreach ($not_available_dates as $k => $v) {
                     if ($k === 0) {
-                        $errString .= $v;
+                        $errString .= '<span ng-bind="' . $v . ' | date">' . $v . '</span>';
                     } else if ($k === (count($not_available_dates) - 1)) {
-                        $errString .= ' and ' . $v;
+                        $errString .= ' and <span ng-bind="' . $v . ' | date">' . $v . '</span>';
                     } else {
-                        $errString .= ', ' . $v;
+                        $errString .= ', <span ng-bind="' . $v . ' | date">' . $v . '</span>';
                     }
                 }
             }

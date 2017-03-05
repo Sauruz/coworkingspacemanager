@@ -25,6 +25,6 @@ function show_workplace_add() {
         }
     }
     
-    include(CSM_PLUGIN_PATH . 'app/pages/assets/colors.php');
+    include(CSM_PLUGIN_PATH . 'app/assets/colors.php');
     include(CSM_PLUGIN_PATH . 'app/views/workplace-add.view.php');
 }

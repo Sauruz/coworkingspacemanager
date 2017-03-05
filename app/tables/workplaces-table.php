@@ -1,6 +1,6 @@
 <?php
 
-class WorkplacesTable extends WP_List_Table {
+class WorkplacesTable extends WP_List_Table_Custom {
 
     private $csmWorkplace;
 

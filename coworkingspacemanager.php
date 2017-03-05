@@ -5,7 +5,7 @@ $csm_db_version = '1.0';
 define('PLUGIN_SLUG', 'coworking-space-manager');
 define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
 define('CMS_SIMPLE_LOCALE', end(explode('-', CMS_LOCALE)));
-
+define('CSM_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 /*
   Plugin Name: Coworking Space Manager
@@ -25,11 +25,10 @@ function register_session() {
 }
 
 //Tables
-if (!class_exists('WP_List_Table')) {
-    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+if (!class_exists('WP_List_Table_Custom')) {
+    require_once(CSM_PLUGIN_PATH . 'app/assets/class-wp-list-table-custom.php' );
 }
 
-define('CSM_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 //Styles & javascript
 function csm_style() {
