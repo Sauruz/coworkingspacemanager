@@ -111,9 +111,8 @@ function csm_menu() {
     add_submenu_page(PLUGIN_SLUG, 'Profile', 'Profile', 'manage_options', 'csm-profile', 'show_profile');
     add_submenu_page(PLUGIN_SLUG, 'Membership Overview', 'Membership Overview', 'manage_options', 'csm-membership-overview', 'show_membership_overview');
     add_submenu_page(PLUGIN_SLUG, 'Add Membership Plan', 'Add Membership Plan', 'manage_options', 'csm-membership-add', 'show_membership_add');
+    add_submenu_page(PLUGIN_SLUG, 'Memberships', 'Memberships', 'manage_options', 'csm-memberships', 'show_memberships');
     add_submenu_page(PLUGIN_SLUG, 'Calendar', 'Calendar', 'manage_options', 'csm-calendar', 'show_calendar');
-    add_submenu_page(PLUGIN_SLUG, 'Invoices', 'Invoices', 'manage_options', 'csm-invoices', 'show_invoices');
-    add_submenu_page(PLUGIN_SLUG, 'Payments', 'Payments', 'manage_options', 'csm-payments', 'show_payments');
 
     add_submenu_page(
             PLUGIN_SLUG, //parent menu slug to attach to
@@ -137,8 +136,6 @@ function csm_menu() {
     add_submenu_page(PLUGIN_SLUG, 'Workplaces', 'Workplaces', 'manage_options', 'csm-workplaces', 'show_workplaces');
     add_submenu_page(PLUGIN_SLUG, 'Add Workplace', 'Add Workplace', 'manage_options', 'csm-workplace-add', 'show_workplace_add');
     add_submenu_page(PLUGIN_SLUG, 'Edit Workplace', 'Edit Workplace', 'manage_options', 'csm-workplace-edit', 'show_workplace_edit');
-
-    add_submenu_page(PLUGIN_SLUG, 'Email Templates', 'Email Templates', 'manage_options', 'csm-email-templates', 'show_email-templates');
 }
 
 //Add menu class to hide elements in menu /*sigh*/

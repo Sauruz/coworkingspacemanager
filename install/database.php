@@ -61,6 +61,20 @@ function create_csm_tables() {
 	) $charset_collate;";
     dbDelta($membership_plans_sql);
 
+    //Email templates
+    $table_templates = $wpdb->prefix . 'csm_templates';
+    $templates_sql = "CREATE TABLE $table_templates (
+		id INT(11) NOT NULL AUTO_INCREMENT,
+                name VARCHAR(100) NOT NULL,
+                slug VARCHAR(100) NOT NULL,
+                template LONGTEXT NULL,
+                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
+                created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+                KEY slug_key (slug),
+                PRIMARY KEY (`id`)
+	) $charset_collate;";
+    dbDelta($templates_sql);
+    
 
     //Spaces
     /**
@@ -199,6 +213,31 @@ function dummy_data() {
             'vat' => 0,
             'price_total' => $plan['price']
         ));
+    }
+    
+    //Add templates
+    $templatescheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_templates", ARRAY_A); 
+    if (empty($templatescheck)) {
+        $wpdb->insert($wpdb->prefix . "csm_templates", array(
+            "name" => "Invoice",
+            "slug" => "invoice",
+            "template" => 'Hi {{first_name}} {{last_name}},<br><br>'
+            . 'This is your invoice for your membership {{membership_nr}} from {{membership_start}} till {{membership_end}}. <br>'
+            . 'Questions? Please contact {{coworking_email}}.<br><br>'
+            . '<table width="400px">'
+            . '<tr><td>Workplace:</td><td>{{workplace}}</td></tr>'
+            . '<tr><td>Days:</td><td>{{days}}</td></tr>'
+            . '<tr><td>Amount:</td><td>{{price}}</td></tr>'
+            . '<tr><td>Date:</td><td>{{date_today}}</td></tr>'
+            . '</table><br><br>'
+            . 'Regards,<br><br>'
+            . '{{csm_name}}<br>'
+            . '{{csm_address}}<br>'
+            . '{{csm_locality}} {{csm_country}}<br>'
+            . '{{csm_email}}<br>'
+            . '{{csm_website}}',
+            'created_at' => current_time('mysql')
+        )); 
     }
 }
 
