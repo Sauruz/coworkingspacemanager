@@ -39,9 +39,9 @@ class MembershipTable extends WP_List_Table_Custom {
                 return '<span ng-bind="' . $item['price_total'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price_total'] . '</span>';
             case 'payment':
                 if ($item['payment']) {
-                    return '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> ' . date('Y-m-d', strtotime($item['payment_at'])) . '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:silver">' . $item['payment_method'] . '</span>';
+                    return '<span ng-click="Ctrl.open(\'' . $item['identifier'] .'\', \'' . $item['price']. '\', \'' . $item['plan_start']. '\', \'' . $item['plan_end']. '\')"><i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> <span ng-bind="\'' . date('Y-m-d', strtotime($item['payment_at'])) . '\' | date : \'mediumDate\'"></span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:silver">' . $item['payment_method'] . '</span></span>';
                 } else {
-                    return '<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Send reminder</button>';
+                    return '<span class="btn btn-sm btn-default" ng-click="Ctrl.open(\'' . $item['identifier'] .'\', \'' . $item['price']. '\', \'' . $item['plan_start']. '\', \'' . $item['plan_end']. '\')"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Register payment</span>';
                 }
             case 'invoice_sent':
                 if ($item['invoice_sent']) {

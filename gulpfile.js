@@ -113,7 +113,9 @@ var bowerComponents = [
     'bower_components/angular/angular.min.js',
     'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'bower_components/moment/min/moment.min.js',
-    'bower_components/fullcalendar/dist/fullcalendar.js'
+    'bower_components/fullcalendar/dist/fullcalendar.js',
+    'bower_components/angular-bootstrap/ui-bootstrap.min.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 ];
 
 gulp.task('js', function () {

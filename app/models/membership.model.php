@@ -105,9 +105,9 @@ class CsmMembership {
      * @throws Exception
      */
     public function check_workplace_availability($plan_id, $start_date, $end_date) {
-        
+
         $plan = $this->csmplan->get($plan_id);
-        
+
         $datediff = strtotime($end_date) - strtotime($start_date);
         $one_day = 60 * 60 * 24;
         $days = floor($datediff / $one_day);
@@ -213,7 +213,7 @@ class CsmMembership {
         $data = $this->validate($data);
         //Check
         $this->check_workplace_availability($data['plan_id'], $data['plan_start'], $data['plan_end']);
-        
+
         return $this->db->insert($this->db->prefix . "csm_memberships", array(
                     'identifier' => $this->create_identifier(),
                     'member_identifier' => $data['member_identifier'],
@@ -226,6 +226,53 @@ class CsmMembership {
                     'created_at' => current_time('mysql'),
                         )
         );
+    }
+
+    /**
+     * Register payment
+     * @param type $identifier
+     * @param type $data
+     * @return type
+     * @throws Exception
+     */
+    public function payment($identifier, $data) {
+        $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
+
+        $this->gump->validation_rules(array(
+            'identifier' => 'required|max_len,100',
+            'payment' => 'required|numeric',
+            'payment_method' => 'required',
+            'payment_at' => 'required|date',
+        ));
+
+        $this->gump->filter_rules(array(
+            'identifier' => 'trim|sanitize_string',
+            'payment_method' => 'trim|sanitize_string',
+        ));
+
+        $validated_data = $this->gump->run($data);
+        if ($validated_data === false) {
+            $errArr = $this->gump->get_readable_errors();
+            $errString = "";
+            foreach ($errArr as $k => $err) {
+                $errString .= $err . '<br>';
+            }
+            throw new Exception($errString);
+        } else {
+            $response = $this->db->update($this->db->prefix . "csm_memberships", array(
+                        'payment' => $data['payment'] ? $data['payment'] : 0,
+                        'payment_method' => $data['payment_method'] ? $data['payment_method'] : NULL,
+                        'payment_at' => $data['payment_at'] ? $data['payment_at'] : '0000-00-00 00:00:00',
+                        'updated_at' => current_time('mysql'),
+                            ), array('identifier' => $identifier) 
+            );
+             if ($this->db->last_error) {
+                 throw new Exception("Something went wrong");
+             }
+             else {
+                 return $response;
+             }
+        }
     }
 
     /**
