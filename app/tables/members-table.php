@@ -202,7 +202,10 @@ class MembersTable extends WP_List_Table_Custom {
         $current_page = $this->get_pagenum();
 
         $members = $this->csmMember->all(
-                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'plan'
+                (($current_page - 1) * $per_page), $per_page, 
+                !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', 
+                !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'plan',
+                !empty($_REQUEST['s']) ? $_REQUEST['s'] : false
         );
         $total_items = $this->csmMember->count();
         $this->items = $members;

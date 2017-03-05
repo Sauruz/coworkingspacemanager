@@ -31,7 +31,13 @@ class CsmMember {
      * @param type $order
      * @return type
      */
-    public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC') {
+    public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC', $search = false) {
+        
+        $extra_where = "";
+        if ($search) {
+            $extra_where = "WHERE " . $this->db->prefix . "csm_members.first_name LIKE '%" . $search . "%' OR " . $this->db->prefix . "csm_members.last_name LIKE '%" . $search . "%' ";
+        }
+        
         $query = "SELECT "
                 . "identifier, "
                 . "first_name, "
@@ -71,6 +77,7 @@ class CsmMember {
                 . "WHERE plan_end > CURDATE() "
                 . "ORDER BY plan_end DESC) ms "
                 . "ON (identifier = ms.member_identifier) "
+                . $extra_where
                 . "GROUP BY identifier "
                 . "ORDER BY " . $order . " " . $orderby . " "
                 . "LIMIT " . $offset . "," . $limit;
