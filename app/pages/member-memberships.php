@@ -29,12 +29,12 @@ function show_member_memberships() {
             };
             
             $data = $member;
-            $MembershipTable = new MembershipTable();
+            $MembershipTable = new MemberMembershipTable();
             //Fetch, prepare, sort, and filter our data...
             $MembershipTable->prepare_items();
             csm_get_update();
 
-            include(CSM_PLUGIN_PATH . 'app/views/membership-overview.view.php');
+            include(CSM_PLUGIN_PATH . 'app/views/member-memberships.view.php');
         }
     } else {
         csm_error('No member identifier specified', true);

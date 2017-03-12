@@ -48,6 +48,7 @@ class CsmMembership {
                 . $this->db->prefix . "csm_memberships.plan_id, "
                 . $this->db->prefix . "csm_memberships.plan_start, "
                 . $this->db->prefix . "csm_memberships.plan_end, "
+                . $this->db->prefix . "csm_members.identifier AS member_identifier, "
                 . $this->db->prefix . "csm_members.first_name, "
                 . $this->db->prefix . "csm_members.last_name, "
                 . $this->db->prefix . "csm_memberships.payment, "

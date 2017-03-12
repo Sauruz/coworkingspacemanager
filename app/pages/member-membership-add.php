@@ -35,12 +35,12 @@ function show_member_membership_add() {
                     ));
 
                     csm_set_update('Membership plan added');
-                    hacky_redirect('csm-membership-overview&member_identifier=' . $_REQUEST['member_identifier']);
+                    hacky_redirect('csm-member-memberships&member_identifier=' . $_REQUEST['member_identifier']);
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
                 }
             }
-            include(CSM_PLUGIN_PATH . 'app/views/membership-add.view.php');
+            include(CSM_PLUGIN_PATH . 'app/views/member-membership-add.view.php');
         }
     } else {
         csm_error('No member identifier specified', true);

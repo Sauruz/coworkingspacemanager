@@ -70,7 +70,8 @@ include(CSM_PLUGIN_PATH . 'install/database.php');
 
 //Classes
 include(CSM_PLUGIN_PATH . 'app/tables/members-table.php');
-include(CSM_PLUGIN_PATH . 'app/tables/membership-table.php');
+include(CSM_PLUGIN_PATH . 'app/tables/member-membership-table.php');
+include(CSM_PLUGIN_PATH . 'app/tables/memberships-table.php');
 include(CSM_PLUGIN_PATH . 'app/tables/plans-table.php');
 include(CSM_PLUGIN_PATH . 'app/tables/workplaces-table.php');
 
@@ -80,6 +81,7 @@ include(CSM_PLUGIN_PATH . 'app/pages/member-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-memberships.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-membership-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-profile.php');
+include(CSM_PLUGIN_PATH . 'app/pages/memberships.php');
 include(CSM_PLUGIN_PATH . 'app/pages/settings.php');
 include(CSM_PLUGIN_PATH . 'app/pages/plans.php');
 include(CSM_PLUGIN_PATH . 'app/pages/plan-add.php');

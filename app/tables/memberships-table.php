@@ -66,6 +66,23 @@ class MembershipTable extends WP_List_Table_Custom {
                 /* $2%s */ $item['identifier']                //The value of the checkbox should be the record's id
         );
     }
+    
+    /**
+     * Lastname name column
+     * @param type $item
+     * @return type
+     */
+    public function column_last_name($item) {
+
+        //Build row actions
+        $actions = array();
+
+        //Return the title contents
+        return sprintf('%1$s %2$s',
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', 'csm-member-memberships', $item['member_identifier']),
+                /* $2%s */ $this->row_actions($actions)
+        );
+    }
 
     /**
      * Identifier column
@@ -108,12 +125,12 @@ class MembershipTable extends WP_List_Table_Custom {
     public function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
+            'last_name' => 'Name',
             'identifier' => 'Membership Nr.',
             'membership_status' => 'Status',
             'member_identifier' => 'Plan',
             'plan_start' => 'Starts',
             'plan_end' => 'Expires',
-            'price_total' => 'Price',
             'payment' => 'Payment',
             'invoice_sent' => 'Invoice Sent'
         );
@@ -127,11 +144,11 @@ class MembershipTable extends WP_List_Table_Custom {
     public function get_sortable_columns() {
         $sortable_columns = array(
             'identifier' => array('identifier', false),
+            'last_name' => array('last_name', false),
             'membership_status' => array('plan_start', false),
             'member_identifier' => array('member_identifier', false),
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
-            'price_total' => array('price', false),
             'payment' => array('payment', false),
             'invoice_sent' => array('invoice_sent', false),
         );
@@ -197,7 +214,7 @@ class MembershipTable extends WP_List_Table_Custom {
         $current_page = $this->get_pagenum();
 
         $memberships = $this->csmMembership->all(
-                (($current_page - 1) * $per_page), $per_page,  !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', $_REQUEST['member_identifier']
+                (($current_page - 1) * $per_page), $per_page,  !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC',false
         );
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;
