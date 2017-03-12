@@ -1,4 +1,4 @@
-app.controller('ModalPaymentCtrl', function ($uibModal, $log, $document, $timeout) {
+app.controller('invoiceModalContent.html', function ($uibModal, $log, $document, $timeout) {
     var Ctrl = this;
     Ctrl.items = ['item1', 'item2', 'item3'];
 
@@ -13,12 +13,13 @@ app.controller('ModalPaymentCtrl', function ($uibModal, $log, $document, $timeou
             end: end
         };
 
+
         var modalInstance = $uibModal.open({
             animation: Ctrl.animationsEnabled,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'paymentModalContent.html',
-            controller: 'ModalInstanceCtrl',
+            templateUrl: 'invoiceModalContent.html',
+            controller: 'InvoiceInstanceCtrl',
             controllerAs: 'Ctrl',
             windowClass: 'bootstrap-wrapper',
             appendTo: angular.element($document[0].querySelector('#payment-modal')),
@@ -51,7 +52,7 @@ app.controller('ModalPaymentCtrl', function ($uibModal, $log, $document, $timeou
 // Please note that $uibModalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-app.controller('ModalInstanceCtrl', function ($uibModalInstance, membership) {
+app.controller('InvoiceInstanceCtrl', function ($uibModalInstance, membership) {
     var Ctrl = this;
     Ctrl.membership = membership;
 

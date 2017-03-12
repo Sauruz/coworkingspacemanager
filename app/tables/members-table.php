@@ -85,13 +85,13 @@ class MembersTable extends WP_List_Table_Custom {
 
         //Build row actions
         $actions = array(
-            'edit' => sprintf('<a href="?page=%s&member_identifier=%s">Edit</a>', 'csm-profile', $item['identifier']),
+            'edit' => sprintf('<a href="?page=%s&member_identifier=%s">Edit</a>', 'csm-member-profile', $item['identifier']),
             'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name']. ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
         );
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', 'csm-membership-overview', $item['identifier']),
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', 'csm-member-memberships', $item['identifier']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }

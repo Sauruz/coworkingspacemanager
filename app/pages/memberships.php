@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Show overview of membership plans
+ * Show overview of membership plans 
  */
-function show_membership_overview() {
+function show_memberships() {
     //must check that the user has the required capability 
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);

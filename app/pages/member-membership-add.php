@@ -3,7 +3,7 @@
 /**
  * Show form to add a membership plan
  */
-function show_membership_add() {
+function show_member_membership_add() {
     //must check that the user has the required capability 
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
