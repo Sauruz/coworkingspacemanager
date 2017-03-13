@@ -8,7 +8,7 @@ $(document).ready(function () {
                 url: 'admin-ajax.php',
                 type: 'POST',
                 data: {
-                    action: 'calendar'
+                    action: 'csmcalendar'
                 }
             }
         ]

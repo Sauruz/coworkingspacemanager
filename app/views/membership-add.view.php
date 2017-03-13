@@ -8,20 +8,6 @@
             csm_error('To give ' . $data['first_name'] .' a new membership you need to configure at least one plan. There are no plans configurated yet. <a href="?page=csm-plan-add">Click here</a> to add a plan.');
         } else {
             ?>
-            <script>
-                    MembershipPlans = [
-                        <?php foreach ($plans as $plan) { ?>
-                                            {
-                                            plan_id : <?php echo $plan['plan_id']; ?>,
-                                                    plan_name : '<?php echo $plan['plan_name']; ?>',
-                                                    workplace_name : '<?php echo $plan['workplace_name']; ?>',
-                                                    price : <?php echo $plan['price']; ?>,
-                                                    days : <?php echo $plan['days']; ?>,
-                                            },
-                        <?php } ?>
-                    ];
-            </script>
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel">
@@ -30,7 +16,14 @@
                                 <input name="action" type="hidden" value="membership-add">
                                 <input name="vat" type="hidden" value="0">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <label for="plan_id">Member <span class="description">(required)</span></label><br>
+                                        <select class="form-control" id="plan_id" name="member_identifier" ng-model="vm.selectedMember">
+                                            <option value=""> -- Select a member -- </option>
+                                            <option ng-repeat="member in vm.members" value="{{member.identifier}}">{{member.last_name + ', ' + member.first_name}}</option>
+                                        </select><br>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label for="plan_id">Membership plan <span class="description">(required)</span></label><br>
                                         <select class="form-control" id="plan_id" name="plan_id"
                                                 ng-options="plan.workplace_name + ' &bull; ' + plan.plan_name for plan in vm.plans track by plan.plan_id"

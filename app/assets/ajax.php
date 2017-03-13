@@ -3,9 +3,9 @@
 /**
  * Ajax call for calendar
  */
-add_action('wp_ajax_calendar', 'calendar');
+add_action('wp_ajax_csmcalendar', 'csmcalendar');
 
-function calendar() {
+function csmcalendar() {
     //must check that the user has the required capability 
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
@@ -36,9 +36,9 @@ function calendar() {
 /**
  * Get available membership plans
  */
-add_action('wp_ajax_membershipplans', 'membershipplans');
+add_action('wp_ajax_csmmembershipplans', 'csmmembershipplans');
 
-function membershipplans() {
+function csmmembershipplans() {
     //must check that the user has the required capability 
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
@@ -59,5 +59,24 @@ function membershipplans() {
     wp_send_json($response);
     wp_die();
 }
+
+/**
+ * Get members
+ */
+add_action('wp_ajax_csmmembers', 'csmmembers');
+
+function csmmembers() {
+    //must check that the user has the required capability 
+    if (!current_user_can('manage_options')) {
+        csm_error('You do not have sufficient permissions to access this page', true);
+    }
+    
+    $CsmMember= new CsmMember();
+    $members = $CsmMember->ajax();
+    
+    wp_send_json($members);
+    wp_die();
+}
+
 
 ?>

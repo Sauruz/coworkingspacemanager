@@ -15,19 +15,19 @@ function show_membership_add() {
     
 
     //Add membership plan
-    if (isset($_POST['action']) && $_POST['action'] === 'member-membership-add') {
+    if (isset($_POST['action']) && $_POST['action'] === 'membership-add') {
 
         try {
             $CsmMembership = new CsmMembership();
             $CsmMembership->create_simple(array(
-                'member_identifier' => $_REQUEST['member_identifier'],
+                'member_identifier' => $_POST['member_identifier'],
                 'plan_id' => $_POST['plan_id'],
                 'plan_start' => $_POST['plan_start'],
                 'vat' => $_POST['vat']
             ));
 
             csm_set_update('Membership plan added');
-            hacky_redirect('csm-member-memberships&member_identifier=' . $_REQUEST['member_identifier']);
+            hacky_redirect('csm-memberships');
         } catch (\Exception $e) {
             csm_error($e->getMessage());
         }

@@ -79,8 +79,28 @@ class CsmMember {
                 . "ON (identifier = ms.member_identifier) "
                 . $extra_where
                 . "GROUP BY identifier "
-                . "ORDER BY " . $order . " " . $orderby . " "
+                . "ORDER BY " . $orderby . " " . $order. " "
                 . "LIMIT " . $offset . "," . $limit;
+        return $this->db->get_results($query, ARRAY_A);
+    }
+    
+    /**
+     * Get users for ajax
+     * @param type $offset
+     * @param type $limit
+     * @param type $orderby
+     * @param type $order
+     * @return type
+     */
+    public function ajax($offset = 0, $limit = 1000000, $orderby = 'last_name', $order = 'ASC') { 
+        $query = "SELECT "
+                . "identifier, "
+                . "first_name, "
+                . "last_name "
+                . "FROM " . $this->db->prefix . "csm_members "
+                . "ORDER BY " . $orderby. " " . $order  . " "
+                . "LIMIT " . $offset . "," . $limit;
+        
         return $this->db->get_results($query, ARRAY_A);
     }
 
