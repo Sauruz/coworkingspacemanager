@@ -17,7 +17,14 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
             company: "@",
             address: "@",
             locality: "@",
-            country: "@"
+            country: "@",
+            csmName: "@",
+            csmAddress: "@",
+            csmZipcode: "@",
+            csmLocality: "@",
+            csmCountry: "@",
+            csmEmail: "@",
+            csmWebsite: "@"
         },
         controllerAs: 'vm',
         scope: {},

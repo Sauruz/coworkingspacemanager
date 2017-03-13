@@ -53,6 +53,13 @@ require CSM_PLUGIN_PATH . 'vendor/autoload.php';
 include(CSM_PLUGIN_PATH . '/app/assets/currency-symbols.php');
 
 //Standard CSM Settings Settings
+define('CSM_NAME', get_option('csm-name'));
+define('CSM_ADDRESS', get_option('csm-address'));
+define('CSM_ZIPCODE', get_option('csm-zipcode'));
+define('CSM_LOCALITY', get_option('csm-locality'));
+define('CSM_COUNTRY', get_option('csm-country'));
+define('CSM_EMAIL', get_option('csm-email'));
+define('CSM_WEBSITE', get_option('csm-website'));
 define('CSM_CURRENCY', get_option('csm-currency'));
 define('CSM_CURRENCY_SYMBOL', html_entity_decode($currency_symbols[CSM_CURRENCY]));
 

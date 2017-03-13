@@ -61,6 +61,13 @@ class MembershipTable extends WP_List_Table_Custom {
                             . 'locality="' . $item['locality'] . '" '
                             . 'country="' . $item['country'] . '" '
                             . 'days="' . $item['plan_days'] . '" '
+                            . 'csm-name="' . CSM_NAME . '" '
+                            . 'csm-address="' . CSM_ADDRESS . '" '
+                            . 'csm-zipcode="' . CSM_ZIPCODE . '" '
+                            . 'csm-locality="' . CSM_LOCALITY . '" '
+                            . 'csm-country="' . CSM_COUNTRY . '" '
+                            . 'csm-email="' . CSM_EMAIL . '" '
+                            . 'csm-website="' . CSM_WEBSITE . '" '
                             . '></invoice>';
                 }
             default:

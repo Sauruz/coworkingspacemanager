@@ -67,11 +67,10 @@
                     <div class="row">
                         <div class="col-md-12">
                          <span class="default-control">
-                                     <?php echo $invoiceTemplate['template']; ?>
+                                     <?php echo $invoiceTemplate['template']; ?>  
                          </span><br><br>
                         </div>
                     </div>    
-            
                 </div>
                 <div class="modal-footer">
                 <button class="btn btn-primary" type="submit">Register Payment</button>
