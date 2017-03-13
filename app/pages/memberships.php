@@ -24,6 +24,16 @@ function show_memberships() {
         }
     };
 
+    //Send invoice
+    if (isset($_POST['action']) && $_POST['action'] === 'sendinvoice') {
+        $CsmInvoice = new CsmInvoice();
+        try {
+            $CsmInvoice->send($_POST);
+        } catch (Exception $e) {
+            csm_error($e->getMessage());
+        }
+    };
+
     $data = $member;
     $MembershipTable = new MembershipTable();
     //Fetch, prepare, sort, and filter our data...

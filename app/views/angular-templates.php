@@ -55,11 +55,11 @@
 
             <script type="text/ng-template" id="invoiceModalContent.html">
                 <form action="" id="register-payment" method="POST">
-                <input name="action" type="hidden" value="sendInvoice">
+                <input name="action" type="hidden" value="sendinvoice">
                 <input name="identifier" type="hidden" ng-value="'{{Ctrl.membership.identifier}}'">
                 <input name="invoice_sent" type="hidden" value="1">
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-                <input type="hidden" name="member_identifier" value="<?php echo $_REQUEST['member_identifier'] ?>" />
+                <input type="hidden" name="member_identifier" value="{{Ctrl.membership.memberIdentifier}}" />
                 <div class="modal-header">
                 <h3 class="modal-title" id="modal-title">Send invoice to {{Ctrl.membership.firstName}}</h3>
                 </div>
@@ -67,13 +67,16 @@
                     <div class="row">
                         <div class="col-md-12">
                          <span class="default-control">
-                                     <?php echo $invoiceTemplate['template']; ?>  
+                              <?php echo $invoiceTemplate['template']; ?>
                          </span><br><br>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea name="invoice" class="form-control" style="display: none;"><?php echo $invoiceTemplate['template']; ?>  </textarea>
                         </div>
                     </div>    
                 </div>
                 <div class="modal-footer">
-                <button class="btn btn-primary" type="submit">Register Payment</button>
+                <button class="btn btn-primary" type="submit">Send Invoice</button>
                 <button class="btn btn-default" type="button" ng-click="Ctrl.cancel()">Cancel</button>
                 </div>
                 </form>

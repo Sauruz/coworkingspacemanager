@@ -82,21 +82,14 @@ class CsmMembership {
     }
 
     /**
-     * Get single member
+     * Get single membership
      * @param type $identifier
      * @return type
      */
     public function get($identifier) {
         $query = "SELECT "
-                . "identifier, "
-                . "first_name, "
-                . "last_name, "
-                . "email, "
-                . "profession, "
-                . "bio, "
-                . "photo, "
-                . "created_at "
-                . "FROM " . $this->db->prefix . "csm_members "
+                . "* "
+                . "FROM " . $this->db->prefix . "csm_memberships "
                 . "WHERE identifier = '" . $identifier . "'";
         return $this->db->get_row($query, ARRAY_A);
     }
@@ -265,19 +258,34 @@ class CsmMembership {
             throw new Exception($errString);
         } else {
             $response = $this->db->update($this->db->prefix . "csm_memberships", array(
-                        'payment' => $data['payment'] ? $data['payment'] : 0,
-                        'payment_method' => $data['payment_method'] ? $data['payment_method'] : NULL,
-                        'payment_at' => $data['payment_at'] ? $data['payment_at'] : '0000-00-00 00:00:00',
-                        'updated_at' => current_time('mysql'),
-                            ), array('identifier' => $identifier) 
+                'payment' => $data['payment'] ? $data['payment'] : 0,
+                'payment_method' => $data['payment_method'] ? $data['payment_method'] : NULL,
+                'payment_at' => $data['payment_at'] ? $data['payment_at'] : '0000-00-00 00:00:00',
+                'updated_at' => current_time('mysql'),
+                    ), array('identifier' => $identifier)
             );
-             if ($this->db->last_error) {
-                 throw new Exception("Something went wrong");
-             }
-             else {
-                 return $response;
-             }
+            if ($this->db->last_error) {
+                throw new Exception("Something went wrong");
+            } else {
+                return $response;
+            }
         }
+    }
+
+    /**
+     * Register Invoice
+     * @param type $identifier
+     * @return type
+     * @throws Exception
+     */
+    public function update_invoice($identifier, $bool = 1) {
+        $response = $this->db->update($this->db->prefix . "csm_memberships", array(
+            'invoice_sent' => $bool,
+            'invoice_sent_at' => current_time('mysql'),
+            'updated_at' => current_time('mysql'),
+                ), array('identifier' => $identifier)
+        );
+        return $response;
     }
 
     /**

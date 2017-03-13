@@ -48,7 +48,7 @@ var onError = function (err) {
  * ######################################################################
  */
 gulp.task('clean', function () {
-    return gulp.src('dist', {read: false})
+    return gulp.src(['dist', '_coworkingspacemanager'], {read: false})
         .pipe(clean());
 });
 
@@ -86,7 +86,7 @@ gulp.task('css', function () {
     ])
             .pipe(concat('css-files.css'));
 
-    var mergedStream = merge(scssStream, cssStream)
+    return merge(scssStream, cssStream)
             .pipe(concat('styles.css'))
             
             //only uglify if gulp is ran with '--type production'
@@ -177,4 +177,24 @@ gulp.task('watch', function () {
 
 gulp.task('default', function() {
     runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales']);    
+});
+
+gulp.task('distro', function() {
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales'], ['make_distro']);    
+});
+
+/**
+ * ######################################################################
+ * COPY DISTRO
+ * ######################################################################
+ */
+gulp.task('make_distro', function () {
+    return gulp.src([
+        'app/**/*',
+        'dist/**/*',
+        'install/**/*',
+        'vendor/**/*',
+        'coworkingspacemanager.php'
+    ], {base:"."})
+            .pipe(gulp.dest('_coworkingspacemanager/'));
 });

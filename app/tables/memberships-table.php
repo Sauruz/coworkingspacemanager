@@ -52,6 +52,7 @@ class MembershipTable extends WP_List_Table_Custom {
                             . 'price="' . $item['price'] . '" '
                             . 'start="' . $item['plan_start'] . '" '
                             . 'end="' . $item['plan_end'] . '" '
+                            . 'member-identifier="' . $item['member_identifier'] . '" '
                             . 'first-name="' . $item['first_name'] . '" '
                             . 'last-name="' . $item['last_name'] . '" '
                             . 'plan-name="' . $item['plan_name'] . '" '
