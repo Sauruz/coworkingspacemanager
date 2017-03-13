@@ -237,18 +237,30 @@ function dummy_data() {
         $wpdb->insert($wpdb->prefix . "csm_templates", array(
             "name" => "Invoice",
             "slug" => "invoice",
-            "template" => 'Hi {{Ctrl.membership.firstName}} {{Ctrl.membership.lastName}},<br><br>
+            "template" => '<b>Invoice {{Ctrl.membership.identifier}}</b><br><br>
 
-This is your invoice for your membership {{Ctrl.membership.identifier}} from {{Ctrl.membership.start}} till {{Ctrl.membership.end}}. <br>
-Questions? Please contact {{coworking_email}}.<br><br>
+{{Ctrl.membership.company}}<br>
+ {{Ctrl.membership.firstName}} {{Ctrl.membership.lastName}}<br>
+ {{Ctrl.membership.address}}<br>
+ {{Ctrl.membership.locality}}<br> 
+{{Ctrl.membership.country}}<br><br>
+
+<table  width="200px">
+<tr><td>Invoice nr: </td><td>{{Ctrl.membership.identifier}}</td></tr>
+<tr><td>Date: </td><td>{{Ctrl.membership.currentDate}}</td></tr>
+</table><br><br>
 
 <table width="400px">
 <tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Workplace</b></td><td>{{Ctrl.membership.workplaceName}}</td></tr>
 <tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Plan</b></td><td>{{Ctrl.membership.planName}}</td></tr>
 <tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Days</b></td><td>{{Ctrl.membership.days}}</td></tr>
 <tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Price</b></td><td>{{Ctrl.membership.priceFormatted}}</td></tr>
-<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Date</b></td><td>{{Ctrl.membership.currentDate}}</td></tr>
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Membership starts at</b></td><td>{{Ctrl.membership.start}}</td></tr>
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Membership end at</b></td><td>{{Ctrl.membership.end}}</td></tr>
 </table><br><br>
+
+This is your invoice for your membership {{Ctrl.membership.identifier}} from {{Ctrl.membership.start}} till {{Ctrl.membership.end}}. <br>
+Questions? Please contact {{coworking_email}}.<br><br>
 
 Regards,<br><br>
 

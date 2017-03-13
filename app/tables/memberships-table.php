@@ -56,6 +56,10 @@ class MembershipTable extends WP_List_Table_Custom {
                             . 'last-name="' . $item['last_name'] . '" '
                             . 'plan-name="' . $item['plan_name'] . '" '
                             . 'workplace-name="' . $item['workplace_name'] . '" '
+                            . 'company="' . $item['company'] . '" '
+                            . 'address="' . $item['address'] . '" '
+                            . 'locality="' . $item['locality'] . '" '
+                            . 'country="' . $item['country'] . '" '
                             . 'days="' . $item['plan_days'] . '" '
                             . '></invoice>';
                 }
@@ -226,6 +230,7 @@ class MembershipTable extends WP_List_Table_Custom {
         $memberships = $this->csmMembership->all(
                 (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', false
         );
+        
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;
 

@@ -55,9 +55,9 @@
 
             <script type="text/ng-template" id="invoiceModalContent.html">
                 <form action="" id="register-payment" method="POST">
-                <input name="action" type="hidden" value="addpayment">
+                <input name="action" type="hidden" value="sendInvoice">
                 <input name="identifier" type="hidden" ng-value="'{{Ctrl.membership.identifier}}'">
-                <input name="payment" type="hidden" value="1">
+                <input name="invoice_sent" type="hidden" value="1">
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
                 <input type="hidden" name="member_identifier" value="<?php echo $_REQUEST['member_identifier'] ?>" />
                 <div class="modal-header">
@@ -65,33 +65,10 @@
                 </div>
                 <div class="modal-body" id="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
-                         <label>Membership Nr.</label><br>
-                         <span class="default-control" ng-bind="Ctrl.membership.identifier"></span><br><br>
-                        </div>
-                        <div class="col-md-6">
-                         <label>Price</label><br>
-                         <span class="default-control" ng-bind="Ctrl.membership.price | currency : '<?php echo CSM_CURRENCY_SYMBOL;?>'"></span><br><br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                         <label>Membership starts at</label><br>
-                         <span class="default-control" ng-bind="Ctrl.membership.start | date : 'mediumDate'"></span><br><br>
-                        </div>
-                        <div class="col-md-6">
-                         <label>Membership ends at</label><br>
-                         <span class="default-control" ng-bind="Ctrl.membership.end | date : 'mediumDate'"></span><br><br>
-                        </div>
-                    </div>
-            
-                    <div class="row">
                         <div class="col-md-12">
-                         <label>Invoice</label><br>
-                         <hr>
                          <span class="default-control">
                                      <?php echo $invoiceTemplate['template']; ?>
-                                     </span><br><br>
+                         </span><br><br>
                         </div>
                     </div>    
             

@@ -15578,7 +15578,11 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
             lastName: "@",
             workplaceName: "@",
             planName: "@",
-            days: "@"
+            days: "@",
+            company: "@",
+            address: "@",
+            locality: "@",
+            country: "@"
         },
         controllerAs: 'vm',
         scope: {},
@@ -15596,7 +15600,11 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
                         var modal = this;
                         modal.membership = membership;
                         modal.membership.currentDate = $filter('date')(moment().format('YYYY-MM-DD'), 'mediumDate');
+                        modal.membership.start = $filter('date')(modal.membership.start, 'mediumDate');
+                        modal.membership.end = $filter('date')(modal.membership.end, 'mediumDate');
                         modal.membership.priceFormatted = $filter('currency')(modal.membership.price, '€');
+                        
+                        console.log(modal.membership);
                         
                         modal.ok = function () {
                             $uibModalInstance.close(modal.membership);
