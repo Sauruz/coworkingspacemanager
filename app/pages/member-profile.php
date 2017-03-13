@@ -29,7 +29,7 @@ function show_member_profile() {
                     csm_error($e->getMessage());
                 }
             }
-            include(CSM_PLUGIN_PATH . 'app/views/profile.view.php');
+            include(CSM_PLUGIN_PATH . 'app/views/member-profile.view.php');
         }
     } else {
         csm_error('No member identifier specified', true);

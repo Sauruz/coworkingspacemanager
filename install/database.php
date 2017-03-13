@@ -20,7 +20,11 @@ function create_csm_tables() {
                 first_name VARCHAR(100) NOT NULL,
                 last_name VARCHAR(100) NOT NULL,
                 email VARCHAR(100) NOT NULL,
-                profession VARCHAR(100) NOT NULL,
+                company VARCHAR(100) NULL,
+                address VARCHAR(100) NULL,
+                locality VARCHAR(100) NULL,
+                country VARCHAR(100) NULL,
+                profession VARCHAR(100) NULL,
                 bio LONGTEXT NULL,
                 photo LONGTEXT NULL,
                 updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
@@ -74,7 +78,7 @@ function create_csm_tables() {
                 PRIMARY KEY (`id`)
 	) $charset_collate;";
     dbDelta($templates_sql);
-    
+
 
     //Spaces
     /**
@@ -179,6 +183,10 @@ function dummy_data() {
             'email' => 'hankneville@example.com',
             'profession' => 'Online marketeer',
             'bio' => 'I am an online marketeer',
+            'company' => 'Neville Marketing',
+            'address' => '2106 Bolman Court',
+            'locality' => 'Baylis, Illinois',
+            'country' => 'United States',
             'photo' => ''
         ));
 
@@ -188,6 +196,10 @@ function dummy_data() {
             'email' => 'Guidorus@example.com',
             'profession' => 'Software developer',
             'bio' => 'I am a software developer',
+            'company' => 'Spottocamp',
+            'address' => '',
+            'locality' => 'Amsterdam',
+            'country' => 'The Netherlands',
             'photo' => ''
         ));
 
@@ -196,7 +208,11 @@ function dummy_data() {
             'last_name' => 'Crush',
             'email' => 'jimcrush@example.com',
             'profession' => 'Entrepeneur',
-            'bio' => 'I am a enterpeneur',
+            'bio' => 'I am an enterpeneur',
+            'company' => 'Awesome Entrepeneurs With Loads Of Money',
+            'address' => '305 Park Street',
+            'locality' => 'San Jose, California',
+            'country' => 'United States',
             'photo' => ''
         ));
 
@@ -214,34 +230,39 @@ function dummy_data() {
             'price_total' => $plan['price']
         ));
     }
-    
+
     //Add templates
-    $templatescheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_templates", ARRAY_A); 
+    $templatescheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_templates", ARRAY_A);
     if (empty($templatescheck)) {
         $wpdb->insert($wpdb->prefix . "csm_templates", array(
             "name" => "Invoice",
             "slug" => "invoice",
-            "template" => 'Hi {{first_name}} {{last_name}},<br><br>'
-            . 'This is your invoice for your membership {{membership_nr}} from {{membership_start}} till {{membership_end}}. <br>'
-            . 'Questions? Please contact {{coworking_email}}.<br><br>'
-            . '<table width="400px">'
-            . '<tr><td>Workplace:</td><td>{{workplace}}</td></tr>'
-            . '<tr><td>Days:</td><td>{{days}}</td></tr>'
-            . '<tr><td>Amount:</td><td>{{price}}</td></tr>'
-            . '<tr><td>Date:</td><td>{{date_today}}</td></tr>'
-            . '</table><br><br>'
-            . 'Regards,<br><br>'
-            . '{{csm_name}}<br>'
-            . '{{csm_address}}<br>'
-            . '{{csm_locality}} {{csm_country}}<br>'
-            . '{{csm_email}}<br>'
-            . '{{csm_website}}',
+            "template" => 'Hi {{Ctrl.membership.firstName}} {{Ctrl.membership.lastName}},<br><br>
+
+This is your invoice for your membership {{Ctrl.membership.identifier}} from {{Ctrl.membership.start}} till {{Ctrl.membership.end}}. <br>
+Questions? Please contact {{coworking_email}}.<br><br>
+
+<table width="400px">
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Workplace</b></td><td>{{Ctrl.membership.workplaceName}}</td></tr>
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Plan</b></td><td>{{Ctrl.membership.planName}}</td></tr>
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Days</b></td><td>{{Ctrl.membership.days}}</td></tr>
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Price</b></td><td>{{Ctrl.membership.priceFormatted}}</td></tr>
+<tr  style="border: 1px solid #ddd;"><td style="padding: 5px;"><b>Date</b></td><td>{{Ctrl.membership.currentDate}}</td></tr>
+</table><br><br>
+
+Regards,<br><br>
+
+{{csm_name}}<br>
+{{csm_address}}<br>
+{{csm_locality}} {{csm_country}}<br>
+{{csm_email}}<br>
+{{csm_website}}',
             'created_at' => current_time('mysql')
-        )); 
+        ));
     }
 }
 
-    //Set standard options for Coworking Space Manages
+//Set standard options for Coworking Space Manages
 function default_options() {
     update_option('csm-currency', 'USD');
 }

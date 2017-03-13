@@ -39,9 +39,9 @@ class MemberMembershipTable extends WP_List_Table_Custom {
                 return '<span ng-bind="' . $item['price_total'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price_total'] . '</span>';
             case 'payment':
                if ($item['payment']) {
-                    return '<payment paid="false" payment-at="' . date('Y-m-d', strtotime($item['payment_at'])) . '" payment-method="' . $item['payment_method'] . '" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></payment>';
+                    return '<payment paid="true" payment-at="' . date('Y-m-d', strtotime($item['payment_at'])) . '" payment-method="' . $item['payment_method'] . '" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></payment>';
                 } else {
-                    return '<payment paid="true" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></payment>';
+                    return '<payment paid="false" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></payment>';
                 }
             case 'invoice_sent':
                 if ($item['invoice_sent']) {

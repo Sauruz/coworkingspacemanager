@@ -32,17 +32,21 @@ class CsmMember {
      * @return type
      */
     public function all($offset = 0, $limit = 10, $orderby = 'last_name', $order = 'ASC', $search = false) {
-        
+
         $extra_where = "";
         if ($search) {
             $extra_where = "WHERE " . $this->db->prefix . "csm_members.first_name LIKE '%" . $search . "%' OR " . $this->db->prefix . "csm_members.last_name LIKE '%" . $search . "%' ";
         }
-        
+
         $query = "SELECT "
                 . "identifier, "
                 . "first_name, "
                 . "last_name, "
                 . "email, "
+                . "company, "
+                . "address, "
+                . "locality, "
+                . "country, "
                 . "profession, "
                 . "bio, "
                 . "photo, "
@@ -79,11 +83,11 @@ class CsmMember {
                 . "ON (identifier = ms.member_identifier) "
                 . $extra_where
                 . "GROUP BY identifier "
-                . "ORDER BY " . $orderby . " " . $order. " "
+                . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
         return $this->db->get_results($query, ARRAY_A);
     }
-    
+
     /**
      * Get users for ajax
      * @param type $offset
@@ -92,15 +96,15 @@ class CsmMember {
      * @param type $order
      * @return type
      */
-    public function ajax($offset = 0, $limit = 1000000, $orderby = 'last_name', $order = 'ASC') { 
+    public function ajax($offset = 0, $limit = 1000000, $orderby = 'last_name', $order = 'ASC') {
         $query = "SELECT "
                 . "identifier, "
                 . "first_name, "
                 . "last_name "
                 . "FROM " . $this->db->prefix . "csm_members "
-                . "ORDER BY " . $orderby. " " . $order  . " "
+                . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
-        
+
         return $this->db->get_results($query, ARRAY_A);
     }
 
@@ -115,6 +119,10 @@ class CsmMember {
                 . "first_name, "
                 . "last_name, "
                 . "email, "
+                . "company, "
+                . "address, "
+                . "locality, "
+                . "country, "
                 . "profession, "
                 . "bio, "
                 . "photo, "
@@ -143,8 +151,12 @@ class CsmMember {
             'first_name' => 'trim|sanitize_string',
             'last_name' => 'trim|sanitize_string',
             'email' => 'trim|sanitize_email',
+            'company' => 'trim|sanitize_string',
+            'address' => 'trim|sanitize_string',
+            'locality' => 'trim|sanitize_string',
+            'country' => 'trim|sanitize_string',
             'profession' => 'trim|sanitize_string',
-            'bio' => 'trim|sanitize_string'
+            'bio' => 'trim|sanitize_string',
         ));
 
         $validated_data = $this->gump->run($data);
@@ -175,6 +187,10 @@ class CsmMember {
                         'first_name' => $data['first_name'],
                         'last_name' => $data['last_name'],
                         'email' => $data['email'],
+                        'company' => $data['company'],
+                        'address' => $data['address'],
+                        'locality' => $data['locality'],
+                        'country' => $data['country'],
                         'bio' => $data['bio'],
                         'profession' => $data['profession'],
                         'photo' => $data['photo'],
@@ -201,6 +217,10 @@ class CsmMember {
                         'first_name' => $data['first_name'],
                         'last_name' => $data['last_name'],
                         'email' => $data['email'],
+                        'company' => $data['company'],
+                        'address' => $data['address'],
+                        'locality' => $data['locality'],
+                        'country' => $data['country'],
                         'bio' => $data['bio'],
                         'profession' => $data['profession'],
                         'photo' => $data['photo'],
