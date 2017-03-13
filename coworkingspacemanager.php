@@ -65,6 +65,7 @@ include(CSM_PLUGIN_PATH . 'app/models/membership.model.php');
 include(CSM_PLUGIN_PATH . 'app/models/plan.model.php');
 include(CSM_PLUGIN_PATH . 'app/models/workplace.model.php');
 include(CSM_PLUGIN_PATH . 'app/models/templates.model.php');
+include(CSM_PLUGIN_PATH . 'app/models/settings.model.php');
 
 //Install
 include(CSM_PLUGIN_PATH . 'install/database.php');

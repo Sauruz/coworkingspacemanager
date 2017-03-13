@@ -13,11 +13,45 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="currency">Currency</label><br>
-                                    <select name="currency" id="currency" class="form-control">
+                                    <label for="csm_name">Name Coworking Space <span class="description">(required)</span></label><br>
+                                    <input name="csm_name" class="form-control" placeholder="Name Coworking Space" type="text" id="csm_name" value="<?php form_value($data, 'csm_name'); ?>"><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="csm_address">Address <span class="description">(required)</span></label><br>
+                                    <input name="csm_address" class="form-control" placeholder="Address"  type="text" id="csm_address" value="<?php form_value($data, 'csm_address'); ?>"><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="csm_zipcode">Zipcode</label><br>
+                                    <input name="csm_zipcode" class="form-control" placeholder="Zipcode" type="text" id="csm_zipcode" value="<?php form_value($data, 'csm_zipcode'); ?>"><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="csm_locality">City, State/Province <span class="description">(required)</span></label><br>
+                                    <input name="csm_locality" class="form-control" placeholder="City, State/Province"  type="text" id="csm_locality" value="<?php form_value($data, 'csm_locality'); ?>"><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="csm_country">Country</label><br>
+                                    <input name="csm_country" class="form-control" placeholder="Country" type="text" id="csm_country" value="<?php form_value($data, 'csm_country'); ?>"><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="csm_email">Email <span class="description">(required)</span></label><br>
+                                    <input name="csm_email" class="form-control" placeholder="Email" type="text" id="csm_email" value="<?php form_value($data, 'csm_email'); ?>"><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                 <div class="col-md-6">
+                                    <label for="csm_website">Website</label><br>
+                                    <input name="csm_website" class="form-control" placeholder="Website" type="text" id="csm_website" value="<?php form_value($data, 'csm_website'); ?>"><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="csm_currency">Currency</label><br>
+                                    <select name="csm_currency" id="csm_currency" class="form-control">
                                         <?php
                                         foreach ($currency_symbols as $k => $symbol) {
-                                            $selected = (CSM_CURRENCY === $k) ? "selected" : "";
+                                            $selected = ($data['csm_currency'] === $k) ? "selected" : "";
                                             echo '<option value="' . $k . '" ' . $selected . '>' . $k . ' (' . html_entity_decode($symbol) . ')</option>';
                                         }
                                         ?>
@@ -27,7 +61,7 @@
 
 
                             <p class="submit">
-                                <input type="submit" name="createuser" id="createusersub" class="btn btn-primary btn-block" value="Update settings">
+                                <input type="submit" id="createusersub" class="btn btn-primary btn-block" value="Update settings">
                             </p>
                         </form>
                     </div>

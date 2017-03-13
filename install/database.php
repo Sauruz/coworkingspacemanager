@@ -116,6 +116,7 @@ function create_csm_tables() {
     add_option('csm_db_version', $csm_db_version);
 }
 
+
 /**
  * Add dummy users to database
  */
@@ -276,6 +277,13 @@ Regards,<br><br>
 
 //Set standard options for Coworking Space Manages
 function default_options() {
+    update_option('csm-name', get_option('blogname'));
+    update_option('csm-address', '');
+    update_option('csm-zipcode', '');
+    update_option('csm-locality', '');
+    update_option('csm-country', '');
+    update_option('csm-email', get_option('admin_email'));
+    update_option('csm-website', get_option('siteurl'));
     update_option('csm-currency', 'USD');
 }
 
