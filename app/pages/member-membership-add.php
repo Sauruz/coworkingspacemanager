@@ -22,7 +22,7 @@ function show_member_membership_add() {
 
             //die;
             //Add membership plan
-            if (isset($_POST['action']) && $_POST['action'] === 'add-membership-plan') {
+            if (isset($_POST['action']) && $_POST['action'] === 'member-membership-add') {
                 $data = $_POST;
 
                 try {

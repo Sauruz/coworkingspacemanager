@@ -1,19 +1,33 @@
 <div class="wrap" ng-app="App" ng-controller="Ctrl as Ctrl">
     <h1 class="wp-heading-inline"><strong>New Membership:</strong> <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
     <div class="bootstrap-wrapper">
-        <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/member.tabbar.php'; ?>
+        <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/memberships.tabbar.php'; ?>
 
         <?php
         if (empty($plans)) {
             csm_error('To give ' . $data['first_name'] .' a new membership you need to configure at least one plan. There are no plans configurated yet. <a href="?page=csm-plan-add">Click here</a> to add a plan.');
         } else {
             ?>
+            <script>
+                    MembershipPlans = [
+                        <?php foreach ($plans as $plan) { ?>
+                                            {
+                                            plan_id : <?php echo $plan['plan_id']; ?>,
+                                                    plan_name : '<?php echo $plan['plan_name']; ?>',
+                                                    workplace_name : '<?php echo $plan['workplace_name']; ?>',
+                                                    price : <?php echo $plan['price']; ?>,
+                                                    days : <?php echo $plan['days']; ?>,
+                                            },
+                        <?php } ?>
+                    ];
+            </script>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel">
                         <div class="panel-body">
-                            <form action="" method="post" member-membership-add>
-                                <input name="action" type="hidden" value="member-membership-add">
+                            <form action="" method="post" membership-add>
+                                <input name="action" type="hidden" value="membership-add">
                                 <input name="vat" type="hidden" value="0">
                                 <div class="row">
                                     <div class="col-md-12">

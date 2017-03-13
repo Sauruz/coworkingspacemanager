@@ -1,4 +1,4 @@
-app.directive('addMembershipPlan', function ($locale, $timeout) {
+app.directive('membershipAdd', function ($locale, $timeout) {
     return {
         scope: true,
         controllerAs: 'vm',

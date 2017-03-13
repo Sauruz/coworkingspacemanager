@@ -82,6 +82,7 @@ include(CSM_PLUGIN_PATH . 'app/pages/member-memberships.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-membership-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-profile.php');
 include(CSM_PLUGIN_PATH . 'app/pages/memberships.php');
+include(CSM_PLUGIN_PATH . 'app/pages/membership-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/settings.php');
 include(CSM_PLUGIN_PATH . 'app/pages/plans.php');
 include(CSM_PLUGIN_PATH . 'app/pages/plan-add.php');
@@ -112,8 +113,9 @@ function csm_menu() {
     add_submenu_page(PLUGIN_SLUG, 'Add Member', 'Add Member', 'manage_options', 'csm-member-add', 'show_member_add');
     add_submenu_page(PLUGIN_SLUG, 'Profile', 'Profile', 'manage_options', 'csm-member-profile', 'show_member_profile');
     add_submenu_page(PLUGIN_SLUG, 'Membership Overview', 'Membership Overview', 'manage_options', 'csm-member-memberships', 'show_member_memberships');
-    add_submenu_page(PLUGIN_SLUG, 'Add Membership Plan', 'Add Membership Plan', 'manage_options', 'csm-member-membership-add', 'show_member_membership_add');
+    add_submenu_page(PLUGIN_SLUG, 'New Membership', 'New Membership', 'manage_options', 'csm-member-membership-add', 'show_member_membership_add');
     add_submenu_page(PLUGIN_SLUG, 'Memberships', 'Memberships', 'manage_options', 'csm-memberships', 'show_memberships');
+    add_submenu_page(PLUGIN_SLUG, 'New Membership', 'New Membership', 'manage_options', 'csm-membership-add', 'show_membership_add');
     add_submenu_page(PLUGIN_SLUG, 'Calendar', 'Calendar', 'manage_options', 'csm-calendar', 'show_calendar');
 
     add_submenu_page(
