@@ -15546,139 +15546,6 @@ $(document).ready(function () {
         ]
     });
 });
-app.controller('invoiceModalContent.html', function ($uibModal, $log, $document, $timeout) {
-    var Ctrl = this;
-    Ctrl.items = ['item1', 'item2', 'item3'];
-
-    Ctrl.animationsEnabled = true;
-
-    Ctrl.open = function (identifier, price, start, end) {
-
-        Ctrl.membership = {
-            identifier: identifier,
-            price: price,
-            start: start,
-            end: end
-        };
-
-
-        var modalInstance = $uibModal.open({
-            animation: Ctrl.animationsEnabled,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'invoiceModalContent.html',
-            controller: 'InvoiceInstanceCtrl',
-            controllerAs: 'Ctrl',
-            windowClass: 'bootstrap-wrapper',
-            appendTo: angular.element($document[0].querySelector('#payment-modal')),
-            resolve: {
-                membership: function () {
-                    return Ctrl.membership;
-                }
-            }
-        });
-        modalInstance.result.then(function () {
-            console.log('init');
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-
-        $timeout(function () {
-            $('#payment_at').datepicker({
-                language: 'en',
-                format: "yyyy-mm-dd",
-                todayHighlight: true,
-                autoclose: true
-            });
-            $('#payment_at').datepicker('setDate', new Date());
-        });
-
-    };
-
-});
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
-
-app.controller('InvoiceInstanceCtrl', function ($uibModalInstance, membership) {
-    var Ctrl = this;
-    Ctrl.membership = membership;
-
-    Ctrl.ok = function () {
-        $uibModalInstance.close(Ctrl.membership);
-    };
-
-    Ctrl.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
-
-app.controller('ModalPaymentCtrl', function ($uibModal, $log, $document, $timeout) {
-    var Ctrl = this;
-    Ctrl.items = ['item1', 'item2', 'item3'];
-
-    Ctrl.animationsEnabled = true;
-
-    Ctrl.open = function (identifier, price, start, end) {
-
-        Ctrl.membership = {
-            identifier: identifier,
-            price: price,
-            start: start,
-            end: end
-        };
-
-        var modalInstance = $uibModal.open({
-            animation: Ctrl.animationsEnabled,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'paymentModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            controllerAs: 'Ctrl',
-            windowClass: 'bootstrap-wrapper',
-            appendTo: angular.element($document[0].querySelector('#payment-modal')),
-            resolve: {
-                membership: function () {
-                    return Ctrl.membership;
-                }
-            }
-        });
-        modalInstance.result.then(function () {
-            console.log('init');
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-
-        $timeout(function () {
-            $('#payment_at').datepicker({
-                language: 'en',
-                format: "yyyy-mm-dd",
-                todayHighlight: true,
-                autoclose: true
-            });
-            $('#payment_at').datepicker('setDate', new Date());
-        });
-
-    };
-
-});
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
-
-app.controller('ModalInstanceCtrl', function ($uibModalInstance, membership) {
-    var Ctrl = this;
-    Ctrl.membership = membership;
-
-    Ctrl.ok = function () {
-        $uibModalInstance.close(Ctrl.membership);
-    };
-
-    Ctrl.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
-
 app.factory('Services', function ($http, $timeout) {
     var factory = {};
 
@@ -15792,5 +15659,76 @@ app.directive('membershipAdd', function ($locale, $timeout, Services) {
                 return vm;
             });
         }
+    };
+});
+app.directive('payment', function ($locale, $log, $document, $timeout, $uibModal) {
+    return {
+        bindToController: {
+            paid: '=',
+            paymentAt: '@',
+            paymentMethod: '@',
+            identifier: "@",
+            price: "@",
+            start: "@",
+            end: "@"
+        },
+        controllerAs: 'vm',
+        scope: {},
+        controller: function ($scope) {
+            var vm = this;
+
+            vm.openModal = function () {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: 'paymentModalContent.html',
+                    controller: function ($uibModalInstance, membership) {
+                        var modal = this;
+                        modal.membership = membership;
+
+                        modal.ok = function () {
+                            $uibModalInstance.close(modal.membership);
+                        };
+
+                        modal.cancel = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        };
+                    },
+                    controllerAs: 'Ctrl',
+                    windowClass: 'bootstrap-wrapper',
+                    appendTo: angular.element($document[0].querySelector('#payment-modal')),
+                    resolve: {
+                        membership: function () {
+                            return {
+                                identifier: vm.identifier,
+                                price: vm.price,
+                                start: vm.start,
+                                end: vm.end
+                            };
+                        }
+                    }
+                });
+                modalInstance.result.then(function () {
+                    console.log('init');
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+
+                $timeout(function () {
+                    $('#payment_at').datepicker({
+                        language: 'en',
+                        format: "yyyy-mm-dd",
+                        todayHighlight: true,
+                        autoclose: true
+                    });
+                    $('#payment_at').datepicker('setDate', new Date());
+                });
+            };
+
+            return vm;
+        },
+        template: '<span ng-if="!vm.paid" class="cursor-pointer" ng-click="vm.openModal()"><i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> <span ng-bind="vm.paymentAt | date : \'mediumDate\'"></span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:silver" ng-bind="vm.paymentMethod"></span></span>' 
+        + '<span ng-if="vm.paid" class="btn btn-sm btn-default" ng-click="vm.openModal()"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Register payment</span>'
     };
 });

@@ -5,9 +5,8 @@
 
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/member.tabbar.php'; ?>
 
-        <div ng-app="App" ng-controller="ModalPaymentCtrl as Ctrl" class="modal-demo">
+        <div ng-app="App" ng-controller="Ctrl as Ctrl">
             <?php include CSM_PLUGIN_PATH . 'app/views/angular-templates.php'; ?>
-
             <form id="memberships-filter" method="get">
                 <!-- For plugins, we also need to ensure that the form posts back to our current page -->
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
