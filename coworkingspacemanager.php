@@ -54,11 +54,11 @@ include(CSM_PLUGIN_PATH . '/app/assets/currency-symbols.php');
 
 //Standard CSM Settings Settings
 define('CSM_SETTINGS_SET', get_option('csm-settings-set'));
-define('CSM_NAME', get_option('csm-name'));
-define('CSM_ADDRESS', get_option('csm-address'));
-define('CSM_ZIPCODE', get_option('csm-zipcode'));
-define('CSM_LOCALITY', get_option('csm-locality'));
-define('CSM_COUNTRY', get_option('csm-country'));
+define('CSM_NAME', stripslashes(get_option('csm-name')));
+define('CSM_ADDRESS', stripslashes(get_option('csm-address')));
+define('CSM_ZIPCODE', stripslashes(get_option('csm-zipcode')));
+define('CSM_LOCALITY', stripslashes(get_option('csm-locality')));
+define('CSM_COUNTRY', stripslashes(get_option('csm-country')));
 define('CSM_EMAIL', get_option('csm-email'));
 define('CSM_WEBSITE', get_option('csm-website'));
 define('CSM_CURRENCY', get_option('csm-currency'));
