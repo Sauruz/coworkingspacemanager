@@ -16,6 +16,10 @@ function show_settings() {
     //Edit the settings
     if (isset($_POST['action']) && $_POST['action'] === 'change-settings') {
         $data = $_POST;
+        foreach($data as $k => $v) {
+           $data[$k] =  stripslashes($v);
+        }
+       
         try {
             $CsmSettings->update($data);
             csm_update('Settings updated');
