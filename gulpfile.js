@@ -20,6 +20,7 @@ var notify = require("gulp-notify");
 var clean = require('gulp-clean');
 var htmlmin = require('gulp-htmlmin');
 var stripDebug = require('gulp-strip-debug');
+var zip = require('gulp-zip');
 
 
 var paths = {
@@ -48,7 +49,12 @@ var onError = function (err) {
  * ######################################################################
  */
 gulp.task('clean', function () {
-    return gulp.src(['dist', '_coworkingspacemanager'], {read: false})
+    return gulp.src(['dist', '_coworkingspacemanager', 'coworkingspacemanager.zip'], {read: false})
+        .pipe(clean());
+});
+
+gulp.task('clean_distro', function () {
+    return gulp.src(['_coworkingspacemanager'], {read: false})
         .pipe(clean());
 });
 
@@ -180,7 +186,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('distro', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales'], ['make_distro']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales'], ['make_distro'], ['zip'], ['clean_distro']);    
 });
 
 /**
@@ -197,4 +203,15 @@ gulp.task('make_distro', function () {
         'coworkingspacemanager.php'
     ], {base:"."})
             .pipe(gulp.dest('_coworkingspacemanager/'));
+});
+
+/**
+ * ######################################################################
+ * ZIP PLUGIN
+ * ######################################################################
+ */
+gulp.task('zip', function () {
+    return gulp.src('_coworkingspacemanager/**/*')
+        .pipe(zip('coworkingspacemanager.zip'))
+        .pipe(gulp.dest('.'));
 });
