@@ -1,22 +1,25 @@
 <?php
 
-global $csm_db_version;
-$csm_db_version = '1.0';
-define('PLUGIN_SLUG', 'coworking-space-manager');
-define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
-define('CMS_SIMPLE_LOCALE', (explode('-', CMS_LOCALE)[0]));
-define('CSM_PLUGIN_PATH', plugin_dir_path(__FILE__));
-
 /*
   Plugin Name: Coworking Space Manager
   Plugin URI:  http://www.de-rus.nl
   Description: A Wordpress plugin for coworking spaces. Manage members, bookings and invoices.
   Version:     1.0
   Author:      Guido Rus
+  Text Domain: coworkingspacemanager
   Author URI:  http://www.de-rus.nl
   License:     GPL2
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+
+
+global $csm_db_version;
+$csm_db_version = '1.0';
+define('PLUGIN_SLUG', 'coworking-space-manager');
+define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
+define('CMS_SIMPLE_LOCALE', (explode('-', CMS_LOCALE)[0]));
+define('CSM_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 function register_session() {
     if (!session_id()) {
