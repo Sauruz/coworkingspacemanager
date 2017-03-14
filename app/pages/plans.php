@@ -10,7 +10,7 @@ function show_plans() {
     
     //Check if settings are set
     if (!CSM_SETTINGS_SET) {
-        csm_error("Please set your coworking space details under settings in the left menu.");
+        csm_error("Please enter your coworking space details at settings in the left menu");
     }
     
     //Create an instance of our package class...

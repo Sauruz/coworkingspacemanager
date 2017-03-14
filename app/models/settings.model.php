@@ -66,14 +66,14 @@ class CsmSettings {
      */
     public function all() {
         $settings = array(
-            'csm_name' => get_option('csm-name'),
-            'csm_address' => get_option('csm-address'),
-            'csm_zipcode' => get_option('csm-zipcode'),
-            'csm_locality' => get_option('csm-locality'),
-            'csm_country' => get_option('csm-country'),
-            'csm_email' => get_option('csm-email'),
-            'csm_website' => get_option('csm-website'),
-            'csm_currency' => get_option('csm-currency')
+            'csm_name' => stripslashes(get_option('csm-name')),
+            'csm_address' => stripslashes(get_option('csm-address')),
+            'csm_zipcode' => stripslashes(get_option('csm-zipcode')),
+            'csm_locality' => stripslashes(get_option('csm-locality')),
+            'csm_country' => stripslashes(get_option('csm-country')),
+            'csm_email' => stripslashes(get_option('csm-email')),
+            'csm_website' => stripslashes(get_option('csm-website')),
+            'csm_currency' => stripslashes(get_option('csm-currency'))
         );
         return $settings;
     }
