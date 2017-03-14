@@ -38,16 +38,38 @@ class MemberMembershipTable extends WP_List_Table_Custom {
             case 'price_total':
                 return '<span ng-bind="' . $item['price_total'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price_total'] . '</span>';
             case 'payment':
-               if ($item['payment']) {
+                if ($item['payment']) {
                     return '<payment paid="true" payment-at="' . date('Y-m-d', strtotime($item['payment_at'])) . '" payment-method="' . $item['payment_method'] . '" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></payment>';
                 } else {
                     return '<payment paid="false" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></payment>';
                 }
             case 'invoice_sent':
                 if ($item['invoice_sent']) {
-                    return '<i class="fa fa-lg fa-fw fa-check-circle text-success" aria-hidden="true"></i> ' . date('Y-m-d', strtotime($item['invoice_sent_at']));
+                    return '<invoice invoice-sent="true" invoice-sent-at="' . date('Y-m-d', strtotime($item['invoice_sent_at'])) . '" payment-method="' . $item['payment_method'] . '" identifier="' . $item['identifier'] . '" price="' . $item['price'] . '" start="' . $item['plan_start'] . '" end="' . $item['plan_end'] . '"></invoice>';
                 } else {
-                    return '<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Send invoice</button>';
+                    return '<invoice invoice-sent="false" '
+                            . 'identifier="' . $item['identifier'] . '" '
+                            . 'price="' . $item['price'] . '" '
+                            . 'start="' . $item['plan_start'] . '" '
+                            . 'end="' . $item['plan_end'] . '" '
+                            . 'member-identifier="' . $item['member_identifier'] . '" '
+                            . 'first-name="' . $item['first_name'] . '" '
+                            . 'last-name="' . $item['last_name'] . '" '
+                            . 'plan-name="' . $item['plan_name'] . '" '
+                            . 'workplace-name="' . $item['workplace_name'] . '" '
+                            . 'company="' . $item['company'] . '" '
+                            . 'address="' . $item['address'] . '" '
+                            . 'locality="' . $item['locality'] . '" '
+                            . 'country="' . $item['country'] . '" '
+                            . 'days="' . $item['plan_days'] . '" '
+                            . 'csm-name="' . CSM_NAME . '" '
+                            . 'csm-address="' . CSM_ADDRESS . '" '
+                            . 'csm-zipcode="' . CSM_ZIPCODE . '" '
+                            . 'csm-locality="' . CSM_LOCALITY . '" '
+                            . 'csm-country="' . CSM_COUNTRY . '" '
+                            . 'csm-email="' . CSM_EMAIL . '" '
+                            . 'csm-website="' . CSM_WEBSITE . '" '
+                            . '></invoice>';
                 }
             default:
                 return $item[$column_name];

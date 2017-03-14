@@ -8,7 +8,10 @@ function show_member_memberships() {
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
- 
+
+    $CsmTemplates = new CsmTemplates();
+    $invoiceTemplate = $CsmTemplates->get('invoice');
+
 
     if ($_REQUEST['member_identifier']) {
         $CsmMember = new CsmMember();
@@ -16,18 +19,28 @@ function show_member_memberships() {
         if (empty($member)) {
             csm_error('No user found with identifier ' . $_REQUEST['member_identifier'], true);
         } else {
-            
-           //Update payment status
-           if (isset($_POST['action']) && $_POST['action'] === 'addpayment') {
-               $CsmMembership = new CsmMembership();
-               try {
-                   $CsmMembership->payment($_POST['identifier'], $_POST);
+
+            //Update payment status
+            if (isset($_POST['action']) && $_POST['action'] === 'addpayment') {
+                $CsmMembership = new CsmMembership();
+                try {
+                    $CsmMembership->payment($_POST['identifier'], $_POST);
                     csm_set_update('Payment status of ' . $_POST['identifier'] . ' has been updated');
-               } catch (Exception $e) {
+                } catch (Exception $e) {
                     csm_error($e->getMessage());
-               }
+                }
             };
-            
+
+            //Send invoice
+            if (isset($_POST['action']) && $_POST['action'] === 'sendinvoice') {
+                $CsmInvoice = new CsmInvoice();
+                try {
+                    $CsmInvoice->send($_POST);
+                } catch (Exception $e) {
+                    csm_error($e->getMessage());
+                }
+            };
+
             $data = $member;
             $MembershipTable = new MemberMembershipTable();
             //Fetch, prepare, sort, and filter our data...
