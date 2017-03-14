@@ -86,6 +86,8 @@ class CsmSettings {
      */
     public function update($data) {
         $data = $this->validate($data);
+        update_option('csm-settings-set', true);
+        define('CSM_SETTINGS_SET', true);
         update_option('csm-name', $data['csm_name']);
         update_option('csm-address', $data['csm_address']);
         update_option('csm-zipcode', $data['csm_zipcode']);

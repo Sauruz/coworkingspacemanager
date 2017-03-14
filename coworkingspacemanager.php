@@ -53,6 +53,7 @@ require CSM_PLUGIN_PATH . 'vendor/autoload.php';
 include(CSM_PLUGIN_PATH . '/app/assets/currency-symbols.php');
 
 //Standard CSM Settings Settings
+define('CSM_SETTINGS_SET', get_option('csm-settings-set'));
 define('CSM_NAME', get_option('csm-name'));
 define('CSM_ADDRESS', get_option('csm-address'));
 define('CSM_ZIPCODE', get_option('csm-zipcode'));
@@ -62,6 +63,7 @@ define('CSM_EMAIL', get_option('csm-email'));
 define('CSM_WEBSITE', get_option('csm-website'));
 define('CSM_CURRENCY', get_option('csm-currency'));
 define('CSM_CURRENCY_SYMBOL', html_entity_decode($currency_symbols[CSM_CURRENCY]));
+
 
 //Functions
 include(CSM_PLUGIN_PATH . 'app/assets/functions.php');
@@ -110,8 +112,6 @@ add_action('init', 'register_session');
 register_activation_hook(__FILE__, 'create_csm_tables');
 register_activation_hook(__FILE__, 'dummy_data');
 register_activation_hook(__FILE__, 'default_options');
-
-
 
 //Add menu to admin
 add_action('admin_menu', 'csm_menu');

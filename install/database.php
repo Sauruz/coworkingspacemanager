@@ -9,12 +9,6 @@ function create_csm_tables() {
     global $wpdb;
     global $csm_db_version;
 
-    /**
-     * @TODO Charset does not work for all databases
-     */
-    //$charset_collate = $wpdb->get_charset_collate();
-    //$charset_collate = "SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-    $charset_collate = "";
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
     //Create members
@@ -249,14 +243,18 @@ function dummy_data() {
 
 //Set standard options for Coworking Space Manages
 function default_options() {
-    update_option('csm-name', get_option('blogname'));
-    update_option('csm-address', '');
-    update_option('csm-zipcode', '');
-    update_option('csm-locality', '');
-    update_option('csm-country', '');
-    update_option('csm-email', get_option('admin_email'));
-    update_option('csm-website', get_option('siteurl'));
-    update_option('csm-currency', 'USD');
+    $isset = get_option('csm-settings-set');
+    if (!$isset) {
+        update_option('csm-settings-set', false);
+        update_option('csm-name', get_option('blogname'));
+        update_option('csm-address', '');
+        update_option('csm-zipcode', '');
+        update_option('csm-locality', '');
+        update_option('csm-country', '');
+        update_option('csm-email', '');
+        update_option('csm-website', get_option('siteurl'));
+        update_option('csm-currency', 'USD');
+    }
 }
 
 ?>

@@ -76,8 +76,9 @@ class CsmInvoice {
             $to = $member['email'];
             $subject = 'Invoice nr: ' . $membership['identifier'];
             $body = $data['invoice'];
-            $headers[] = 'Content-Type: text/html; charset=UTF-8';
-            $headers[] = 'From: ' . CSM_NAME . ' <' . CSM_EMAIL . '>';
+            $headers = array('Content-Type: text/html; charset=UTF-8',  
+                'From: ' . CSM_NAME . ' <' . CSM_EMAIL . '>'
+                );
 
             $mail = wp_mail($to, $subject, $body, $headers);
             if ($mail) {
