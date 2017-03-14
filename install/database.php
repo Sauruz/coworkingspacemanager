@@ -9,7 +9,6 @@ function create_csm_tables() {
     global $wpdb;
     global $csm_db_version;
 
-    $charset_collate = $wpdb->get_charset_collate();
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
     //Create members
@@ -33,7 +32,7 @@ function create_csm_tables() {
 		UNIQUE KEY identifier_key (identifier),
                 UNIQUE KEY email_key (email)
                 
-	) $charset_collate;";
+	);";
     dbDelta($members_sql);
 
     //Workplaces
@@ -47,7 +46,7 @@ function create_csm_tables() {
                 updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`)
-	) $charset_collate;";
+	);";
     dbDelta($workplaces_sql);
 
     //Membership Plans
@@ -62,7 +61,7 @@ function create_csm_tables() {
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`),
                 CONSTRAINT `workplace_foreign` FOREIGN KEY (`workplace_id`) REFERENCES $table_workplaces (`id`)
-	) $charset_collate;";
+	);";
     dbDelta($membership_plans_sql);
 
     //Email templates
@@ -76,7 +75,7 @@ function create_csm_tables() {
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 KEY slug_key (slug),
                 PRIMARY KEY (`id`)
-	) $charset_collate;";
+	);";
     dbDelta($templates_sql);
 
 
@@ -110,7 +109,7 @@ function create_csm_tables() {
                 KEY `sub_identifier_foreign` (`member_identifier`),
                 CONSTRAINT `sub_identifier_foreign` FOREIGN KEY (`member_identifier`) REFERENCES $table_members (`identifier`) ON DELETE CASCADE, 
                 CONSTRAINT `plan_foreign` FOREIGN KEY (`plan_id`) REFERENCES $table_membership_plans (`id`)
-                ) $charset_collate;";
+                );";
     dbDelta($memberships_sql);
 
     add_option('csm_db_version', $csm_db_version);
