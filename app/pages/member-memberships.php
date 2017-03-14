@@ -35,6 +35,7 @@ function show_member_memberships() {
             if (isset($_POST['action']) && $_POST['action'] === 'sendinvoice') {
                 $CsmInvoice = new CsmInvoice();
                 try {
+                    csm_set_update('Invoice ' . $_POST['identifier'] . ' has been sent');
                     $CsmInvoice->send($_POST);
                 } catch (Exception $e) {
                     csm_error($e->getMessage());
