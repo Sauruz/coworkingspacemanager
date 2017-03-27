@@ -12,27 +12,27 @@ function create_csm_tables() {
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
     //Create members
-    $table_members = $wpdb->prefix . 'csm_members';
-    $members_sql = "CREATE TABLE $table_members (
-		id INT(11) NOT NULL AUTO_INCREMENT,
-                identifier VARCHAR(100) NOT NULL,
-                first_name VARCHAR(100) NOT NULL,
-                last_name VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                company VARCHAR(100) NULL,
-                address VARCHAR(100) NULL,
-                locality VARCHAR(100) NULL,
-                country VARCHAR(100) NULL,
-                profession VARCHAR(100) NULL,
-                bio LONGTEXT NULL,
-                photo LONGTEXT NULL,
-                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
-                created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
-                PRIMARY KEY (`id`),
-		UNIQUE KEY identifier_key (identifier),
-                UNIQUE KEY email_key (email)    
-	);";
-    dbDelta($members_sql);
+//    $table_members = $wpdb->prefix . 'csm_members';
+//    $members_sql = "CREATE TABLE $table_members (
+//		id INT(11) NOT NULL AUTO_INCREMENT,
+//                identifier VARCHAR(100) NOT NULL,
+//                first_name VARCHAR(100) NOT NULL,
+//                last_name VARCHAR(100) NOT NULL,
+//                email VARCHAR(100) NOT NULL,
+//                company VARCHAR(100) NULL,
+//                address VARCHAR(100) NULL,
+//                locality VARCHAR(100) NULL,
+//                country VARCHAR(100) NULL,
+//                profession VARCHAR(100) NULL,
+//                bio LONGTEXT NULL,
+//                photo LONGTEXT NULL,
+//                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
+//                created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+//                PRIMARY KEY (`id`),
+//		UNIQUE KEY identifier_key (identifier),
+//                UNIQUE KEY email_key (email)    
+//	);";
+//    dbDelta($members_sql);
 
     //Workplaces
     $table_workplaces = $wpdb->prefix . 'csm_workplaces';
@@ -89,7 +89,7 @@ function create_csm_tables() {
     $memberships_sql = "CREATE TABLE $table_membership (
 		id INT(11) NOT NULL AUTO_INCREMENT,
                 identifier VARCHAR(100) NOT NULL,
-                member_identifier VARCHAR(100) NOT NULL,
+                user_id bigint(20) unsigned NOT NULL,
                 plan_id INT(11) NOT NULL,
                 plan_start DATE DEFAULT '0000-00-00' NOT NULL,
                 plan_end DATE DEFAULT '0000-00-00' NOT NULL,
@@ -105,13 +105,20 @@ function create_csm_tables() {
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY identifier_key (identifier),
-                KEY `sub_identifier_foreign` (`member_identifier`),
-                CONSTRAINT `sub_identifier_foreign` FOREIGN KEY (`member_identifier`) REFERENCES $table_members (`identifier`) ON DELETE CASCADE, 
+                KEY `sub_identifier_foreign` (`user_id`),
+                CONSTRAINT `sub_identifier_foreign` FOREIGN KEY (`user_id`) REFERENCES " .$wpdb->prefix . "users (`ID`) ON DELETE CASCADE, 
                 CONSTRAINT `plan_foreign` FOREIGN KEY (`plan_id`) REFERENCES $table_membership_plans (`id`)
                 );";
     dbDelta($memberships_sql);
 
     add_option('csm_db_version', $csm_db_version);
+}
+
+/**
+ * Add user role for member
+ */
+function add_user_roles() {
+    add_role( 'csm_member', 'Coworking Space Member', array( 'read' => true, 'level_0' => true ) );
 }
 
 /**
@@ -172,7 +179,7 @@ function dummy_data() {
     }
 
     //Add member
-    $membercheck = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "csm_members", ARRAY_A);
+   $membercheck = get_users(array('role' => 'csm_member'));
     if (empty($membercheck)) {
         $CsmMember = new CsmMember();
         $CsmMember->create(array(
@@ -215,11 +222,11 @@ function dummy_data() {
         ));
 
         //Add a membership plan
-        $memberidentifier = $wpdb->get_var("SELECT identifier FROM " . $wpdb->prefix . "csm_members LIMIT 0,1");
+        $user = get_users(array('role' => 'csm_member', 'number' => 1));
         $plan = $wpdb->get_row("SELECT * FROM " . $wpdb->prefix . "csm_plans LIMIT 0,1", ARRAY_A);
         $CsmMembership = new CsmMembership();
         $CsmMembership->create(array(
-            'member_identifier' => $memberidentifier,
+            'user_id' => $user[0]->ID,
             'plan_id' => $plan['id'],
             'plan_start' => date('Y-m-d'),
             'plan_end' => date('Y-m-d', (time() + ($plan['days'] * 60 * 60 * 24))),

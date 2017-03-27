@@ -169,7 +169,7 @@ class CsmMembership {
         $data = $this->gump->sanitize($data); // You don't have to sanitize, but it's safest to do so.
 
         $this->gump->validation_rules(array(
-            'member_identifier' => 'required|max_len,100',
+            'user_id' => 'required|max_len,100',
             'plan_id' => 'required|numeric',
             'plan_start' => 'required|date',
             'plan_end' => 'required|date',
@@ -179,7 +179,7 @@ class CsmMembership {
         ));
 
         $this->gump->filter_rules(array(
-            'member_identifier' => 'trim|sanitize_string',
+            'user_id' => 'trim|sanitize_string',
             'plan_id' => 'trim|sanitize_string',
             'plan_start' => 'trim|sanitize_string',
             'plan_end' => 'trim|sanitize_string',
@@ -214,7 +214,7 @@ class CsmMembership {
 
         return $this->db->insert($this->db->prefix . "csm_memberships", array(
                     'identifier' => $this->create_identifier(),
-                    'member_identifier' => $data['member_identifier'],
+                    'user_id' => $data['user_id'],
                     'plan_id' => $data['plan_id'],
                     'plan_start' => $data['plan_start'],
                     'plan_end' => $data['plan_end'],

@@ -180,23 +180,19 @@ class CsmMember {
      */
     public function create($data) {
         $data = $this->validate($data);
-        $user = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'csm_members WHERE email="' . $data['email'] . '"', ARRAY_A);
+        $user = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'users WHERE email="' . $data['email'] . '"', ARRAY_A);
         if (empty($user)) {
-            return $this->db->insert($this->db->prefix . "csm_members", array(
-                        'identifier' => uniqid() . '_' . substr(strtolower(preg_replace("/(\W)+/", "", $data['last_name'])), 0, 15),
-                        'first_name' => $data['first_name'],
-                        'last_name' => $data['last_name'],
-                        'email' => $data['email'],
-                        'company' => $data['company'],
-                        'address' => $data['address'],
-                        'locality' => $data['locality'],
-                        'country' => $data['country'],
-                        'bio' => $data['bio'],
-                        'profession' => $data['profession'],
-                        'photo' => $data['photo'],
-                        'created_at' => current_time('mysql'),
-                            )
+            $userdata = array(
+                'user_login' => $data['email'],
+                'user_pass' => '123456789',
+                'user_email' => $data['email'],
+                'display_name' => $data['first_name'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'description' => $data['bio'],
+                'role' => 'csm_member'
             );
+            wp_insert_user($userdata);
         } else {
             throw new Exception("Email already exist");
         }

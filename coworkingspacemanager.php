@@ -113,6 +113,7 @@ include(CSM_PLUGIN_PATH . 'app/assets/ajax.php');
 add_action('init', 'register_session');
 
 register_activation_hook(__FILE__, 'create_csm_tables');
+register_activation_hook(__FILE__, 'add_user_roles');
 register_activation_hook(__FILE__, 'dummy_data');
 register_activation_hook(__FILE__, 'default_options');
 
