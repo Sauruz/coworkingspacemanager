@@ -86,14 +86,21 @@ class MembersTable extends WP_List_Table_Custom {
         //Build row actions
         $actions = array(
             'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-member-profile', $item['ID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name']. ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name'] . ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
         );
 
         //Return the title contents
-        return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . '</a>', 'csm-member-memberships', $item['ID']),
-                /* $2%s */ $this->row_actions($actions)
-        );
+        if (empty($item['last_name']) && empty($item['first_name'])) {
+            return sprintf('%1$s %2$s',
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . '</a>', 'csm-member-memberships', $item['ID']),
+                    /* $2%s */ $this->row_actions($actions)
+            );
+        } else {
+            return sprintf('%1$s %2$s',
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . '</span></a>', 'csm-member-memberships', $item['ID']),
+                    /* $2%s */ $this->row_actions($actions)
+            );
+        }
     }
 
     /**
@@ -202,10 +209,7 @@ class MembersTable extends WP_List_Table_Custom {
         $current_page = $this->get_pagenum();
 
         $members = $this->csmMember->all(
-                (($current_page - 1) * $per_page), $per_page, 
-                !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'plan',
-                !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', 
-                !empty($_REQUEST['s']) ? $_REQUEST['s'] : false
+                (($current_page - 1) * $per_page), $per_page, !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'plan', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', !empty($_REQUEST['s']) ? $_REQUEST['s'] : false
         );
         $total_items = $this->csmMember->count();
         $this->items = $members;

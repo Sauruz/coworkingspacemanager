@@ -92,7 +92,9 @@ class CsmMember {
                 . $this->db->prefix . "users.display_name, "
                 . $this->db->prefix . "users.user_nicename AS slug, "
                 . $this->db->prefix . "users.user_email AS email, "
-                . $this->db->prefix . "users.user_registered AS created_at,"
+                . $this->db->prefix . "users.user_registered AS created_at, "
+                . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'first_name' LIMIT 0,1) AS first_name, "
+                . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'last_name' LIMIT 0,1) AS last_name, "
                 . "ms.plan_id, "
                 . "ms.plan, "
                 . "ms.plan_price, "
@@ -125,9 +127,7 @@ class CsmMember {
                 . "GROUP BY " . $this->db->prefix . "users.ID "
                 . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
-
-        echo $query;
-
+        
         return $this->db->get_results($query, ARRAY_A);
     }
 
@@ -172,9 +172,22 @@ class CsmMember {
 //                . "created_at "
 //                . "FROM " . $this->db->prefix . "csm_members "
 //                . "WHERE identifier = '" . $identifier . "'";
-        
-        
-        $user = get_userdata($id);
+
+
+        $query = "SELECT "
+                . "id, "
+                . "user_email AS email, "
+                . meta_user_query($this->db->prefix, $id, 'first_name', true)
+                . meta_user_query($this->db->prefix, $id, 'user_company', true, 'company')
+                . meta_user_query($this->db->prefix, $id, 'user_address', true, 'address')
+                . meta_user_query($this->db->prefix, $id, 'user_locality', true, 'locality')
+                . meta_user_query($this->db->prefix, $id, 'user_country', true, 'country')
+                . meta_user_query($this->db->prefix, $id, 'user_profession', true, 'profession')
+                . meta_user_query($this->db->prefix, $id, 'description', true, 'bio')
+                . meta_user_query($this->db->prefix, $id, 'last_name', false)
+                . "FROM " . $this->db->prefix . "users "
+                . "WHERE id = " . $id;
+        $user = $this->db->get_row($query, ARRAY_A);
         return $user;
     }
 
@@ -238,7 +251,8 @@ class CsmMember {
                 'description' => $data['bio'],
                 'role' => 'csm_member'
             );
-            wp_insert_user($userdata);
+            $id = wp_insert_user($userdata);
+            $this->addMeta($id, $data);
         } else {
             throw new Exception("Email already exist");
         }
@@ -246,32 +260,58 @@ class CsmMember {
 
     /**
      * Update a member
-     * @param type $identifier
+     * @param type $id
      * @param type $data
      * @return type
      * @throws Exception
      */
-    public function update($identifier, $data) {
+    public function update($id, $data) {
         $data = $this->validate($data);
-        $user = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'csm_members WHERE email="' . $data['email'] . ' AND identifier != "' . $identifier . '"', ARRAY_A);
+        $user = $this->db->get_row('SELECT * FROM ' . $this->db->prefix . 'users WHERE email="' . $data['email'] . ' AND id != ' . $id . '', ARRAY_A);
         if (empty($user)) {
-            return $this->db->update($this->db->prefix . "csm_members", array(
-                        'first_name' => $data['first_name'],
-                        'last_name' => $data['last_name'],
-                        'email' => $data['email'],
-                        'company' => $data['company'],
-                        'address' => $data['address'],
-                        'locality' => $data['locality'],
-                        'country' => $data['country'],
-                        'bio' => $data['bio'],
-                        'profession' => $data['profession'],
-                        'photo' => $data['photo'],
-                        'created_at' => current_time('mysql'),
-                            ), array('identifier' => $identifier)
-            );
+
+          
+            wp_update_user(array(
+                'ID' => $id,
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'user_email' => $data['email'],
+                'display_name' => $data['first_name'],
+                'nickname' => $data['nickname'],
+                'description' => $data['bio'],
+            ));
+            
+            $this->addMeta($id, $data);
+
         } else {
             throw new Exception("Email already exist");
         }
+    }
+    
+    public function addMeta($id, $data) {
+        if(!empty($data['company'])) {
+                update_user_meta($id, 'user_company', $data['company']);
+            }
+            
+            if(!empty($data['address'])) {
+                update_user_meta($id, 'user_address', $data['address']);
+            }
+            
+            if(!empty($data['locality'])) {
+                update_user_meta($id, 'user_locality', $data['locality']);
+            }
+           
+            if(!empty($data['country'])) {
+                update_user_meta($id, 'user_country', $data['country']);
+            }
+            
+            if(!empty($data['bio'])) {
+                update_user_meta($id, 'description', $data['bio']);
+            }
+            
+            if(!empty($data['profession'])) {
+                update_user_meta($id, 'user_profession', $data['profession']);
+            }
     }
 
     /**

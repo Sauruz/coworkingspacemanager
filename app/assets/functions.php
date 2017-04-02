@@ -70,4 +70,23 @@ function tab_active($slug) {
     echo!empty($_GET['page']) && $_GET['page'] === $slug ? 'active' : '';
 }
 
+/**
+ * 
+ * @param type $prefix
+ * @param type $id
+ * @param type $key
+ * @param type $comma
+ * @return string
+ */
+function meta_user_query($prefix, $id, $key, $comma = false, $alias = false) {
+    if (!$alias) {
+        $alias = $key;
+    }
+    $response = "(SELECT meta_value FROM " . $prefix . "usermeta WHERE user_id = " . intval($id) . " AND meta_key = '".$key."' LIMIT 0,1) AS ".$alias." ";
+    if ($comma) {
+        $response .= ", ";
+    }
+    return $response;
+}
+
 ?>

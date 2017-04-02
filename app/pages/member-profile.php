@@ -22,7 +22,7 @@ function show_member_profile() {
                 $data = $_POST;
                 $CsmMember = new CsmMember();
                 try {
-                    $CsmMember->update($member['identifier'], $_POST);
+                    $CsmMember->update($member['id'], $_POST);
                     csm_set_update($_POST['first_name'] . ' ' . $_POST['last_name'] . ' was updated');
                     hacky_redirect();
                 } catch (\Exception $e) {

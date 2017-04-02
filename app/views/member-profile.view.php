@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Profile:</strong> <?php echo $data->first_name . ' ' . $data->last_name; ?></h1>
+    <h1 class="wp-heading-inline"><strong>Profile:</strong> <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
 
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/member.tabbar.php'; ?>

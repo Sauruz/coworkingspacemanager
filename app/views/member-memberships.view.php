@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Membership Overview:</strong> <?php echo $data->first_name . ' ' . $data->last_name; ?></h1>
+    <h1 class="wp-heading-inline"><strong>Membership Overview:</strong> <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
 
     <div class="bootstrap-wrapper">
 
