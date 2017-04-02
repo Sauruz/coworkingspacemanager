@@ -13,11 +13,11 @@ function show_member_memberships() {
     $invoiceTemplate = $CsmTemplates->get('invoice');
 
 
-    if ($_REQUEST['member_identifier']) {
+    if ($_REQUEST['id']) {
         $CsmMember = new CsmMember();
-        $member = $CsmMember->get($_REQUEST['member_identifier']);
+        $member = $CsmMember->get($_REQUEST['id']);
         if (empty($member)) {
-            csm_error('No user found with identifier ' . $_REQUEST['member_identifier'], true);
+            csm_error('No user found with id ' . $_REQUEST['id'], true);
         } else {
 
             //Update payment status

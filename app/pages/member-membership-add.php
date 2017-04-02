@@ -8,11 +8,11 @@ function show_member_membership_add() {
     if (!current_user_can('manage_options')) {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
-    if ($_REQUEST['member_identifier']) {
+    if ($_REQUEST['id']) {
         $CsmMember = new CsmMember();
-        $member = $CsmMember->get($_REQUEST['member_identifier']);
+        $member = $CsmMember->get($_REQUEST['id']);
         if (empty($member)) {
-            csm_error('No user found with identifier ' . $_REQUEST['member_identifier'], true);
+            csm_error('No user found with id ' . $_REQUEST['id'], true);
         } else {
             $data = $member;
 

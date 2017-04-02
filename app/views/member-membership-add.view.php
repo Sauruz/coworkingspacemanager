@@ -1,11 +1,11 @@
 <div class="wrap" ng-app="App" ng-controller="Ctrl as Ctrl">
-    <h1 class="wp-heading-inline"><strong>New Membership:</strong> <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
+    <h1 class="wp-heading-inline"><strong>New Membership:</strong> <?php echo $data->first_name . ' ' . $data->last_name; ?></h1>
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/member.tabbar.php'; ?>
 
         <?php
         if (empty($plans)) {
-            csm_error('To give ' . $data['first_name'] .' a new membership you need to configure at least one plan. There are no plans configurated yet. <a href="?page=csm-plan-add">Click here</a> to add a plan.');
+            csm_error('To give ' . $data->first_name .' a new membership you need to configure at least one plan. There are no plans configurated yet. <a href="?page=csm-plan-add">Click here</a> to add a plan.');
         } else {
             ?>
             <div class="row">

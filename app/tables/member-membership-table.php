@@ -98,7 +98,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
 
         //Build row actions
         $actions = array(
-            'delete' => sprintf('<a href="?page=%s&action=%s&member_identifier=%s&identifier=%s" onclick="return confirm(\'Are you sure you want to delete membership nr. ' . $item['identifier'] . '?\')">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['member_identifier'], $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s&identifier=%s" onclick="return confirm(\'Are you sure you want to delete membership nr. ' . $item['identifier'] . '?\')">Delete</a>', $_REQUEST['page'], 'delete', $_REQUEST['id'], $item['identifier']),
         );
 
         //Return the title contents
@@ -219,7 +219,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
         $current_page = $this->get_pagenum();
 
         $memberships = $this->csmMembership->all(
-                (($current_page - 1) * $per_page), $per_page,  !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', $_REQUEST['member_identifier']
+                (($current_page - 1) * $per_page), $per_page,  !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', $_REQUEST['id']
         );
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;

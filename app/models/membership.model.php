@@ -33,11 +33,11 @@ class CsmMembership {
      * @param type $order
      * @return type
      */
-    public function all($offset = 0, $limit = 10, $orderby = 'identifier', $order = 'ASC', $member_identifier = false, $plan_start = false, $plan_end = false) {
+    public function all($offset = 0, $limit = 10, $orderby = 'identifier', $order = 'ASC', $id = false, $plan_start = false, $plan_end = false) {
 
         $where = "";
-        if ($member_identifier) {
-            $where = "WHERE " . $this->db->prefix . "csm_memberships.member_identifier = '" . $member_identifier . "' ";
+        if ($id) {
+            $where = "WHERE " . $this->db->prefix . "users.id = '" . $id . "' ";
         }
         if ($plan_start && $plan_end) {
             $where = "WHERE plan_start >= '" . $plan_start . "' AND plan_end <= '" . $plan_end . "' ";
@@ -48,13 +48,7 @@ class CsmMembership {
                 . $this->db->prefix . "csm_memberships.plan_id, "
                 . $this->db->prefix . "csm_memberships.plan_start, "
                 . $this->db->prefix . "csm_memberships.plan_end, "
-                . $this->db->prefix . "csm_members.identifier AS member_identifier, "
-                . $this->db->prefix . "csm_members.first_name, "
-                . $this->db->prefix . "csm_members.last_name, "
-                . $this->db->prefix . "csm_members.company, "
-                . $this->db->prefix . "csm_members.address, "
-                . $this->db->prefix . "csm_members.locality, "
-                . $this->db->prefix . "csm_members.country, "
+                . $this->db->prefix . "users.id, "
                 . $this->db->prefix . "csm_memberships.payment, "
                 . $this->db->prefix . "csm_memberships.payment_method, "
                 . $this->db->prefix . "csm_memberships.payment_at, "
@@ -69,8 +63,8 @@ class CsmMembership {
                 . $this->db->prefix . "csm_workplaces.color, "
                 . $this->db->prefix . "csm_memberships.created_at "
                 . "FROM " . $this->db->prefix . "csm_memberships "
-                . "INNER JOIN " . $this->db->prefix . "csm_members "
-                . "ON " . $this->db->prefix . "csm_memberships.member_identifier = " . $this->db->prefix . "csm_members.identifier "
+                . "INNER JOIN " . $this->db->prefix . "users "
+                . "ON " . $this->db->prefix . "csm_memberships.user_id = " . $this->db->prefix . "users.id "
                 . "INNER JOIN " . $this->db->prefix . "csm_plans "
                 . "ON " . $this->db->prefix . "csm_memberships.plan_id = " . $this->db->prefix . "csm_plans.id "
                 . "INNER JOIN " . $this->db->prefix . "csm_workplaces "

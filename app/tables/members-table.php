@@ -81,17 +81,17 @@ class MembersTable extends WP_List_Table_Custom {
      * @param type $item
      * @return type
      */
-    public function column_last_name($item) {
+    public function column_display_name($item) {
 
         //Build row actions
         $actions = array(
-            'edit' => sprintf('<a href="?page=%s&member_identifier=%s">Edit</a>', 'csm-member-profile', $item['identifier']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&identifier=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name']. ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
+            'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-member-profile', $item['ID']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name']. ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
         );
 
         //Return the title contents
         return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', 'csm-member-memberships', $item['identifier']),
+                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . '</a>', 'csm-member-memberships', $item['ID']),
                 /* $2%s */ $this->row_actions($actions)
         );
     }
@@ -118,7 +118,7 @@ class MembersTable extends WP_List_Table_Custom {
     public function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
-            'last_name' => 'Name',
+            'display_name' => 'Name',
             'membership_status' => 'Membership Status',
             'plan' => 'Membership Plan',
             'plan_end' => 'Membership Expires',

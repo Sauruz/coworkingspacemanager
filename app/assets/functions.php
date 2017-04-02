@@ -5,7 +5,11 @@
  * @param type $val
  */
 function form_value($data, $val) {
-    $res = !empty($data[$val]) ? $data[$val] : "";
+    if (is_object($data)) {
+        $res = !empty($data->$val) ? $data->$val : "";
+    } else {
+        $res = !empty($data[$val]) ? $data[$val] : "";
+    }
     echo $res;
 }
 
@@ -63,6 +67,7 @@ function hacky_redirect($page = false) {
  * @param type $slug
  */
 function tab_active($slug) {
-    echo !empty($_GET['page']) && $_GET['page'] === $slug ? 'active' : '';
+    echo!empty($_GET['page']) && $_GET['page'] === $slug ? 'active' : '';
 }
+
 ?>
