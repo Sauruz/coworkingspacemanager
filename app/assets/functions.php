@@ -82,11 +82,24 @@ function meta_user_query($prefix, $id, $key, $comma = false, $alias = false) {
     if (!$alias) {
         $alias = $key;
     }
-    $response = "(SELECT meta_value FROM " . $prefix . "usermeta WHERE user_id = " . intval($id) . " AND meta_key = '".$key."' LIMIT 0,1) AS ".$alias." ";
+    $response = "(SELECT meta_value FROM " . $prefix . "usermeta WHERE user_id = " . intval($id) . " AND meta_key = '" . $key . "' LIMIT 0,1) AS " . $alias . " ";
     if ($comma) {
         $response .= ", ";
     }
     return $response;
+}
+
+/**
+ * Show first and last name or display name
+ * @param type $data
+ * @return type
+ */
+function show_a_name($data) {
+    if (!empty($data['first_name']) && !empty($data['last_name'])) {
+        return $data['first_name'] . ' ' . $data['last_name'];
+    } else {
+        return $data['display_name'];
+    }
 }
 
 ?>

@@ -20,13 +20,13 @@ function show_membership_add() {
         try {
             $CsmMembership = new CsmMembership();
             $CsmMembership->create_simple(array(
-                'member_identifier' => $_POST['member_identifier'],
+                'user_id' => $_POST['user_id'],
                 'plan_id' => $_POST['plan_id'],
                 'plan_start' => $_POST['plan_start'],
                 'vat' => $_POST['vat']
             ));
 
-            csm_set_update('Membership plan added');
+            csm_set_update('Membership added');
             hacky_redirect('csm-memberships');
         } catch (\Exception $e) {
             csm_error($e->getMessage());

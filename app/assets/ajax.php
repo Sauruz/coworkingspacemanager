@@ -20,7 +20,7 @@ function csmcalendar() {
     $response = array();
     foreach ($memberships as $k => $v) {
         array_push($response, array(
-            "title" => $v['first_name'] . ' ' . $v['last_name'] . ' - ' . $v['workplace_name'] . ' • ' . $v['plan_name'],
+            "title" => show_a_name($v) . ' - ' . $v['workplace_name'] . ' • ' . $v['plan_name'],
             "allDay" => true,
             "start" => $v['plan_start'],
             "end" => $v['plan_end'],

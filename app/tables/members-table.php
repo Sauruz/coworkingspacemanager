@@ -72,7 +72,7 @@ class MembersTable extends WP_List_Table_Custom {
         return sprintf(
                 '<input type="checkbox" name="%1$s[]" value="%2$s" />',
                 /* $1%s */ $this->_args['singular'], //Let's simply repurpose the table's singular label ("movie")
-                /* $2%s */ $item['identifier']                //The value of the checkbox should be the record's id
+                /* $2%s */ $item['ID']                //The value of the checkbox should be the record's id
         );
     }
 
@@ -86,18 +86,26 @@ class MembersTable extends WP_List_Table_Custom {
         //Build row actions
         $actions = array(
             'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-member-profile', $item['ID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name'] . ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['identifier']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete ' . $item['first_name'] . ' ' . $item['last_name'] . ' as a member?\')">Delete</a>', $_REQUEST['page'], 'delete', $item['ID']),
         );
+
+        $admin_string = "";
+        if (isset($item['roles']['administrator']) && $item['roles']['administrator'] == '1') {
+            $admin_string = ' <i class="text-success">(admin)</i>';
+            $actions = array(
+                'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-member-profile', $item['ID']),
+            );
+        };
 
         //Return the title contents
         if (empty($item['last_name']) && empty($item['first_name'])) {
             return sprintf('%1$s %2$s',
-                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . '</a>', 'csm-member-memberships', $item['ID']),
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . $admin_string . '</a>', 'csm-member-memberships', $item['ID']),
                     /* $2%s */ $this->row_actions($actions)
             );
         } else {
             return sprintf('%1$s %2$s',
-                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . '</span></a>', 'csm-member-memberships', $item['ID']),
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . $admin_string . '</span></a>', 'csm-member-memberships', $item['ID']),
                     /* $2%s */ $this->row_actions($actions)
             );
         }
@@ -169,9 +177,9 @@ class MembersTable extends WP_List_Table_Custom {
         //Detect when a bulk action is being triggered...
         if ('delete' === $this->current_action()) {
             //Single member delete action
-            if (isset($_REQUEST['identifier'])) {
+            if (isset($_REQUEST['id'])) {
                 try {
-                    $member = $this->csmMember->delete($_REQUEST['identifier']);
+                    $member = $this->csmMember->delete($_REQUEST['id']);
                     csm_update($member['first_name'] . ' ' . $member['last_name'] . ' was deleted');
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
@@ -180,9 +188,9 @@ class MembersTable extends WP_List_Table_Custom {
             //Delete multiple members
             else {
                 try {
-                    $res = "";
-                    foreach ($_REQUEST['member'] as $identifier) {
-                        $member = $this->csmMember->delete($identifier);
+                    $res = "";         
+                    foreach ($_REQUEST['member'] as $id) {
+                        $member = $this->csmMember->delete($id);
                         $res .= $member['first_name'] . ' ' . $member['last_name'] . ' was deleted<br>';
                     }
                     csm_update($res);

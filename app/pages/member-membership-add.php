@@ -28,14 +28,14 @@ function show_member_membership_add() {
                 try {
                     $CsmMembership = new CsmMembership();
                     $CsmMembership->create_simple(array(
-                        'member_identifier' => $_REQUEST['member_identifier'],
+                        'user_id' => $_REQUEST['id'],
                         'plan_id' => $_POST['plan_id'],
                         'plan_start' => $_POST['plan_start'],
                         'vat' => $_POST['vat']
                     ));
 
                     csm_set_update('Membership plan added');
-                    hacky_redirect('csm-member-memberships&member_identifier=' . $_REQUEST['member_identifier']);
+                    hacky_redirect('csm-member-memberships&id=' . $_REQUEST['id']);
                 } catch (\Exception $e) {
                     csm_error($e->getMessage());
                 }
@@ -43,7 +43,7 @@ function show_member_membership_add() {
             include(CSM_PLUGIN_PATH . 'app/views/member-membership-add.view.php');
         }
     } else {
-        csm_error('No member identifier specified', true);
+        csm_error('No user id specified', true);
     }
 }
 

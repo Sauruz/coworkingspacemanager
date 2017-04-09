@@ -48,7 +48,14 @@ class CsmMembership {
                 . $this->db->prefix . "csm_memberships.plan_id, "
                 . $this->db->prefix . "csm_memberships.plan_start, "
                 . $this->db->prefix . "csm_memberships.plan_end, "
-                . $this->db->prefix . "users.id, "
+                . $this->db->prefix . "users.ID, "
+                . $this->db->prefix . "users.display_name, "
+                . $this->db->prefix . "users.user_nicename AS slug, "
+                . $this->db->prefix . "users.user_email AS email, "
+                . $this->db->prefix . "users.user_registered AS created_at, "
+                . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'first_name' LIMIT 0,1) AS first_name, "
+                . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'last_name' LIMIT 0,1) AS last_name, "
+                . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'wp_capabilities' LIMIT 0,1) AS roles, "
                 . $this->db->prefix . "csm_memberships.payment, "
                 . $this->db->prefix . "csm_memberships.payment_method, "
                 . $this->db->prefix . "csm_memberships.payment_at, "
@@ -72,7 +79,12 @@ class CsmMembership {
                 . $where
                 . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
-        return $this->db->get_results($query, ARRAY_A);
+        
+        $result = $this->db->get_results($query, ARRAY_A);
+        foreach($result as $k => $v) {
+            $result[$k]['roles'] = unserialize($v['roles']);
+        } 
+        return $result;
     }
 
     /**
@@ -196,7 +208,7 @@ class CsmMembership {
     }
 
     /**
-     * Create new membership plan
+     * Create new membership
      * @param type $data
      * @return type
      * @throws Exception
@@ -296,7 +308,7 @@ class CsmMembership {
             throw new Exception('Something went wrong. Membership plan does not exist');
         } else {
             $this->gump->validation_rules(array(
-                'member_identifier' => 'required|max_len,100',
+                'user_id' => 'required|max_len,100',
                 'plan_id' => 'required|numeric',
                 'plan_start' => 'required|date',
                 'vat' => 'required|numeric'
@@ -312,7 +324,7 @@ class CsmMembership {
                 throw new Exception($errString);
             } else {
                 $response = $this->create(array(
-                    'member_identifier' => $data['member_identifier'],
+                    'user_id' => $data['user_id'],
                     'plan_id' => $plan['plan_id'],
                     'plan_start' => $data['plan_start'],
                     'plan_end' => date('Y-m-d', (strtotime($data['plan_start']) + ($plan['days'] * 60 * 60 * 24))),

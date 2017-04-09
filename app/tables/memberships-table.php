@@ -98,12 +98,24 @@ class MembershipTable extends WP_List_Table_Custom {
 
         //Build row actions
         $actions = array();
+        
+        $admin_string = "";
+        if (isset($item['roles']['administrator']) && $item['roles']['administrator'] == '1') {
+            $admin_string = ' <i class="text-success">(admin)</i>';
+        };
 
         //Return the title contents
-        return sprintf('%1$s %2$s',
-                /* $1%s */ sprintf('<a class="row-title" href="?page=%s&member_identifier=%s" aria-label="">' . $item['last_name'] . '</a><span style="color:silver">, ' . $item['first_name'] . '</span>', 'csm-member-memberships', $item['member_identifier']),
-                /* $2%s */ $this->row_actions($actions)
-        );
+        if (empty($item['last_name']) && empty($item['first_name'])) {
+            return sprintf('%1$s %2$s',
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . $admin_string . '</a>', 'csm-member-memberships', $item['ID']),
+                    /* $2%s */ $this->row_actions($actions)
+            );
+        } else {
+            return sprintf('%1$s %2$s',
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . $admin_string . '</span></a>', 'csm-member-memberships', $item['ID']),
+                    /* $2%s */ $this->row_actions($actions)
+            );
+        }
     }
 
     /**
@@ -194,7 +206,6 @@ class MembershipTable extends WP_List_Table_Custom {
     public function process_bulk_action() {
         //Detect when a bulk action is being triggered...
         if ('delete' === $this->current_action()) {
-
             //Single member delete action
             if (isset($_REQUEST['identifier'])) {
                 try {

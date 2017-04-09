@@ -7,7 +7,8 @@
 
         <div ng-app="App" ng-controller="Ctrl as Ctrl">
             <?php include CSM_PLUGIN_PATH . 'app/views/angular-templates.php'; ?>
-            <form id="memberships-filter" method="get">
+            
+            <form id="memberships-filter" method="get" action="">
                 <!-- For plugins, we also need to ensure that the form posts back to our current page -->
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
                 <input type="hidden" name="member_identifier" value="<?php echo $_REQUEST['member_identifier'] ?>" />

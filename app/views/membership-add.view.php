@@ -1,5 +1,5 @@
 <div class="wrap" ng-app="App" ng-controller="Ctrl as Ctrl">
-    <h1 class="wp-heading-inline"><strong>New Membership:</strong> <?php echo $data['first_name'] . ' ' . $data['last_name']; ?></h1>
+    <h1 class="wp-heading-inline"><strong>New Membership</strong></h1>
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/memberships.tabbar.php'; ?>
 
@@ -17,10 +17,10 @@
                                 <input name="vat" type="hidden" value="0">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="plan_id">Member <span class="description">(required)</span></label><br>
-                                        <select class="form-control" id="plan_id" name="member_identifier" ng-model="vm.selectedMember">
+                                        <label for="user_id">Member <span class="description">(required)</span></label><br>
+                                        <select class="form-control" id="user_id" name="user_id" ng-model="vm.selectedMember">
                                             <option value=""> -- Select a member -- </option>
-                                            <option ng-repeat="member in vm.members" value="{{member.identifier}}">{{member.last_name + ', ' + member.first_name}}</option>
+                                            <option ng-repeat="member in vm.members" value="{{member.ID}}">{{member.display_name}}</option>
                                         </select><br>
                                     </div>
                                     <div class="col-md-6">

@@ -43,6 +43,7 @@ function show_member_memberships() {
             };
 
             $data = $member;
+            
             $MembershipTable = new MemberMembershipTable();
             //Fetch, prepare, sort, and filter our data...
             $MembershipTable->prepare_items();
@@ -51,7 +52,7 @@ function show_member_memberships() {
             include(CSM_PLUGIN_PATH . 'app/views/member-memberships.view.php');
         }
     } else {
-        csm_error('No member identifier specified', true);
+        csm_error('No user id specified', true);
     }
 }
 
