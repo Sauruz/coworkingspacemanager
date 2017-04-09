@@ -187,7 +187,7 @@ class CsmMember {
         if (empty($user)) {
             $userdata = array(
                 'user_login' => $data['email'],
-                'user_pass' => '123456789',
+                'user_pass' => $data['password'],
                 'user_email' => $data['email'],
                 'display_name' => $data['first_name'],
                 'first_name' => $data['first_name'],

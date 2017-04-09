@@ -9,6 +9,8 @@ function show_member_add() {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
     
+    $add_password = true;
+    
     //Add the member
     if (isset($_POST['action']) && $_POST['action'] === 'addmember') {
         $data = $_POST;
@@ -21,6 +23,8 @@ function show_member_add() {
             csm_error($e->getMessage());
         }
     }
+    
+    $data['password'] = randomPassword();
     
     include(CSM_PLUGIN_PATH . 'app/views/member-add.view.php');
 }

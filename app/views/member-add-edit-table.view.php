@@ -8,6 +8,21 @@
         <input name="last_name" class="form-control" placeholder="Last Name"  type="text" id="last_name" value="<?php form_value($data, 'last_name'); ?>"><br>
     </div>
 </div>
+<?php if ($add_password) { ?>
+<div class="row">
+    <div class="col-md-6">
+        <label for="password">Password<br>
+        <span class="text-danger">Make sure you give this password to the member</span>
+        <input name="password" class="form-control" type="hidden" id="password" value="<?php echo $data['password']; ?>"><br>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="alert alert-success">
+            <b style="font-family: courier; color: #000; font-size: 20px;"><?php echo $data['password']; ?></b>
+        </div>
+    </div>
+</div>
+<?php } ?>
 <div class="row">
     <div class="col-md-6">
         <label for="email">Email <span class="description">(required)</span></label><br>
