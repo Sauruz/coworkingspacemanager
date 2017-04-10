@@ -1,8 +1,6 @@
+@import "bootstrap"; 
+
 .bootstrap-wrapper {
-
-
-    @import "bootstrap"; 
-
 
     //########################################################
     // BOWER LIBS
@@ -28,3 +26,4 @@
 }
 
  @import "outside-wrapper"; 
+ @import "frontend"; 

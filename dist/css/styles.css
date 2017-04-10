@@ -7670,3 +7670,11 @@ be a descendant of the grid when it is being dragged.
 .coworking-space-menu .wp-submenu li:nth-child(16),
 .coworking-space-menu .wp-submenu li:nth-child(17) {
   display: none; }
+
+.csm-frontend {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background-color: #F23B3B; }
+
+.panel-login {
+  margin-top: 50px; }

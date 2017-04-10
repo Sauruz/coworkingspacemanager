@@ -1,13 +1,12 @@
 <html>
     <body>
         <b>Invoice {{Ctrl.membership.identifier}}</b><br><br>
-
         <b>
-            {{Ctrl.membership.company}}<br>
-            {{Ctrl.membership.firstName}} {{Ctrl.membership.lastName}}<br>
-            {{Ctrl.membership.address}}<br>
-            {{Ctrl.membership.locality}}<br> 
-            {{Ctrl.membership.country}}<br><br>
+            <span ng-if="Ctrl.membership.company.length > 0">{{Ctrl.membership.company}}<br></span>
+            <span ng-if="Ctrl.membership.firstName.length > 0">{{Ctrl.membership.firstName}} {{Ctrl.membership.lastName}}<br></span>
+            <span ng-if="Ctrl.membership.address.length > 0">{{Ctrl.membership.address}}<br></span>
+            <span ng-if="Ctrl.membership.locality.length > 0">{{Ctrl.membership.locality}}<br></span>
+            <span ng-if="Ctrl.membership.country.length > 0">{{Ctrl.membership.country}}<br><br></span>
         </b>
 
         <table  width="200px">
