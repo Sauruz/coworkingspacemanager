@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * Flush all rewrite rules
+ * @global type $wp_rewrite
+ */
+function cms_flush_rewrite_rules() 
+{
+  global $wp_rewrite;
+  $wp_rewrite->flush_rules();
+}
+
+/**
  * Create all the database tables
  * @global type $wpdb
  * @global type $csm_db_version

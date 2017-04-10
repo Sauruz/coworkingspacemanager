@@ -112,6 +112,7 @@ include(CSM_PLUGIN_PATH . 'app/assets/ajax.php');
 
 add_action('init', 'register_session');
 
+register_activation_hook(__FILE__, 'cms_flush_rewrite_rules');
 register_activation_hook(__FILE__, 'create_csm_tables');
 register_activation_hook(__FILE__, 'add_user_roles');
 register_activation_hook(__FILE__, 'dummy_data');
@@ -122,7 +123,7 @@ add_action('admin_menu', 'csm_menu');
 
 function csm_menu() {
 
-    add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_members', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2MDBweCIgaGVpZ2h0PSI2MDBweCIgdmlld0JveD0iMCAwIDYwMCA2MDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYwMCA2MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiNGRjQ3NDIiIGQ9Ik0yMDAuMDYxLDIyNC43NWMtMjguOTM4LTE3LjI2Ni01Ny44MTctMzQuNjMzLTg2LjcxMy01MS45N2MtMC45MDQtMC41NDEtMS44NDYtMS4wMi0zLjI5Ni0xLjgxOWMwLDEuNDk5LDAsMi40MTYsMCwzLjMzMmMwLDc0LjM3MywwLjAxOCwxNDguNzQ1LTAuMDY4LDIyMy4xMThjLTAuMDAzLDIuNjQyLDEuMDQzLDMuODcxLDMuMTIyLDUuMTA5YzE5LjIyOCwxMS40MzksMzguNCwyMi45NzEsNTcuNTg2LDM0LjQ3OWMxMC41MTcsNi4zMDksMjEuMDMsMTIuNjE4LDMyLjMwNCwxOS4zODJjMC0xLjY2NSwwLTIuNDg1LDAtMy4zMDVjMC4wMDEtNzQuMzcyLTAuMDEzLTE0OC43NDQsMC4wNTctMjIzLjExOEMyMDMuMDUzLDIyNy40MTYsMjAyLjIyOCwyMjYuMDQzLDIwMC4wNjEsMjI0Ljc1eiIvPjxwYXRoIGZpbGw9IiNGMjNCM0IiIGQ9Ik0yOTkuMjUsMUMxMzQuNTMxLDEsMSwxMzQuNTMxLDEsMjk5LjI1QzEsNDYzLjk2OSwxMzQuNTMxLDU5Ny41LDI5OS4yNSw1OTcuNWMxNjQuNzE5LDAsMjk4LjI1LTEzMy41MzEsMjk4LjI1LTI5OC4yNUM1OTcuNSwxMzQuNTMxLDQ2My45NjksMSwyOTkuMjUsMXogTTUwOC4zODEsNDk1LjVjLTI0LjQyLTE0LjU5My00OC44NDgtMjkuMTc3LTczLjI1OS00My43ODRjLTE4LjcyOS0xMS4yMDctMzcuNDczLTIyLjM5LTU2LjExNi0zMy43MzdjLTIuNTY1LTEuNTYyLTQuNDY5LTEuNjA4LTcuMTI2LTAuMjcyYy01MC40NiwyNS4zNDYtMTAwLjk4Myw1MC41NjItMTUxLjQzNiw3NS45MjJjLTMuMDUzLDEuNTM1LTUuMjA4LDEuNTM3LTguMjIyLTAuMjg0Yy00MS43NDItMjUuMjA2LTgzLjU3NS01MC4yNTgtMTI1LjQxOC03NS4yOTRjLTIuMTctMS4zLTMuMzg5LTIuNTUxLTMuMzg2LTUuNDEyYzAuMDk0LTk1LjE0OCwwLjA3OC0xOTAuMjk3LDAuMDc4LTI4NS40NDVjMC0wLjkzOCwwLTEuODc0LDAtMy4zOTNjMS43NDUsMC45NTUsMy4wNTQsMS42MTIsNC4zMDgsMi4zNjVjNDEuNjk4LDI1LjAwOSw4My40MDgsNDkuOTk5LDEyNS4wNDUsNzUuMTA5YzIuNTg3LDEuNTYsNC40OTUsMS41NzYsNy4xMzgsMC4yNDljNTAuNDYxLTI1LjM0MiwxMDAuOTg0LTUwLjU1OSwxNTEuNDM1LTc1LjkyM2MzLjA2Ny0xLjU0Miw1LjIyNS0xLjUwNCw4LjIxOSwwLjMwMmM0MS42MjYsMjUuMTI5LDgzLjM0NCw1MC4xMDMsMTI1LjA1Nyw3NS4wOWMxLjEzNSwwLjY4LDIuNDUyLDEuMDU0LDMuNjg0LDEuNTcxQzUwOC4zODEsMzAwLjIwNyw1MDguMzgxLDM5Ny44NTQsNTA4LjM4MSw0OTUuNXoiLz48cGF0aCBmaWxsPSIjRkY0NzQyIiBkPSJNMzYyLjMyNywxNjAuNDI5Yy0xLjgxNywwLjgzMi0zLjA2MywxLjM1Ny00LjI3LDEuOTZjLTQxLjQ5MywyMC43MzktODIuOTYzLDQxLjUyLTEyNC41MDYsNjIuMTU1Yy0zLjAwOCwxLjQ5NC00LjA4NywzLjEyNS00LjA4Myw2LjUyMWMwLjEwOCw3NC4zNywwLjA4MiwxNDguNzQxLDAuMDgyLDIyMy4xMTJjMCwxLjM1NSwwLDIuNzEyLDAsNC41ODNjMS42NTEtMC43MzMsMi44OTQtMS4yMjksNC4wODYtMS44MjRjNDEuNjE2LTIwLjgwMiw4My4yMDktNDEuNjQ3LDEyNC44NzUtNjIuMzQ4YzIuODkyLTEuNDM4LDMuOTAyLTIuOTYyLDMuODk3LTYuMjIyYy0wLjEwNi03NC41MDgtMC4wODItMTQ5LjAxNy0wLjA4Mi0yMjMuNTI1QzM2Mi4zMjcsMTYzLjYwNCwzNjIuMzI3LDE2Mi4zNjcsMzYyLjMyNywxNjAuNDI5eiIvPjxwYXRoIGZpbGw9IiNGRjQ3NDIiIGQ9Ik00NzguODk2LDIxNi43OTNjLTI4LjkyMS0xNy4yOTctNTcuODE0LTM0LjYzOC04Ni43MjEtNTEuOTU5Yy0wLjkwMy0wLjU0LTEuODY4LTAuOTc0LTMuMTItMS42MjJjLTAuMDcsMS40ODItMC4xNjYsMi41NS0wLjE2NiwzLjYxN2MtMC4wMDgsNzQuMDk3LDAuMDEyLDE0OC4xOTMtMC4wNzIsMjIyLjI5Yy0wLjAwNCwyLjc1LDAuOTMsNC4xMzIsMy4yMjgsNS40OTVjMTkuNDgxLDExLjU1NiwzOC44NzUsMjMuMjU0LDU4LjI5NywzNC45MDhjMTAuMjcxLDYuMTYzLDIwLjU0MiwxMi4zMjMsMzEuMzQxLDE4LjgwM2MwLjA3OC0xLjMxNSwwLjEzOC0xLjg2MywwLjEzOC0yLjQxNGMwLjAwNS03NC43ODgtMC4wMTMtMTQ5LjU3NSwwLjA4MS0yMjQuMzYyQzQ4MS45MDQsMjE4Ljk5MSw0ODAuNzc1LDIxNy45MTgsNDc4Ljg5NiwyMTYuNzkzeiIvPjwvZz48L3N2Zz4=);', 2);
+    add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_members', plugins_url('coworkingspacemanager/src/img/logo-orange-small.svg' ), 2);
     add_submenu_page(PLUGIN_SLUG, 'All Members', 'Members', 'manage_options', PLUGIN_SLUG);
     add_submenu_page(PLUGIN_SLUG, 'Add Member', 'Add Member', 'manage_options', 'csm-member-add', 'show_member_add');
     add_submenu_page(PLUGIN_SLUG, 'Profile', 'Profile', 'manage_options', 'csm-member-profile', 'show_member_profile');
@@ -166,4 +167,38 @@ function add_menu_class() {
             $menu[$key][4] .= " coworking-space-menu";
         }
     }
+}
+
+
+/**
+ * Rewrite
+ */
+add_action('init', 'csm_rewrite_rules');
+function csm_rewrite_rules() {
+    add_rewrite_rule( 'csmlogin/?$', 'index.php?csmlogin=true', 'top' );
+}
+
+/**
+ *  Query Vars 
+ */
+add_filter( 'query_vars', 'csm_register_query_var' );
+function csm_register_query_var( $vars ) {
+    $vars[] = 'csmlogin';
+    return $vars;
+}
+
+/** 
+ * Template Include 
+ */
+add_filter('template_include', 'csm_login_template_include', 1, 1); 
+function csm_login_template_include($template)
+{
+    global $wp_query; 
+    $page_value = $wp_query->query_vars['csmlogin']; 
+
+    if ($page_value && $page_value == "true") { 
+        return plugin_dir_path(__FILE__).'app/frontend/login.php'; 
+    }
+    
+    return $template;
 }
