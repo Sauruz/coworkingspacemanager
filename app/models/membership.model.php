@@ -83,6 +83,7 @@ class CsmMembership {
         $result = $this->db->get_results($query, ARRAY_A);
         foreach($result as $k => $v) {
             $result[$k]['roles'] = unserialize($v['roles']);
+            $result[$k]['avatar_url'] = get_avatar_url($v['email']);
         } 
         return $result;
     }

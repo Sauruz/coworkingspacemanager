@@ -55,3 +55,17 @@ body {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.csm-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    float: left;
+    border-radius: 40px;
+    
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 32px;
+    }
+}

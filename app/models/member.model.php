@@ -84,6 +84,7 @@ class CsmMember {
         $result = $this->db->get_results($query, ARRAY_A);
         foreach ($result as $k => $v) {
             $result[$k]['roles'] = unserialize($v['roles']);
+            $result[$k]['avatar_url'] = get_avatar_url($v['email']);
         }
         return $result;
     }
@@ -132,6 +133,7 @@ class CsmMember {
                 . "WHERE id = " . $id;
         $user = $this->db->get_row($query, ARRAY_A);
         $user['roles'] = unserialize($user['roles']);
+        $user['avatar_url'] = get_avatar_url($user['email']);
         return $user;
     }
 

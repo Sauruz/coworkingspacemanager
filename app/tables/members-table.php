@@ -96,16 +96,20 @@ class MembersTable extends WP_List_Table_Custom {
                 'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-member-profile', $item['ID']),
             );
         };
+        
+        $avatar = '<div class="csm-avatar"><img src="' . $item['avatar_url'] . '"></div>';
 
         //Return the title contents
         if (empty($item['last_name']) && empty($item['first_name'])) {
-            return sprintf('%1$s %2$s',
-                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . $admin_string . '</a>', 'csm-member-memberships', $item['ID']),
+            return sprintf('%1$s %2$s %3$s',
+                                $avatar, 
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' .  $item['display_name'] . $admin_string . '</a>', 'csm-member-memberships', $item['ID']),
                     /* $2%s */ $this->row_actions($actions)
             );
         } else {
-            return sprintf('%1$s %2$s',
-                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . $admin_string . '</span></a>', 'csm-member-memberships', $item['ID']),
+            return sprintf('%1$s %2$s %3$s',
+                                $avatar, 
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">'  . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . $admin_string . '</span></a>', 'csm-member-memberships', $item['ID']),
                     /* $2%s */ $this->row_actions($actions)
             );
         }
