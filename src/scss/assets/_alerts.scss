@@ -1,0 +1,24 @@
+.alert {
+    font-weight: bold;
+    
+    a {
+        color: #fff;
+        text-decoration: underline;
+    }
+    
+    a:hover {
+        color: #ddd;
+    }
+}
+
+.alert-danger {
+    background-color: $brand-danger;
+    border: $brand-danger;
+    color: #fff;
+}
+
+.alert-success {
+    background-color: #fff;
+    border: 2px solid $brand-success;
+    color: $brand-success;
+}

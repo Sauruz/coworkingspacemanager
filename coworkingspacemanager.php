@@ -107,6 +107,8 @@ include(CSM_PLUGIN_PATH . 'app/pages/workplace-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/workplace-edit.php');
 include(CSM_PLUGIN_PATH . 'app/pages/calendar.php');
 
+include(CSM_PLUGIN_PATH . 'routing.php');
+
 //Ajax
 include(CSM_PLUGIN_PATH . 'app/assets/ajax.php');
 
@@ -169,36 +171,3 @@ function add_menu_class() {
     }
 }
 
-
-/**
- * Rewrite
- */
-add_action('init', 'csm_rewrite_rules');
-function csm_rewrite_rules() {
-    add_rewrite_rule( 'csmlogin/?$', 'index.php?csmlogin=true', 'top' );
-}
-
-/**
- *  Query Vars 
- */
-add_filter( 'query_vars', 'csm_register_query_var' );
-function csm_register_query_var( $vars ) {
-    $vars[] = 'csmlogin';
-    return $vars;
-}
-
-/** 
- * Template Include 
- */
-add_filter('template_include', 'csm_login_template_include', 1, 1); 
-function csm_login_template_include($template)
-{
-    global $wp_query; 
-    $page_value = $wp_query->query_vars['csmlogin']; 
-
-    if ($page_value && $page_value == "true") { 
-        return plugin_dir_path(__FILE__).'app/frontend/login.php'; 
-    }
-    
-    return $template;
-}

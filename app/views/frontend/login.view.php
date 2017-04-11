@@ -1,51 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Bootstrap 101 Template</title>
+<?php include('layout/header.view.php'); ?>
 
-        <!-- Bootstrap -->
-        <link href="<?php echo plugins_url() . '/coworkingspacemanager/dist/css/styles.css'; ?>" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <div class="panel col-md-4 col-md-offset-4 panel-login">
+            <div class="panel-header">
+                <h4>Login to <?php echo $data['csm_name']; ?></h4>
+            </div>
+            <div class="panel-body">
+                <form action="" method="POST">
+                    <input name="action" type="hidden" value="login">
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body class="csm-frontend">
-        <div class="bootstrap-wrapper"> 
-            <div class="bootstrap-wrapper-fonts">
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="panel col-md-4 col-md-offset-4 panel-login">
-                            <div class="panel-header">
-                                <h4>Login to <?php echo $data['csm_name'];?></h4>
-                            </div>
-                            <div class="panel-body">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Email"><br>
-                                
-                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password"><br>
-                                
-                                <button type="submit" class="btn btn-block btn-success">Login</button><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                    <?php if ($error) { ?>
+                        <div class="alert alert-danger"><?php echo $errorStr; ?></div>
+                    <?php } ?>
+
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control" name="user_login" placeholder="Email"><br>
+
+                    <label for="password">Password</label>
+                    <input id="password" type="password" class="form-control" name="user_password" placeholder="Password"><br>
+
+                    <input id="remember" type="checkbox" name="remember">
+                    <label for="remember">Remember me</label><br><br> 
+
+                    <button type="submit" class="btn btn-block btn-success">Login</button><br>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-    </body>
-</html>
+<?php include('layout/footer.view.php'); ?>
+                

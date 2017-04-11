@@ -921,10 +921,10 @@ be a descendant of the grid when it is being dragged.
     font-size: inherit;
     line-height: inherit; }
   .bootstrap-wrapper a {
-    color: #0073AA;
+    color: #337ab7;
     text-decoration: none; }
     .bootstrap-wrapper a:hover, .bootstrap-wrapper a:focus {
-      color: #003f5e;
+      color: #22527b;
       text-decoration: underline; }
     .bootstrap-wrapper a:focus {
       outline: 5px auto -webkit-focus-ring-color;
@@ -1077,10 +1077,10 @@ be a descendant of the grid when it is being dragged.
   .bootstrap-wrapper .text-muted {
     color: #777777; }
   .bootstrap-wrapper .text-primary {
-    color: #0073AA; }
+    color: #337ab7; }
   .bootstrap-wrapper a.text-primary:hover,
   .bootstrap-wrapper a.text-primary:focus {
-    color: #005177; }
+    color: #285f8f; }
   .bootstrap-wrapper .text-success {
     color: #5cb85c; }
   .bootstrap-wrapper a.text-success:hover,
@@ -1104,10 +1104,10 @@ be a descendant of the grid when it is being dragged.
   .bootstrap-wrapper .bg-primary {
     color: #fff; }
   .bootstrap-wrapper .bg-primary {
-    background-color: #0073AA; }
+    background-color: #337ab7; }
   .bootstrap-wrapper a.bg-primary:hover,
   .bootstrap-wrapper a.bg-primary:focus {
-    background-color: #005177; }
+    background-color: #285f8f; }
   .bootstrap-wrapper .bg-success {
     background-color: #dff0d8; }
   .bootstrap-wrapper a.bg-success:hover,
@@ -2445,28 +2445,28 @@ be a descendant of the grid when it is being dragged.
       background-color: #333; }
   .bootstrap-wrapper .btn-primary {
     color: #fff;
-    background-color: #0073AA;
-    border-color: #006291; }
+    background-color: #337ab7;
+    border-color: #2d6da3; }
     .bootstrap-wrapper .btn-primary:focus, .bootstrap-wrapper .btn-primary.focus {
       color: #fff;
-      background-color: #005177;
-      border-color: #000c11; }
+      background-color: #285f8f;
+      border-color: #122a3f; }
     .bootstrap-wrapper .btn-primary:hover {
       color: #fff;
-      background-color: #005177;
-      border-color: #003853; }
+      background-color: #285f8f;
+      border-color: #204d73; }
     .bootstrap-wrapper .btn-primary:active, .bootstrap-wrapper .btn-primary.active,
     .open > .bootstrap-wrapper .btn-primary.dropdown-toggle {
       color: #fff;
-      background-color: #005177;
-      border-color: #003853; }
+      background-color: #285f8f;
+      border-color: #204d73; }
       .bootstrap-wrapper .btn-primary:active:hover, .bootstrap-wrapper .btn-primary:active:focus, .bootstrap-wrapper .btn-primary:active.focus, .bootstrap-wrapper .btn-primary.active:hover, .bootstrap-wrapper .btn-primary.active:focus, .bootstrap-wrapper .btn-primary.active.focus,
       .open > .bootstrap-wrapper .btn-primary.dropdown-toggle:hover,
       .open > .bootstrap-wrapper .btn-primary.dropdown-toggle:focus,
       .open > .bootstrap-wrapper .btn-primary.dropdown-toggle.focus {
         color: #fff;
-        background-color: #003853;
-        border-color: #000c11; }
+        background-color: #204d73;
+        border-color: #122a3f; }
     .bootstrap-wrapper .btn-primary:active, .bootstrap-wrapper .btn-primary.active,
     .open > .bootstrap-wrapper .btn-primary.dropdown-toggle {
       background-image: none; }
@@ -2474,10 +2474,10 @@ be a descendant of the grid when it is being dragged.
     fieldset[disabled] .bootstrap-wrapper .btn-primary:hover,
     fieldset[disabled] .bootstrap-wrapper .btn-primary:focus,
     fieldset[disabled] .bootstrap-wrapper .btn-primary.focus {
-      background-color: #0073AA;
-      border-color: #006291; }
+      background-color: #337ab7;
+      border-color: #2d6da3; }
     .bootstrap-wrapper .btn-primary .badge {
-      color: #0073AA;
+      color: #337ab7;
       background-color: #fff; }
   .bootstrap-wrapper .btn-success {
     color: #fff;
@@ -2624,7 +2624,7 @@ be a descendant of the grid when it is being dragged.
       color: #d9534f;
       background-color: #fff; }
   .bootstrap-wrapper .btn-link {
-    color: #0073AA;
+    color: #337ab7;
     font-weight: normal;
     border-radius: 0; }
     .bootstrap-wrapper .btn-link, .bootstrap-wrapper .btn-link:active, .bootstrap-wrapper .btn-link.active, .bootstrap-wrapper .btn-link[disabled],
@@ -2635,7 +2635,7 @@ be a descendant of the grid when it is being dragged.
     .bootstrap-wrapper .btn-link, .bootstrap-wrapper .btn-link:hover, .bootstrap-wrapper .btn-link:focus, .bootstrap-wrapper .btn-link:active {
       border-color: transparent; }
     .bootstrap-wrapper .btn-link:hover, .bootstrap-wrapper .btn-link:focus {
-      color: #003f5e;
+      color: #22527b;
       text-decoration: underline;
       background-color: transparent; }
     .bootstrap-wrapper .btn-link[disabled]:hover, .bootstrap-wrapper .btn-link[disabled]:focus,
@@ -2751,7 +2751,7 @@ be a descendant of the grid when it is being dragged.
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: #0073AA; }
+    background-color: #337ab7; }
   .bootstrap-wrapper .dropdown-menu > .disabled > a, .bootstrap-wrapper .dropdown-menu > .disabled > a:hover, .bootstrap-wrapper .dropdown-menu > .disabled > a:focus {
     color: #777777; }
   .bootstrap-wrapper .dropdown-menu > .disabled > a:hover, .bootstrap-wrapper .dropdown-menu > .disabled > a:focus {
@@ -3063,7 +3063,7 @@ be a descendant of the grid when it is being dragged.
           cursor: not-allowed; }
     .bootstrap-wrapper .nav .open > a, .bootstrap-wrapper .nav .open > a:hover, .bootstrap-wrapper .nav .open > a:focus {
       background-color: #eeeeee;
-      border-color: #0073AA; }
+      border-color: #337ab7; }
     .bootstrap-wrapper .nav .nav-divider {
       height: 1px;
       margin: 9px 0;
@@ -3097,7 +3097,7 @@ be a descendant of the grid when it is being dragged.
       margin-left: 2px; }
     .bootstrap-wrapper .nav-pills > li.active > a, .bootstrap-wrapper .nav-pills > li.active > a:hover, .bootstrap-wrapper .nav-pills > li.active > a:focus {
       color: #fff;
-      background-color: #0073AA; }
+      background-color: #337ab7; }
   .bootstrap-wrapper .nav-stacked > li {
     float: none; }
     .bootstrap-wrapper .nav-stacked > li + li {
@@ -3551,7 +3551,7 @@ be a descendant of the grid when it is being dragged.
         padding: 6px 12px;
         line-height: 1.42857;
         text-decoration: none;
-        color: #0073AA;
+        color: #337ab7;
         background-color: #fff;
         border: 1px solid #ddd;
         margin-left: -1px; }
@@ -3568,7 +3568,7 @@ be a descendant of the grid when it is being dragged.
     .bootstrap-wrapper .pagination > li > span:hover,
     .bootstrap-wrapper .pagination > li > span:focus {
       z-index: 2;
-      color: #003f5e;
+      color: #22527b;
       background-color: #eeeeee;
       border-color: #ddd; }
     .bootstrap-wrapper .pagination > .active > a, .bootstrap-wrapper .pagination > .active > a:hover, .bootstrap-wrapper .pagination > .active > a:focus,
@@ -3577,8 +3577,8 @@ be a descendant of the grid when it is being dragged.
     .bootstrap-wrapper .pagination > .active > span:focus {
       z-index: 3;
       color: #fff;
-      background-color: #0073AA;
-      border-color: #0073AA;
+      background-color: #337ab7;
+      border-color: #337ab7;
       cursor: default; }
     .bootstrap-wrapper .pagination > .disabled > span,
     .bootstrap-wrapper .pagination > .disabled > span:hover,
@@ -3677,9 +3677,9 @@ be a descendant of the grid when it is being dragged.
     .bootstrap-wrapper .label-default[href]:hover, .bootstrap-wrapper .label-default[href]:focus {
       background-color: #5e5e5e; }
   .bootstrap-wrapper .label-primary {
-    background-color: #0073AA; }
+    background-color: #337ab7; }
     .bootstrap-wrapper .label-primary[href]:hover, .bootstrap-wrapper .label-primary[href]:focus {
-      background-color: #005177; }
+      background-color: #285f8f; }
   .bootstrap-wrapper .label-success {
     background-color: #5cb85c; }
     .bootstrap-wrapper .label-success[href]:hover, .bootstrap-wrapper .label-success[href]:focus {
@@ -3720,7 +3720,7 @@ be a descendant of the grid when it is being dragged.
       padding: 1px 5px; }
     .list-group-item.active > .bootstrap-wrapper .badge,
     .nav-pills > .active > a > .bootstrap-wrapper .badge {
-      color: #0073AA;
+      color: #337ab7;
       background-color: #fff; }
     .list-group-item > .bootstrap-wrapper .badge {
       float: right; }
@@ -3789,7 +3789,7 @@ be a descendant of the grid when it is being dragged.
   .bootstrap-wrapper a.thumbnail:hover,
   .bootstrap-wrapper a.thumbnail:focus,
   .bootstrap-wrapper a.thumbnail.active {
-    border-color: #0073AA; }
+    border-color: #337ab7; }
   .bootstrap-wrapper .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -3874,7 +3874,7 @@ be a descendant of the grid when it is being dragged.
     line-height: 20px;
     color: #fff;
     text-align: center;
-    background-color: #0073AA;
+    background-color: #337ab7;
     -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
     -webkit-transition: width 0.6s ease;
@@ -3993,8 +3993,8 @@ be a descendant of the grid when it is being dragged.
   .bootstrap-wrapper .list-group-item.active, .bootstrap-wrapper .list-group-item.active:hover, .bootstrap-wrapper .list-group-item.active:focus {
     z-index: 2;
     color: #fff;
-    background-color: #0073AA;
-    border-color: #0073AA; }
+    background-color: #337ab7;
+    border-color: #337ab7; }
     .bootstrap-wrapper .list-group-item.active .list-group-item-heading,
     .bootstrap-wrapper .list-group-item.active .list-group-item-heading > small,
     .bootstrap-wrapper .list-group-item.active .list-group-item-heading > .small, .bootstrap-wrapper .list-group-item.active:hover .list-group-item-heading,
@@ -4004,7 +4004,7 @@ be a descendant of the grid when it is being dragged.
     .bootstrap-wrapper .list-group-item.active:focus .list-group-item-heading > .small {
       color: inherit; }
     .bootstrap-wrapper .list-group-item.active .list-group-item-text, .bootstrap-wrapper .list-group-item.active:hover .list-group-item-text, .bootstrap-wrapper .list-group-item.active:focus .list-group-item-text {
-      color: #77d3ff; }
+      color: #c7ddef; }
   .bootstrap-wrapper .list-group-item-success {
     color: #5cb85c;
     background-color: #dff0d8; }
@@ -4310,18 +4310,18 @@ be a descendant of the grid when it is being dragged.
     .bootstrap-wrapper .panel-default > .panel-footer + .panel-collapse > .panel-body {
       border-bottom-color: #ddd; }
   .bootstrap-wrapper .panel-primary {
-    border-color: #0073AA; }
+    border-color: #337ab7; }
     .bootstrap-wrapper .panel-primary > .panel-heading {
       color: #fff;
-      background-color: #0073AA;
-      border-color: #0073AA; }
+      background-color: #337ab7;
+      border-color: #337ab7; }
       .bootstrap-wrapper .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-        border-top-color: #0073AA; }
+        border-top-color: #337ab7; }
       .bootstrap-wrapper .panel-primary > .panel-heading .badge {
-        color: #0073AA;
+        color: #337ab7;
         background-color: #fff; }
     .bootstrap-wrapper .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-      border-bottom-color: #0073AA; }
+      border-bottom-color: #337ab7; }
   .bootstrap-wrapper .panel-success {
     border-color: #d6e9c6; }
     .bootstrap-wrapper .panel-success > .panel-heading {
@@ -7631,6 +7631,28 @@ be a descendant of the grid when it is being dragged.
       width: 40px;
       height: 40px;
       border-radius: 32px; }
+  .bootstrap-wrapper .label-alert {
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 10px; }
+  .bootstrap-wrapper .full-width {
+    display: block !important;
+    width: 100%; }
+  .bootstrap-wrapper .alert {
+    font-weight: bold; }
+    .bootstrap-wrapper .alert a {
+      color: #fff;
+      text-decoration: underline; }
+    .bootstrap-wrapper .alert a:hover {
+      color: #ddd; }
+  .bootstrap-wrapper .alert-danger {
+    background-color: #d9534f;
+    border: #d9534f;
+    color: #fff; }
+  .bootstrap-wrapper .alert-success {
+    background-color: #fff;
+    border: 2px solid #5cb85c;
+    color: #5cb85c; }
 
 .dropdown-menu {
   position: absolute !important;
@@ -7674,7 +7696,8 @@ be a descendant of the grid when it is being dragged.
 .csm-frontend {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
-  background-color: #F23B3B; }
+  background-color: #F23B3B;
+  padding-top: 70px; }
 
 .panel-login {
   margin-top: 50px; }

@@ -1,3 +1,5 @@
+$csm-primary: #F23B3B;
+
 @import "bootstrap"; 
 
 .bootstrap-wrapper {
@@ -22,7 +24,7 @@
     //########################################################
     // ASSETS
     //########################################################
-
+    @import "assets/alerts";      
 }
 
  @import "outside-wrapper"; 

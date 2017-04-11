@@ -52,6 +52,18 @@ function csm_get_update() {
 }
 
 /**
+ * Get update message for frontend
+ * @return string
+ */
+function csm_get_update_frontend() {
+    if (isset($_SESSION['update_message']) && !empty($_SESSION['update_message'])) {
+        $update = $_SESSION['update_message'];
+        $_SESSION['update_message'] = '';
+        return $update;
+    }
+}
+
+/**
  * Hacky AF but whatever, this is Wordpress and wp_redirect gives a bug.
  */
 function hacky_redirect($page = false) {

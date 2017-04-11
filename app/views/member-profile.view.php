@@ -12,7 +12,7 @@
                             <input name="action" type="hidden" value="editmember">
                             <?php include(CSM_PLUGIN_PATH . 'app/views/member-add-edit-table.view.php'); ?>
                             <p class="submit">
-                                <input type="submit" name="createuser" id="createusersub" class="btn btn-primary btn-block" value="Edit Member">
+                                <input type="submit" name="createuser" id="createusersub" class="btn btn-success btn-block" value="Save">
                             </p>
                         </form>
                     </div>

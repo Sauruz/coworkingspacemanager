@@ -1,7 +1,8 @@
 .csm-frontend {
     font-family: $font-family-sans-serif;
     font-size: $font-size-base;
-    background-color: #F23B3B;
+    background-color: $csm-primary;
+    padding-top: $navbar-height + 20;
 }
 
 .panel-login {
