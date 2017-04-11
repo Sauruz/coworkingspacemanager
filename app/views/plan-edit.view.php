@@ -49,7 +49,7 @@
 
 
                             <p class="submit">
-                                <input type="submit"class="btn btn-primary btn-block" value="Edit Membership plan">
+                                <input type="submit"class="btn btn-success btn-block" value="Edit Membership plan">
                             </p>
                         </form>
                     </div>

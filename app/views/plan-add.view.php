@@ -54,7 +54,7 @@
 
 
                             <p class="submit">
-                                <input type="submit"class="btn btn-primary btn-block" value="Add Membership plan">
+                                <input type="submit"class="btn btn-success btn-block" value="Add Membership plan">
                             </p>
                         </form>
                     </div>

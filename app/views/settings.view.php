@@ -61,7 +61,7 @@
 
 
                             <p class="submit">
-                                <input type="submit" id="createusersub" class="btn btn-primary btn-block" value="Update settings">
+                                <input type="submit" id="createusersub" class="btn btn-success btn-block" value="Update settings">
                             </p>
                         </form>
                     </div>

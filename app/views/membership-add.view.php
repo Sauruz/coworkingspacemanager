@@ -57,7 +57,7 @@
                                 </div>
 
                                 <p class="submit">
-                                    <input type="submit" name="addmembership" id="createusersub" class="btn btn-primary btn-block" value="Add Membership">
+                                    <input type="submit" name="addmembership" id="createusersub" class="btn btn-success btn-block" value="Add Membership">
                                 </p>
                             </form>
                         </div>

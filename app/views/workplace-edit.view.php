@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <p class="submit">
-                                <input type="submit"class="btn btn-primary btn-block" value="Edit Workplace">
+                                <input type="submit"class="btn btn-success btn-block" value="Edit Workplace">
                             </p>
                         </form>
                     </div>
