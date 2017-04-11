@@ -7641,14 +7641,14 @@ be a descendant of the grid when it is being dragged.
   .bootstrap-wrapper .alert {
     font-weight: bold; }
     .bootstrap-wrapper .alert a {
-      color: #fff;
+      color: #000;
       text-decoration: underline; }
     .bootstrap-wrapper .alert a:hover {
-      color: #ddd; }
+      color: #565656; }
   .bootstrap-wrapper .alert-danger {
-    background-color: #d9534f;
-    border: #d9534f;
-    color: #fff; }
+    background-color: #fff;
+    border: 2px solid #d9534f;
+    color: #d9534f; }
   .bootstrap-wrapper .alert-success {
     background-color: #fff;
     border: 2px solid #5cb85c;

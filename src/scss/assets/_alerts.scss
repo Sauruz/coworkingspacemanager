@@ -2,19 +2,19 @@
     font-weight: bold;
     
     a {
-        color: #fff;
+        color: #000;
         text-decoration: underline;
     }
     
     a:hover {
-        color: #ddd;
+        color: #565656;
     }
 }
 
 .alert-danger {
-    background-color: $brand-danger;
-    border: $brand-danger;
-    color: #fff;
+    background-color: #fff;
+    border:  2px solid $brand-danger;
+    color: $brand-danger;
 }
 
 .alert-success {
