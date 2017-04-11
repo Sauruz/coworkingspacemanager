@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button class="btn btn-primary" type="submit">Register Payment</button>
+                <button class="btn btn-success" type="submit">Register Payment</button>
                 <button class="btn btn-default" type="button" ng-click="Ctrl.cancel()">Cancel</button>
                 </div>
                 </form>
@@ -76,7 +76,7 @@
                     </div>    
                 </div>
                 <div class="modal-footer">
-                <button class="btn btn-primary" type="submit">Send Invoice</button>
+                <button class="btn btn-success" type="submit">Send Invoice</button>
                 <button class="btn btn-default" type="button" ng-click="Ctrl.cancel()">Cancel</button>
                 </div>
                 </form>

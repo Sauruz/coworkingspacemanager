@@ -112,7 +112,6 @@ class CsmMembership {
     public function check_workplace_availability($plan_id, $start_date, $end_date) {
 
         $plan = $this->csmplan->get($plan_id);
-
         $datediff = strtotime($end_date) - strtotime($start_date);
         $one_day = 60 * 60 * 24;
         $days = floor($datediff / $one_day);
@@ -121,7 +120,7 @@ class CsmMembership {
         $dates_arr = array();
         for ($x = 0; $x < $days; $x++) {
             $date = date('Y-m-d', strtotime($start_date) + ($one_day * $x));
-            $query_count_string .= "(SELECT count(*) FROM " . $this->db->prefix . "csm_memberships WHERE plan_start <= '$date' AND plan_end > '$date') AS `$date`, ";
+            $query_count_string .= "(SELECT count(*) FROM " . $this->db->prefix . "csm_memberships WHERE plan_start <= '$date' AND plan_end > '$date' AND plan_id=$plan_id) AS `$date`, ";
             array_push($dates_arr, $date);
         }
 
@@ -133,7 +132,7 @@ class CsmMembership {
                 . "WHERE wp_csm_workplaces.id = " . $plan['workplace_id'];
 
         $result = $this->db->get_row($query, ARRAY_A);
-
+        
         //Check the dates in results
         $is_available = true;
         $not_available_dates = array();

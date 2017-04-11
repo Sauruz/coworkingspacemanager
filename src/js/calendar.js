@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('#calendar').fullCalendar({
-        defaultView: 'basicWeek',
+//        defaultView: 'basicWeek',
         height: 550,
         eventSources: [
             {
