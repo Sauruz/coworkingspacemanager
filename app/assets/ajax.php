@@ -40,7 +40,7 @@ add_action('wp_ajax_csmmembershipplans', 'csmmembershipplans');
 
 function csmmembershipplans() {
     //must check that the user has the required capability 
-    if (!current_user_can('manage_options')) {
+    if (!is_user_logged_in()) {
         csm_error('You do not have sufficient permissions to access this page', true);
     }
     

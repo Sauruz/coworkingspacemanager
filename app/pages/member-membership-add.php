@@ -20,7 +20,6 @@ function show_member_membership_add() {
             $CsmPlan = new CsmPlan();
             $plans = $CsmPlan->all();
 
-            //die;
             //Add membership plan
             if (isset($_POST['action']) && $_POST['action'] === 'member-membership-add') {
                 $data = $_POST;

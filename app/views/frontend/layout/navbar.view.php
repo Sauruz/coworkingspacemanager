@@ -11,7 +11,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="<?php activeSlug($currentSlug, "member");?>"><a href="?csm=member">About Me</a></li>
+                <li class="<?php activeSlug($currentSlug, "member");?>"><a href="?csm=member"><?php echo $member['first_name'] . ' ' . $member['last_name']; ?></a></li>
                 <li class="<?php activeSlug($currentSlug, "memberships");?>"><a href="?csm=memberships">Membership Plans</a></li>
             </ul>
 
