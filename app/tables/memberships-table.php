@@ -29,7 +29,7 @@ class MembershipTable extends WP_List_Table_Custom {
      */
     public function column_default($item, $column_name) {
         switch ($column_name) {
-            case 'member_identifier':
+            case 'plan_id':
                 return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
             case 'plan_start':
                 return '<span ng-bind="' . (strtotime($item['plan_start']) * 1000) . ' | date : \'mediumDate\'">' . $item['plan_start'] . '</span>';
@@ -160,7 +160,7 @@ class MembershipTable extends WP_List_Table_Custom {
             'last_name' => 'Name',
             'identifier' => 'Membership Nr.',
             'membership_status' => 'Status',
-            'member_identifier' => 'Plan',
+            'plan_id' => 'Plan',
             'plan_start' => 'Starts',
             'plan_end' => 'Expires',
             'payment' => 'Payment',
@@ -178,7 +178,7 @@ class MembershipTable extends WP_List_Table_Custom {
             'identifier' => array('identifier', false),
             'last_name' => array('last_name', false),
             'membership_status' => array('plan_start', false),
-            'member_identifier' => array('member_identifier', false),
+            'plan_id' => array('member_identifier', false),
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
             'payment' => array('payment', false),

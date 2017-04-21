@@ -29,7 +29,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
      */
     public function column_default($item, $column_name) {
         switch ($column_name) {
-            case 'member_identifier':
+            case 'plan_id':
                 return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan_name'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace_name'] . '</strong>';
             case 'plan_start':
                 return '<span ng-bind="' . (strtotime($item['plan_start']) * 1000) . ' | date : \'mediumDate\'">' . $item['plan_start'] . '</span>';
@@ -126,7 +126,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'identifier' => 'Membership Nr.',
             'membership_status' => 'Status',
-            'member_identifier' => 'Plan',
+            'plan_id' => 'Plan',
             'plan_start' => 'Starts',
             'plan_end' => 'Expires',
             'price_total' => 'Price',
@@ -144,7 +144,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
         $sortable_columns = array(
             'identifier' => array('identifier', false),
             'membership_status' => array('plan_start', false),
-            'member_identifier' => array('member_identifier', false),
+            'plan_id' => array('plan_id', false),
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
             'price_total' => array('price', false),
@@ -215,6 +215,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
         $memberships = $this->csmMembership->all(
                 (($current_page - 1) * $per_page), $per_page,  !empty($_REQUEST['orderby']) ? $_REQUEST['orderby'] : 'identifier', !empty($_REQUEST['order']) ? $_REQUEST['order'] : 'DESC', $_REQUEST['id']
         );
+        
         $total_items = $this->csmMembership->count();
         $this->items = $memberships;
 
