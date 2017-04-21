@@ -7701,3 +7701,8 @@ be a descendant of the grid when it is being dragged.
 
 .panel-login {
   margin-top: 50px; }
+
+.avatar-big {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px; }

@@ -147,13 +147,7 @@ class MembershipTable extends WP_List_Table_Custom {
      * @return type
      */
     public function column_membership_status($item) {
-        if ((strtotime($item['plan_start']) <= time()) && (strtotime($item['plan_end']) > time())) {
-            return '<span class="label label-success label-member-active">Active</span>';
-        } else if ((strtotime($item['plan_start']) > time()) && (strtotime($item['plan_end']) > time())) {
-            return '<span class="label label-info label-member-active">Pending</span>';
-        } else {
-            return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
-        }
+        return column_membership_status($item);
     }
 
     /**
@@ -241,7 +235,7 @@ class MembershipTable extends WP_List_Table_Custom {
      */
     public function prepare_items() {
         global $wpdb;
-        $per_page = 30;
+        $per_page = 10;
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();

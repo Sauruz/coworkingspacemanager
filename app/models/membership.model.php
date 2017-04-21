@@ -56,6 +56,7 @@ class CsmMembership {
                 . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'first_name' LIMIT 0,1) AS first_name, "
                 . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'last_name' LIMIT 0,1) AS last_name, "
                 . "(SELECT meta_value FROM " . $this->db->prefix . "usermeta WHERE user_id = " . $this->db->prefix . "users.ID AND meta_key = 'wp_capabilities' LIMIT 0,1) AS roles, "
+                . $this->db->prefix . "csm_memberships.approved, "
                 . $this->db->prefix . "csm_memberships.payment, "
                 . $this->db->prefix . "csm_memberships.payment_method, "
                 . $this->db->prefix . "csm_memberships.payment_at, "
@@ -224,6 +225,10 @@ class CsmMembership {
                     'plan_id' => $data['plan_id'],
                     'plan_start' => $data['plan_start'],
                     'plan_end' => $data['plan_end'],
+                    'approved' => $data['approved'] ? 1 : 0,
+                    'payment' => $data['payment'] ? 1 : 0,
+                    'payment_method' => $data['payment_method'],
+                    'payment_at' => $data['payment_at'],
                     'price' => $data['price'],
                     'vat' => $data['vat'],
                     'price_total' => $data['price_total'],
@@ -328,6 +333,10 @@ class CsmMembership {
                     'plan_id' => $plan['plan_id'],
                     'plan_start' => $data['plan_start'],
                     'plan_end' => date('Y-m-d', (strtotime($data['plan_start']) + ($plan['days'] * 60 * 60 * 24))),
+                    'approved' => $data['approved'] ? 1 : 0,
+                    'payment' => $data['payment'] ? 1 : 0,
+                    'payment_method' => $data['payment_method'],
+                    'payment_at' => $data['payment_at'],
                     'price' => $plan['price'],
                     'vat' => $plan['vat'],
                     'price_total' => $plan['price'] + (($plan['price'] / 100) * $data['vat'])

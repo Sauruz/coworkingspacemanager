@@ -21,29 +21,6 @@ function create_csm_tables() {
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-    //Create members
-//    $table_members = $wpdb->prefix . 'csm_members';
-//    $members_sql = "CREATE TABLE $table_members (
-//		id INT(11) NOT NULL AUTO_INCREMENT,
-//                identifier VARCHAR(100) NOT NULL,
-//                first_name VARCHAR(100) NOT NULL,
-//                last_name VARCHAR(100) NOT NULL,
-//                email VARCHAR(100) NOT NULL,
-//                company VARCHAR(100) NULL,
-//                address VARCHAR(100) NULL,
-//                locality VARCHAR(100) NULL,
-//                country VARCHAR(100) NULL,
-//                profession VARCHAR(100) NULL,
-//                bio LONGTEXT NULL,
-//                photo LONGTEXT NULL,
-//                updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,
-//                created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
-//                PRIMARY KEY (`id`),
-//		UNIQUE KEY identifier_key (identifier),
-//                UNIQUE KEY email_key (email)    
-//	);";
-//    dbDelta($members_sql);
-
     //Workplaces
     $table_workplaces = $wpdb->prefix . 'csm_workplaces';
     $workplaces_sql = "CREATE TABLE $table_workplaces (
@@ -103,6 +80,7 @@ function create_csm_tables() {
                 plan_id INT(11) NOT NULL,
                 plan_start DATE DEFAULT '0000-00-00' NOT NULL,
                 plan_end DATE DEFAULT '0000-00-00' NOT NULL,
+                approved BOOLEAN DEFAULT 0 NOT NULL,
                 payment BOOLEAN DEFAULT 0 NOT NULL,
                 payment_method VARCHAR(20) NULL,
                 payment_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL,

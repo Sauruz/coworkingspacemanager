@@ -35,6 +35,9 @@ function csm_login_template_include($template)
     if ($page_value && $page_value == "member") { 
         return plugin_dir_path(__FILE__).'app/frontend/member.php'; 
     }
+    if ($page_value && $page_value == "memberships") { 
+        return plugin_dir_path(__FILE__).'app/frontend/memberships.php'; 
+    }
     
     return $template;
 }

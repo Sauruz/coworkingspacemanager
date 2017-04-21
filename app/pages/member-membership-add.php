@@ -31,6 +31,10 @@ function show_member_membership_add() {
                         'user_id' => $_REQUEST['id'],
                         'plan_id' => $_POST['plan_id'],
                         'plan_start' => $_POST['plan_start'],
+                        'approved' => 1,
+                        'payment' => intval($_POST['payment']),
+                        'payment_method' => intval($_POST['payment']) ? $_POST['payment_method'] : '',
+                        'payment_at' => intval($_POST['payment']) ? date('Y-m-d') : '0000-00-00',
                         'vat' => $_POST['vat']
                     ));
 

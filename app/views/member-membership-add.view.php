@@ -5,7 +5,7 @@
 
         <?php
         if (empty($plans)) {
-            csm_error('To give ' . $data->first_name .' a new membership you need to configure at least one plan. There are no plans configurated yet. <a href="?page=csm-plan-add">Click here</a> to add a plan.');
+            csm_error('To give ' . $data->first_name . ' a new membership you need to configure at least one plan. There are no plans configurated yet. <a href="?page=csm-plan-add">Click here</a> to add a plan.');
         } else {
             ?>
             <div class="row">
@@ -34,6 +34,29 @@
                                         <div class="form-control-static" ng-bind="vm.endDate | date : 'mediumDate'"></div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-6" ng-init="membershipPaid = 0">
+                                        <label for="payment">Membership paid</label><br>
+                                        <input type="hidden" name="payment" value="{{membershipPaid}}">
+                                        <select class="form-control" id="payment" ng-model="membershipPaid">
+                                            <option ng-value="0" value="0">No</option>
+                                            <option ng-value="1" value="1">Yes</option>
+                                        </select><br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="payment_method">Payment method</label><br>
+                                        <select class="form-control" id="payment_method" name="payment_method" ng-disabled="membershipPaid === 0 ? true : false">
+                                            <option> -- Select a payment method -- </option>     
+                                            <option value="bitcoin">Bitcoin</option>        
+                                            <option value="cash">Cash</option>       
+                                            <option value="creditcard">Creditcard</option>
+                                            <option value="debitcard">Debitcard</option>
+                                            <option value="paypal">Paypal</option>  
+                                        </select><br>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-12"><hr></div>
                                     <div class="col-md-6">

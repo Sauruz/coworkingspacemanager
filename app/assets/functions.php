@@ -129,4 +129,52 @@ function randomPassword() {
     return implode($pass); //turn the array into a string
 }
 
+/**
+ * Active a navbar item
+ * @param type $currentSlug
+ * @param type $activeSlug
+ */
+function activeSlug($currentSlug, $activeSlug) {
+    echo $currentSlug === $activeSlug ? "active" : "";
+}
+
+/**
+ * Prints content in plain text then dies
+ * @param type $content
+ */
+function print_p($content) {
+    header('Content-Type: text/plain');
+    print_r($content);
+    die;
+}
+
+/**
+ * Show a membership status column
+ * @param type $item
+ * @return string
+ */
+function column_membership_status($item) {
+    if ((strtotime($item['plan_start']) <= time()) && (strtotime($item['plan_end']) > time())) {
+        return '<span class="label label-success label-member-active">Active</span>';
+    } else if ((strtotime($item['plan_start']) > time()) && (strtotime($item['plan_end']) > time())) {
+        return '<span class="label label-info label-member-active">Upcoming</span>';
+    } else {
+        return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
+    }
+}
+
+/**
+ * Show column of plan
+ * @param type $item
+ * @return string
+ */
+function column_plan($item) {
+    print_r($item);
+    if ($item['plan']) {
+        return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
+    } else {
+        return '';
+    }
+}
+
 ?>

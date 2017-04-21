@@ -1,39 +1,23 @@
 <?php include('layout/header.view.php'); ?>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><?php echo $data['csm_name']; ?></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse navbar-right">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="?csm=member">About Me</a></li>
-                <li><a href="#about">Memberships</a></li>
-            </ul>
-
-            <form class="navbar-form navbar-right" action="" method="POST">
-                <input type="hidden" name="action" value="logout">
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+<?php include('layout/navbar.view.php'); ?>
 
 <div class="container">
     <div class="row">
         <div class="panel col-md-6 col-md-offset-3">
             <div class="panel-body">
-                
-                <?php if(!empty($update)) {?>
-                <div class="alert alert-success"><?php echo $update;?></div>
+
+                <?php if (!empty($update)) { ?>
+                    <div class="alert alert-success"><?php echo $update; ?></div>
                 <?php } ?>
-                
+
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 text-center">
+                        <img class="avatar-big" src="<?php echo get_avatar_url($member['id']); ?>">
+                        <p><br>You can change your profile picture on <a href="https://en.gravatar.com/">Gravatar</a>.</p>
+                        <hr>
+                    </div>
+                </div>
+
                 <form action="" method="post">
                     <input name="action" type="hidden" value="editmember">
                     <div class="row">

@@ -5,7 +5,7 @@ $data = $CsmSettings->all();
 
 $error = false;
 $errorStr = "";
-
+$currentSlug = "member";
 
 /**
  * Check if user is logged in. If user is logged in redirect to user page

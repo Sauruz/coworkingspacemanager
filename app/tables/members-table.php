@@ -96,20 +96,18 @@ class MembersTable extends WP_List_Table_Custom {
                 'edit' => sprintf('<a href="?page=%s&id=%s">Edit</a>', 'csm-member-profile', $item['ID']),
             );
         };
-        
+
         $avatar = '<div class="csm-avatar"><img src="' . $item['avatar_url'] . '"></div>';
 
         //Return the title contents
         if (empty($item['last_name']) && empty($item['first_name'])) {
-            return sprintf('%1$s %2$s %3$s',
-                                $avatar, 
-                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' .  $item['display_name'] . $admin_string . '</a>', 'csm-member-memberships', $item['ID']),
+            return sprintf('%1$s %2$s %3$s', $avatar,
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['display_name'] . $admin_string . '</a>', 'csm-member-memberships', $item['ID']),
                     /* $2%s */ $this->row_actions($actions)
             );
         } else {
-            return sprintf('%1$s %2$s %3$s',
-                                $avatar, 
-                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">'  . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . $admin_string . '</span></a>', 'csm-member-memberships', $item['ID']),
+            return sprintf('%1$s %2$s %3$s', $avatar,
+                    /* $1%s */ sprintf('<a class="row-title" href="?page=%s&id=%s" aria-label="">' . $item['last_name'] . '<span style="color: silver">, ' . $item['first_name'] . $admin_string . '</span></a>', 'csm-member-memberships', $item['ID']),
                     /* $2%s */ $this->row_actions($actions)
             );
         }
@@ -121,13 +119,7 @@ class MembersTable extends WP_List_Table_Custom {
      * @return string
      */
     public function column_membership_status($item) {
-        if ((strtotime($item['plan_start']) <= time()) && (strtotime($item['plan_end']) > time())) {
-            return '<span class="label label-success label-member-active">Active</span>';
-        } else if ((strtotime($item['plan_start']) > time()) && (strtotime($item['plan_end']) > time())) {
-            return '<span class="label label-info label-member-active">Pending</span>';
-        } else {
-            return '<span class="label label-default label-member-active" style="display:block">Inactive</span>';
-        }
+        return column_membership_status($item);
     }
 
     /**
@@ -192,7 +184,7 @@ class MembersTable extends WP_List_Table_Custom {
             //Delete multiple members
             else {
                 try {
-                    $res = "";         
+                    $res = "";
                     foreach ($_REQUEST['member'] as $id) {
                         $member = $this->csmMember->delete($id);
                         $res .= $member['first_name'] . ' ' . $member['last_name'] . ' was deleted<br>';
@@ -211,7 +203,7 @@ class MembersTable extends WP_List_Table_Custom {
      */
     public function prepare_items() {
         global $wpdb;
-        $per_page = 30;
+        $per_page = 10;
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();

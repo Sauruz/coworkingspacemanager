@@ -145,7 +145,7 @@ class WorkplacesTable extends WP_List_Table_Custom {
      */
     public function prepare_items() {
         global $wpdb;
-        $per_page = 30;
+        $per_page = 10;
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();

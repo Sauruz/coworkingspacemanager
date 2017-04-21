@@ -12,7 +12,7 @@ function show_membership_add() {
     //This is used in the template, do not remove
     $CsmPlan = new CsmPlan();
     $plans = $CsmPlan->all();
-    
+
 
     //Add membership plan
     if (isset($_POST['action']) && $_POST['action'] === 'membership-add') {
@@ -23,6 +23,10 @@ function show_membership_add() {
                 'user_id' => $_POST['user_id'],
                 'plan_id' => $_POST['plan_id'],
                 'plan_start' => $_POST['plan_start'],
+                'approved' => 1,
+                'payment' => intval($_POST['payment']),
+                'payment_method' => intval($_POST['payment']) ? $_POST['payment_method'] : '',
+                'payment_at' => intval($_POST['payment']) ? date('Y-m-d') : '0000-00-00',
                 'vat' => $_POST['vat']
             ));
 
