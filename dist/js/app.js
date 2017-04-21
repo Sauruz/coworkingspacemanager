@@ -15584,7 +15584,7 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
             price: "@",
             start: "@",
             end: "@",
-            memberIdentifier: "@", 
+            id: "@", 
             firstName: "@",
             lastName: "@",
             workplaceName: "@",
@@ -15670,9 +15670,10 @@ app.directive('memberMembershipAdd', function ($locale, $timeout, Services) {
         controllerAs: 'vm',
         controller: function ($scope) {
             var vm = this;
-
+            
             Services.membershipplans().then(function (res) {
                 vm.plans = res;
+                
                 vm.selectedPlan = vm.plans[0];
                 vm.startDate = moment().format('YYYY-MM-DD');
                 vm.endDate = moment(vm.startDate).add(vm.selectedPlan.days, 'days').format();

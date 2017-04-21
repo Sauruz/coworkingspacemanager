@@ -13,6 +13,7 @@
                     <div class="panel">
                         <div class="panel-body">
                             <form action="" method="post" member-membership-add>
+                                
                                 <input name="action" type="hidden" value="member-membership-add">
                                 <input name="vat" type="hidden" value="0">
                                 <div class="row">

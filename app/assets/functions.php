@@ -78,8 +78,8 @@ function hacky_redirect($page = false) {
  * Echo active tab in tabbar
  * @param type $slug
  */
-function tab_active($slug) {
-    echo!empty($_GET['page']) && $_GET['page'] === $slug ? 'active' : '';
+function tab_active($slug, $getParam = 'page') {
+    echo!empty($_GET[$getParam]) && $_GET[$getParam] === $slug ? 'active' : '';
 }
 
 /**

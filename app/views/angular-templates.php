@@ -59,7 +59,7 @@
                 <input name="identifier" type="hidden" ng-value="'{{Ctrl.membership.identifier}}'">
                 <input name="invoice_sent" type="hidden" value="1">
                 <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-                <input type="hidden" name="member_identifier" value="{{Ctrl.membership.memberIdentifier}}" />
+                <input type="hidden" name="id" value="{{Ctrl.membership.id}}" />
                 <div class="modal-header">
                 <h3 class="modal-title" id="modal-title">Send invoice to {{Ctrl.membership.firstName}}</h3>
                 </div>

@@ -27,13 +27,13 @@ class CsmInvoice {
 
         $this->gump->validation_rules(array(
             'identifier' => 'required|max_len,100',
-            'member_identifier' => 'required|max_len,100',
+            'id' => 'required|numeric|max_len,100',
             'invoice' => 'required'
         ));
 
         $this->gump->filter_rules(array(
             'identifier' => 'trim|sanitize_string',
-            'member_identifier' => 'trim|sanitize_string'
+            'id' => 'trim|sanitize_string'
         ));
 
         $validated_data = $this->gump->run($data);
@@ -71,8 +71,8 @@ class CsmInvoice {
         if (empty($membership)) {
             throw new Exception('Something went wrong. Member does not exist');
         } else {
-            $member = $this->cmsMember->get($membership['member_identifier']);
-
+            $member = $this->cmsMember->get($membership['user_id']);
+           
             $to = $member['email'];
             $subject = 'Invoice nr: ' . $membership['identifier'];
             $body = $data['invoice'];

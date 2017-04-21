@@ -9,7 +9,7 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
             price: "@",
             start: "@",
             end: "@",
-            memberIdentifier: "@", 
+            id: "@", 
             firstName: "@",
             lastName: "@",
             workplaceName: "@",
