@@ -12,7 +12,7 @@
                     <div class="alert alert-success"><?php echo $update; ?></div>
                 <?php } ?>
 
-                <table class="table table-striped">
+                <table class="table table-striped table-vertical">
                     <thead>
                     <th>Membership Nr.</th>
                     <th>Status</th>
@@ -21,6 +21,7 @@
                     <th>Expires</th>
                     <th>Price</th>
                     <th>Payment Status</th>
+                    <th>Invoice</th>
                     </thead>
                     <tbody>
                         <?php foreach ($memberships as $k => $v) { ?>
@@ -32,6 +33,7 @@
                                 <td><span ng-bind="<?php echo (strtotime($v['plan_end']) * 1000); ?> | date : 'mediumDate'"></span></td>
                                 <td><span ng-bind="<?php echo $v['price_total'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price_total']; ?>"></span></td>
                                 <td><?php echo $v['payment'] === '1' ? '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> Paid' : '<i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Not paid yet'; ?></td>
+                                <td><button class="btn btn-default">Download invoice</button></td>
                             </tr>
                         <?php } ?>
                     </tbody>

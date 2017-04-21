@@ -7706,3 +7706,6 @@ be a descendant of the grid when it is being dragged.
   width: 100px;
   height: 100px;
   border-radius: 100px; }
+
+.table-vertical tbody tr td {
+  vertical-align: middle !important; }

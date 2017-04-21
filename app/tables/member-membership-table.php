@@ -50,6 +50,7 @@ class MemberMembershipTable extends WP_List_Table_Custom {
                     return '<invoice invoice-sent="false" '
                             . 'identifier="' . $item['identifier'] . '" '
                             . 'price="' . $item['price'] . '" '
+                            . 'currency-symbol="' . CSM_CURRENCY_SYMBOL . '" '
                             . 'start="' . $item['plan_start'] . '" '
                             . 'end="' . $item['plan_end'] . '" '
                             . 'id="' . $item['ID'] . '" '

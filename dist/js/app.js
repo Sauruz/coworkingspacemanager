@@ -15582,6 +15582,7 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
             paymentMethod: '@',
             identifier: "@",
             price: "@",
+            currencySymbol: "@",
             start: "@",
             end: "@",
             id: "@", 
@@ -15620,7 +15621,7 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
                         modal.membership.currentDate = $filter('date')(moment().format('YYYY-MM-DD'), 'mediumDate');
                         modal.membership.start = $filter('date')(modal.membership.start, 'mediumDate');
                         modal.membership.end = $filter('date')(modal.membership.end, 'mediumDate');
-                        modal.membership.priceFormatted = $filter('currency')(modal.membership.price, '€');
+                        modal.membership.priceFormatted = $filter('currency')(modal.membership.price, modal.membership.currencySymbol);
                         
                         console.log(modal.membership);
                         
