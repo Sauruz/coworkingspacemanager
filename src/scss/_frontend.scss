@@ -16,7 +16,6 @@
 }
 
 .table-vertical {
-    
     tbody {
         
      tr {
@@ -25,4 +24,12 @@
         }
     } 
     }
+}
+
+.navbar-brand {
+    padding: 5px!important;
+    
+    .coworking-navbar-logo {
+    height: 40px;
+}
 }

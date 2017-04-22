@@ -8,9 +8,23 @@
             <div class="col-md-6">
                 <div class="panel">
                     <div class="panel-body">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <input name="action" type="hidden" value="change-settings">
 
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <?php if($data['csm_logo']) { ?>
+                                        <img src="<?php echo $data['csm_logo']; ?>" class="coworking-space-logo">
+                                    <?php } else { ?>
+                                    <div class="form-control-static"><i><br>No logo uploaded yet</i></div>
+                                    <?php } ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="csm_logo">Logo Coworking Space</label><br>
+                                    <input name="csm_logo" placeholder="Logo Coworking Space" type="file" id="csm_logo" value="<?php form_value($data, 'csm_logo'); ?>"><br>
+                                </div>
+                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="csm_name">Name Coworking Space <span class="description">(required)</span></label><br>

@@ -66,6 +66,7 @@ class CsmSettings {
      */
     public function all() {
         $settings = array(
+            'csm_logo' => stripslashes(get_option('csm-logo')),
             'csm_name' => stripslashes(get_option('csm-name')),
             'csm_address' => stripslashes(get_option('csm-address')),
             'csm_zipcode' => stripslashes(get_option('csm-zipcode')),
@@ -88,6 +89,11 @@ class CsmSettings {
         $data = $this->validate($data);
         update_option('csm-settings-set', true);
         define('CSM_SETTINGS_SET', true);
+        
+        if (isset($data['csm_logo'])) {
+            update_option('csm-logo', $data['csm_logo']);
+        }
+        
         update_option('csm-name', $data['csm_name']);
         update_option('csm-address', $data['csm_address']);
         update_option('csm-zipcode', $data['csm_zipcode']);

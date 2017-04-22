@@ -1,4 +1,5 @@
 <?php
+use Dompdf\Dompdf;
 
 class CsmInvoice {
 
@@ -55,6 +56,11 @@ class CsmInvoice {
      * @return type
      */
     public function all() {
+        
+    }
+    
+    
+    public function createInvoicePdf() {
         
     }
 

@@ -7638,6 +7638,10 @@ be a descendant of the grid when it is being dragged.
   .bootstrap-wrapper .full-width {
     display: block !important;
     width: 100%; }
+  .bootstrap-wrapper .coworking-space-logo {
+    max-width: 100%;
+    max-height: 100px;
+    margin-bottom: 20px; }
   .bootstrap-wrapper .alert {
     font-weight: bold; }
     .bootstrap-wrapper .alert a {
@@ -7709,3 +7713,8 @@ be a descendant of the grid when it is being dragged.
 
 .table-vertical tbody tr td {
   vertical-align: middle !important; }
+
+.navbar-brand {
+  padding: 5px !important; }
+  .navbar-brand .coworking-navbar-logo {
+    height: 40px; }
