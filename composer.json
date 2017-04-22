@@ -1,6 +1,5 @@
 {
     "require": {
-        "wixel/gump": "dev-master",
-        "dompdf/dompdf": "^0.8.0"
+        "wixel/gump": "dev-master"
     }
 }
