@@ -80,12 +80,12 @@ class CsmMembership {
                 . $where
                 . "ORDER BY " . $orderby . " " . $order . " "
                 . "LIMIT " . $offset . "," . $limit;
-        
+
         $result = $this->db->get_results($query, ARRAY_A);
-        foreach($result as $k => $v) {
+        foreach ($result as $k => $v) {
             $result[$k]['roles'] = unserialize($v['roles']);
             $result[$k]['avatar_url'] = get_avatar_url($v['email']);
-        } 
+        }
         return $result;
     }
 
@@ -133,7 +133,7 @@ class CsmMembership {
                 . "WHERE wp_csm_workplaces.id = " . $plan['workplace_id'];
 
         $result = $this->db->get_row($query, ARRAY_A);
-        
+
         //Check the dates in results
         $is_available = true;
         $not_available_dates = array();
@@ -284,19 +284,28 @@ class CsmMembership {
     }
 
     /**
-     * Register Invoice
-     * @param type $identifier
+     * Update membership
+     * @param type $membership
      * @return type
-     * @throws Exception
      */
-    public function update_invoice($identifier, $bool = 1) {
-        $response = $this->db->update($this->db->prefix . "csm_memberships", array(
-            'invoice_sent' => $bool,
-            'invoice_sent_at' => current_time('mysql'),
-            'updated_at' => current_time('mysql'),
-                ), array('identifier' => $identifier)
-        );
-        return $response;
+    public function update($data) {
+        $this->gump->validation_rules(array(
+            'identifier' => 'required|max_len,100',
+        ));
+
+        $validated_data = $this->gump->run($data);
+        if ($validated_data === false) {
+            $errArr = $this->gump->get_readable_errors();
+            $errString = "";
+            foreach ($errArr as $k => $err) {
+                $errString .= $err . '<br>';
+            }
+            throw new Exception($errString);
+        } else {
+            $response = $this->db->update($this->db->prefix . "csm_memberships", $data, array('identifier' => $data['identifier'])
+            );
+            return $response;
+        }
     }
 
     /**

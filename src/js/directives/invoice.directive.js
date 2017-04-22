@@ -48,8 +48,6 @@ app.directive('invoice', function ($locale, $log, $document, $timeout, $uibModal
                         modal.membership.end = $filter('date')(modal.membership.end, 'mediumDate');
                         modal.membership.priceFormatted = $filter('currency')(modal.membership.price, modal.membership.currencySymbol);
                         
-                        console.log(modal.membership);
-                        
                         modal.ok = function () {
                             $uibModalInstance.close(modal.membership);
                         };

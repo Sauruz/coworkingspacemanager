@@ -72,20 +72,30 @@ class CsmInvoice {
             throw new Exception('Something went wrong. Member does not exist');
         } else {
             $member = $this->cmsMember->get($membership['user_id']);
-           
+
             $to = $member['email'];
             $subject = 'Invoice nr: ' . $membership['identifier'];
             $body = $data['invoice'];
-            $headers = array('Content-Type: text/html; charset=UTF-8',  
+            $headers = array('Content-Type: text/html; charset=UTF-8',
                 'From: ' . CSM_NAME . ' <' . CSM_EMAIL . '>'
-                );
+            );
 
-            $mail = wp_mail($to, $subject, $body, $headers);
-            if ($mail) {
-                $this->cmsMembership->update_invoice($data['identifier']);
-            } else {
-                throw new Exception('Invoice was not send. Please check your Wordpress email settings.');
-            }
+            $membership['invoice_sent'] = 1;
+            $membership['invoice'] = $data['invoice'];
+            $membership['invoice_sent_at'] = current_time('mysql');
+            $membership['updated_at'] = current_time('mysql');
+            $this->cmsMembership->update($membership);
+
+//            $mail = wp_mail($to, $subject, $body, $headers);
+//            if ($mail) {
+//                $membership['invoice_sent'] = 1;
+//                $membership['invoice'] = $data['invoice'];
+//                $membership['invoice_sent_at'] = current_time('mysql');
+//                $membership['updated_at'] = current_time('mysql');
+//                $this->cmsMembership->update_invoice($membership);
+//            } else {
+//                throw new Exception('Invoice was not send. Please check your Wordpress email settings.');
+//            }
         }
     }
 

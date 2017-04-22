@@ -88,6 +88,7 @@ function create_csm_tables() {
                 vat INT(11) NULL,
                 price_total INT(11) NULL,
                 invoice_sent BOOLEAN DEFAULT 0 NOT NULL,
+                invoice LONGTEXT NULL,
                 invoice_sent_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NULL, 
                 created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
