@@ -205,7 +205,8 @@ gulp.task('make_distro', function () {
         'dist/**/*',
         'install/**/*',
         'vendor/**/*',
-        'coworkingspacemanager.php'
+        'coworkingspacemanager.php',
+        'routing.php'
     ], {base:"."})
             .pipe(gulp.dest('_coworkingspacemanager/'));
 });

@@ -32,7 +32,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'login') {
             $errorStr .= $v[0] . '<br>';
         }
     } else {
-        wp_redirect('?csm=member');
+        wp_redirect(csm_permalink_url('member'));
     }
 }
 
