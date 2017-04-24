@@ -12,7 +12,9 @@ function show_members() {
     if (!CSM_SETTINGS_SET) {
         csm_error("Please enter your coworking space details under `Settings` in the left menu");
     }
-    
+
+    $csm_permalink= new csm_permalink();
+
     //Create an instance of our package class...
     $membersTable = new MembersTable();
     //Fetch, prepare, sort, and filter our data...
