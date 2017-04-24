@@ -4,11 +4,7 @@
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/members.tabbar.php'; ?>
 
         <form id="members-filter" method="get">
-
-            <div class="pull-left">
-                <a class="btn btn-info" target="_blank" href="<?php echo $csm_permalink->csm_permalink_url('login');?>"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Go to member area</a>
-            </div>
-
+            
             <p class="search-box">
                 <label class="screen-reader-text" for="post-search-input">Search Members:</label>
                 <input type="search" id="post-search-input" name="s" value="<?php echo isset($_GET['s']) ? $_GET['s'] : '';?>" />

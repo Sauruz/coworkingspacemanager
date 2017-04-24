@@ -1,7 +1,14 @@
 <div class="wrap">
     <h1 class="wp-heading-inline"><strong>Dashboard <?php echo $settings['csm_name']; ?></strong></h1>
-
     <div class="bootstrap-wrapper">
+
+        <div class="row">
+            <div class="col-sm-12">
+            <h4><span class="label label-info">Members can login at <a target="_blank" href="<?php echo csm_permalink_url('login');?>"><?php echo csm_permalink_url('login');?></a></span>
+            </h4>
+            </div>
+            </div>
+
         <h3>Capacity stats</h3>
         <div class="row">
             <?php foreach($capacity as $k => $v) { ?>

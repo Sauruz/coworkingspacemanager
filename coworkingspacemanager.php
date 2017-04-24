@@ -129,12 +129,12 @@ function csm_menu() {
 
     add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_dashboard', plugins_url('coworkingspacemanager/dist/img/logo-orange-small.svg' ), 2);
     add_submenu_page(PLUGIN_SLUG, 'Dashboard', 'Dashboard', 'manage_options', PLUGIN_SLUG);
-    add_submenu_page(PLUGIN_SLUG, 'All Members', 'Members', 'manage_options', 'csm-members', 'show_members');
+    add_submenu_page(PLUGIN_SLUG, 'All Members', 'All Members', 'manage_options', 'csm-members', 'show_members');
     add_submenu_page(PLUGIN_SLUG, 'Add Member', 'Add Member', 'manage_options', 'csm-member-add', 'show_member_add');
     add_submenu_page(PLUGIN_SLUG, 'Profile', 'Profile', 'manage_options', 'csm-member-profile', 'show_member_profile');
     add_submenu_page(PLUGIN_SLUG, 'Membership Overview', 'Membership Overview', 'manage_options', 'csm-member-memberships', 'show_member_memberships');
     add_submenu_page(PLUGIN_SLUG, 'New Membership', 'New Membership', 'manage_options', 'csm-member-membership-add', 'show_member_membership_add');
-    add_submenu_page(PLUGIN_SLUG, 'Memberships', 'Memberships', 'manage_options', 'csm-memberships', 'show_memberships');
+    add_submenu_page(PLUGIN_SLUG, 'All Memberships', 'All Memberships', 'manage_options', 'csm-memberships', 'show_memberships');
     add_submenu_page(PLUGIN_SLUG, 'New Membership', 'New Membership', 'manage_options', 'csm-membership-add', 'show_membership_add');
     add_submenu_page(PLUGIN_SLUG, 'Calendar', 'Calendar', 'manage_options', 'csm-calendar', 'show_calendar');
 
