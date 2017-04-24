@@ -35,6 +35,8 @@ if (!is_user_logged_in()) {
                 'approved' => 1,
                 'vat' => 0
             ));
+            
+            $CsmMembership->notifyOwner($member);
 
             csm_set_update('Membership plan added');
             wp_redirect('?csm=memberships');

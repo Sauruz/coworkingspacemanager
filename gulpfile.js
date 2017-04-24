@@ -75,6 +75,11 @@ gulp.task('calendar-locales', function() {
     .pipe(gulp.dest('./dist/js/calendar-locale'));
 });
 
+gulp.task('copy-images', function() {
+    gulp.src('./src/img/**/*')
+    .pipe(gulp.dest('./dist/img'));
+});
+
 /**
  * ######################################################################
  * SASS
@@ -182,11 +187,11 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images']);    
 });
 
 gulp.task('distro', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales'], ['make_distro'], ['zip'], ['clean_distro']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip'], ['clean_distro']);    
 });
 
 /**

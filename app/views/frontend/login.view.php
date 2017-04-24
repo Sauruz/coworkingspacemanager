@@ -24,6 +24,8 @@
                     <label for="remember">Remember me</label><br><br> 
 
                     <button type="submit" class="btn btn-block btn-success">Login</button><br>
+                    
+                    <a href="<?php echo wp_lostpassword_url(); ?>" title="Forgot Password">Forgot your password? Click here</a>
                 </form>
             </div>
         </div>

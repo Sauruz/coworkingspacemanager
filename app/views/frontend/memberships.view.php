@@ -21,9 +21,12 @@
                     <th>Expires</th>
                     <th>Price</th>
                     <th>Payment Status</th>
-                    <th>Invoice</th>
                     </thead>
                     <tbody>
+                        <?php if(empty($memberships)) { ?>
+                        <tr><td colspan="7"><i>No membership plans found. You can add one with the button 'Add Membership Plan' in the tabbar</i><td></tr>
+                        <?php } ?>
+                        
                         <?php foreach ($memberships as $k => $v) { ?>
                             <tr>
                                 <td><?php echo $v['identifier']; ?></td>
@@ -33,7 +36,6 @@
                                 <td><span ng-bind="<?php echo (strtotime($v['plan_end']) * 1000); ?> | date : 'mediumDate'"></span></td>
                                 <td><span ng-bind="<?php echo $v['price_total'] . ' | currency : \'' . CSM_CURRENCY_SYMBOL . '\'">' . CSM_CURRENCY_SYMBOL . $item['price_total']; ?>"></span></td>
                                 <td><?php echo $v['payment'] === '1' ? '<i class="fa fa-fw fa-lg fa-check-circle text-success" aria-hidden="true"></i> Paid' : '<i class="fa fa-fw fa-lg fa-exclamation-triangle text-warning" aria-hidden="true"></i> Not paid yet'; ?></td>
-                                <td><button class="btn btn-default">Download invoice</button></td>
                             </tr>
                         <?php } ?>
                     </tbody>

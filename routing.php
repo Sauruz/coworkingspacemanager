@@ -1,7 +1,7 @@
 <?php
 
 
-add_action('init', 'cms_flush_rewrite_rules');
+//add_action('init', 'cms_flush_rewrite_rules');
 
 /**
  * Rewrite

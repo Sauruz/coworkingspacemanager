@@ -164,7 +164,7 @@ class MembershipTable extends WP_List_Table_Custom {
             'plan_start' => 'Starts',
             'plan_end' => 'Expires',
             'payment' => 'Payment',
-            'invoice_sent' => 'Invoice Sent'
+//            'invoice_sent' => 'Invoice Sent'
         );
         return $columns;
     }
@@ -182,7 +182,7 @@ class MembershipTable extends WP_List_Table_Custom {
             'plan_start' => array('plan_start', false),
             'plan_end' => array('plan_end', false),
             'payment' => array('payment', false),
-            'invoice_sent' => array('invoice_sent', false),
+//            'invoice_sent' => array('invoice_sent', false),
         );
         return $sortable_columns;
     }

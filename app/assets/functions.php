@@ -142,11 +142,11 @@ function activeSlug($currentSlug, $activeSlug) {
  * Prints content in plain text then dies
  * @param type $content
  */
-function print_p($content) {
-    header('Content-Type: text/plain');
-    print_r($content);
-    die;
-}
+//function print_p($content) {
+//    header('Content-Type: text/plain');
+//    print_r($content);
+//    die;
+//}
 
 /**
  * Show a membership status column
@@ -169,7 +169,6 @@ function column_membership_status($item) {
  * @return string
  */
 function column_plan($item) {
-    print_r($item);
     if ($item['plan']) {
         return '<strong><i class="fa fa-fw fa-clock-o text-success" aria-hidden="true"></i> ' . $item['plan'] . '<br><i class="fa fa-fw fa-desktop text-success" aria-hidden="true"></i> ' . $item['workplace'] . '</strong>';
     } else {

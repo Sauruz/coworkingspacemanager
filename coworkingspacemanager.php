@@ -125,7 +125,7 @@ add_action('admin_menu', 'csm_menu');
 
 function csm_menu() {
 
-    add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_members', plugins_url('coworkingspacemanager/src/img/logo-orange-small.svg' ), 2);
+    add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_members', plugins_url('coworkingspacemanager/dist/img/logo-orange-small.svg' ), 2);
     add_submenu_page(PLUGIN_SLUG, 'All Members', 'Members', 'manage_options', PLUGIN_SLUG);
     add_submenu_page(PLUGIN_SLUG, 'Add Member', 'Add Member', 'manage_options', 'csm-member-add', 'show_member_add');
     add_submenu_page(PLUGIN_SLUG, 'Profile', 'Profile', 'manage_options', 'csm-member-profile', 'show_member_profile');

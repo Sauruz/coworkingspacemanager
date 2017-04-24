@@ -392,6 +392,24 @@ class CsmMembership {
         }
     }
 
+    /**
+     * Send mail to owner when new membership is added by user
+     * @param type $member
+     * @throws Exception
+     */
+    public function notifyOwner($member) {
+        $to = CSM_EMAIL;
+        $subject = 'New membership: ' . $member['first_name'] . ' ' . $member['last_name'];
+        $body = 'Hello ' . CSM_NAME . '<br><br>, '
+                . $member['first_name'] . ' ' . $member['last_name'] . ' has added a new membership plan.<br>'
+                . 'Login to your Wordpress account and go to the Coworking Space Manager to see the membership plan.';
+        $headers = array('Content-Type: text/html; charset=UTF-8',
+            'From: ' . CSM_NAME . ' <' . CSM_EMAIL . '>'
+        );
+
+        $mail = wp_mail($to, $subject, $body, $headers);
+    }
+
 }
 
 ?>
