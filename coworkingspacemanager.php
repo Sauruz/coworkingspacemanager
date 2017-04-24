@@ -3,7 +3,7 @@
 /*
   Plugin Name: Coworking Space Manager
   Plugin URI:  http://www.de-rus.nl
-  Description: A Wordpress plugin for coworking spaces. Manage members, bookings and invoices.
+  Description: A Wordpress plugin for coworking spaces. Manage members, bookings and payments.
   Version:     1.0
   Author:      Guido Rus
   Text Domain: coworkingspacemanager
@@ -73,6 +73,7 @@ include(CSM_PLUGIN_PATH . 'routing.php');
 include(CSM_PLUGIN_PATH . 'app/assets/functions.php');
 
 //Models
+include(CSM_PLUGIN_PATH . 'app/models/dashboard.model.php');
 include(CSM_PLUGIN_PATH . 'app/models/member.model.php');
 include(CSM_PLUGIN_PATH . 'app/models/membership.model.php');
 include(CSM_PLUGIN_PATH . 'app/models/plan.model.php');
@@ -92,6 +93,7 @@ include(CSM_PLUGIN_PATH . 'app/tables/plans-table.php');
 include(CSM_PLUGIN_PATH . 'app/tables/workplaces-table.php');
 
 //Pages
+include(CSM_PLUGIN_PATH . 'app/pages/dashboard.php');
 include(CSM_PLUGIN_PATH . 'app/pages/members.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/member-memberships.php');
@@ -125,8 +127,9 @@ add_action('admin_menu', 'csm_menu');
 
 function csm_menu() {
 
-    add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_members', plugins_url('coworkingspacemanager/dist/img/logo-orange-small.svg' ), 2);
-    add_submenu_page(PLUGIN_SLUG, 'All Members', 'Members', 'manage_options', PLUGIN_SLUG);
+    add_menu_page('Coworking Space Manager', 'Coworking Space', 'manage_options', PLUGIN_SLUG, 'show_dashboard', plugins_url('coworkingspacemanager/dist/img/logo-orange-small.svg' ), 2);
+    add_submenu_page(PLUGIN_SLUG, 'Dashboard', 'Dashboard', 'manage_options', PLUGIN_SLUG);
+    add_submenu_page(PLUGIN_SLUG, 'All Members', 'Members', 'manage_options', 'csm-members', 'show_members');
     add_submenu_page(PLUGIN_SLUG, 'Add Member', 'Add Member', 'manage_options', 'csm-member-add', 'show_member_add');
     add_submenu_page(PLUGIN_SLUG, 'Profile', 'Profile', 'manage_options', 'csm-member-profile', 'show_member_profile');
     add_submenu_page(PLUGIN_SLUG, 'Membership Overview', 'Membership Overview', 'manage_options', 'csm-member-memberships', 'show_member_memberships');

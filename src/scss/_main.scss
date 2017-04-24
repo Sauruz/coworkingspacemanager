@@ -89,3 +89,31 @@ body {
     max-height: 100px;
     margin-bottom: 20px;
 }
+
+.dashboard-circle {
+    min-width: 100px;
+    height: 100px;
+    background: $gray-light;
+    border-radius: 100px;
+    display: inline-block;
+    line-height: 100px;
+    font-size: 30px;
+    color: #fff;
+}
+
+
+.bg-success {
+    background: $brand-success;
+}
+
+.bg-info {
+    background: $brand-info;
+}
+
+.bg-danger {
+    background: $brand-danger;
+}
+
+.bg-warning {
+    background: $brand-warning;
+}

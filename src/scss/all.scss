@@ -1,31 +1,31 @@
 $csm-primary: #F23B3B;
 
-@import "bootstrap"; 
+@import "bootstrap";
 
 .bootstrap-wrapper {
 
-    //########################################################
-    // BOWER LIBS
-    //########################################################
+  //########################################################
+  // BOWER LIBS
+  //########################################################
 
-    @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-    @import "bower_components/font-awesome/scss/font-awesome.scss";
-    @import "bower_components/fullcalendar/dist/fullcalendar"; 
-    @import "main";  
+  @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+  @import "bower_components/font-awesome/scss/font-awesome.scss";
+  @import "bower_components/fullcalendar/dist/fullcalendar";
+  @import "main";
 
+  //########################################################
+  // FONTS
+  //########################################################
 
-    //########################################################
-    // FONTS
-    //########################################################
+  /*@import "fonts/flaticon";
+  @import "fonts/icomoon"; */
 
-    /*@import "fonts/flaticon";
-    @import "fonts/icomoon"; */
-
-    //########################################################
-    // ASSETS
-    //########################################################
-    @import "assets/alerts";      
+  //########################################################
+  // ASSETS
+  //########################################################
+  @import "assets/alerts";
+  @import "assets/circle";
 }
 
- @import "outside-wrapper"; 
- @import "frontend"; 
+@import "outside-wrapper";
+@import "frontend";

@@ -20,7 +20,7 @@ class CsmMember {
      * @return type
      */
     public function count() {
-        return $this->db->get_var("SELECT COUNT(*) FROM " . $this->db->prefix . "csm_members");
+        return $this->db->get_var("SELECT COUNT(*) FROM " . $this->db->prefix . "users");
     }
 
     /**
@@ -35,7 +35,7 @@ class CsmMember {
 
         $extra_where = "";
         if ($search) {
-            $extra_where = "WHERE " . $this->db->prefix . "csm_members.first_name LIKE '%" . $search . "%' OR " . $this->db->prefix . "csm_members.last_name LIKE '%" . $search . "%' ";
+            $extra_where = "WHERE " . $this->db->prefix . "users.display_name LIKE '%" . $search . "%' ";
         }
 
         $query = "SELECT "
