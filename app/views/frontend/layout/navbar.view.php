@@ -16,8 +16,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="<?php activeSlug($currentSlug, "member");?>"><a href="?csm=member"><?php echo $member['first_name'] . ' ' . $member['last_name']; ?></a></li>
-                <li class="<?php activeSlug($currentSlug, "memberships");?>"><a href="?csm=memberships">Membership Plans</a></li>
+                <li class="<?php activeSlug($currentSlug, "member");?>"><a href="<?php echo csm_permalink_url('member'); ?>"><?php echo show_a_name($member); ?></a></li>
+                <li class="<?php activeSlug($currentSlug, "memberships");?>"><a href="<?php echo csm_permalink_url('memberships');?>">Membership Plans</a></li>
             </ul>
 
             <form class="navbar-form navbar-right" action="" method="POST">

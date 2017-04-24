@@ -6,7 +6,7 @@ $data = $CsmSettings->all();
 $error = false;
 $errorStr = "";
 
-$currentSlug = "memberships";
+$currentSlug = "membership-add";
 
 /**
  * Check if user is logged in. If user is logged in redirect to user page

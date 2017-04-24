@@ -67,6 +67,7 @@ define('CSM_WEBSITE', get_option('csm-website'));
 define('CSM_CURRENCY', get_option('csm-currency'));
 define('CSM_CURRENCY_SYMBOL', html_entity_decode($currency_symbols[CSM_CURRENCY]));
 
+include(CSM_PLUGIN_PATH . 'routing.php');
 
 //Functions
 include(CSM_PLUGIN_PATH . 'app/assets/functions.php');
@@ -107,7 +108,6 @@ include(CSM_PLUGIN_PATH . 'app/pages/workplace-add.php');
 include(CSM_PLUGIN_PATH . 'app/pages/workplace-edit.php');
 include(CSM_PLUGIN_PATH . 'app/pages/calendar.php');
 
-include(CSM_PLUGIN_PATH . 'routing.php');
 
 //Ajax
 include(CSM_PLUGIN_PATH . 'app/assets/ajax.php');

@@ -176,4 +176,17 @@ function column_plan($item) {
     }
 }
 
+/**
+ * Get CSM url
+ * @param $val
+ * @return string
+ */
+function csm_permalink_url($val) {
+    if ( get_option('permalink_structure')) { // check if the blog has a permalink structure
+        return sprintf("%s/csm/%s",home_url(),$val);
+    } else {
+        return sprintf("%s/index.php?csm=%s",home_url(),$val);
+    }
+}
+
 ?>

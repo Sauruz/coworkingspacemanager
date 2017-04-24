@@ -251,6 +251,11 @@ function default_options() {
         update_option('csm-website', get_option('siteurl'));
         update_option('csm-currency', 'USD');
     }
+
+    if (class_exists('csm_permalink')) {
+        $csm_permalink= new csm_permalink();
+        $csm_permalink->csm_permalink_flush_rewrite_rules();
+    }
 }
 
 ?>
