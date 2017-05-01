@@ -74,7 +74,8 @@ class CsmSettings {
             'csm_country' => stripslashes(get_option('csm-country')),
             'csm_email' => stripslashes(get_option('csm-email')),
             'csm_website' => stripslashes(get_option('csm-website')),
-            'csm_currency' => stripslashes(get_option('csm-currency'))
+            'csm_currency' => stripslashes(get_option('csm-currency')),
+            'csm_frontend_membership' => filter_var(stripslashes(get_option('csm-frontend-membership')), FILTER_VALIDATE_BOOLEAN)
         );
         return $settings;
     }
@@ -102,6 +103,7 @@ class CsmSettings {
         update_option('csm-email', $data['csm_email']);
         update_option('csm-website', $data['csm_website']);
         update_option('csm-currency', $data['csm_currency']);
+        update_option('csm-frontend-membership', $data['csm_frontend_membership']);
     }
 
 }

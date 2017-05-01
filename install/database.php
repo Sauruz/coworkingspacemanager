@@ -250,6 +250,7 @@ function default_options() {
         update_option('csm-email', '');
         update_option('csm-website', get_option('siteurl'));
         update_option('csm-currency', 'USD');
+        update_option('csm-frontend-membership', true);
     }
 
     if (class_exists('csm_permalink')) {

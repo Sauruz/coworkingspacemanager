@@ -11,7 +11,6 @@ function show_settings() {
     $CsmSettings = new CsmSettings();
     $data = $CsmSettings->all();
 
-
     include(CSM_PLUGIN_PATH . '/app/assets/currency-symbols.php');
 
     //Edit the settings
@@ -44,7 +43,7 @@ function show_settings() {
         try {
             $CsmSettings->update($data);
             csm_update('Settings updated');
-            $data['csm_logo'] = stripslashes(get_option('csm-logo'));
+            $data = $CsmSettings->all();
         } catch (\Exception $e) {
             csm_error($e->getMessage());
         }

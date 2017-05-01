@@ -103,19 +103,25 @@ if (!class_exists('csm_permalink')) {
             if (isset($wp_query->query_vars['csm'])) { // same as the first custom variable in csm_permalink_query_vars( $query_vars )
                 // add your code here, code below is for this demo
 
+                $CsmSettings = new CsmSettings();
+                $csmSettings = $CsmSettings->all();
+
                 $page_value = $wp_query->query_vars['csm'];
 
                 if ($page_value && $page_value == "login") {
                     include(plugin_dir_path(__FILE__).'app/frontend/login.php');
                 }
-                if ($page_value && $page_value == "member") {
+                else if ($page_value && $page_value == "member") {
                     include(plugin_dir_path(__FILE__).'app/frontend/member.php');
                 }
-                if ($page_value && $page_value == "memberships") {
+                else if ($page_value && $page_value == "memberships") {
                     include(plugin_dir_path(__FILE__).'app/frontend/memberships.php');
                 }
-                if ($page_value && $page_value == "membership-add") {
+                else if ($page_value && $page_value == "membership-add" && $csmSettings['csm_frontend_membership']) {
                     include(plugin_dir_path(__FILE__).'app/frontend/membership-add.php');
+                }
+                else {
+                    wp_redirect('?csm=login');
                 }
 
 //                printf("<pre>%s</pre>",print_r($wp_query->query_vars,true));

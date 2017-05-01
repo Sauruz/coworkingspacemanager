@@ -73,6 +73,15 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="csm_frontend_membership">Users can add their own membership in the members area</label><br>
+                                    <select name="csm_frontend_membership" id="csm_frontend_membership" class="form-control">
+                                        <option value="true" <?php echo $data['csm_frontend_membership'] ? "selected" : ""; ?>>Yes</option>
+                                        <option value="false" <?php echo !$data['csm_frontend_membership'] ? "selected" : ""; ?>>No</option>
+                                    </select><br>
+                                </div>
+                            </div>
 
                             <p class="submit">
                                 <input type="submit" id="createusersub" class="btn btn-success btn-block" value="Update settings">
