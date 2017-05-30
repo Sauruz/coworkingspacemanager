@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>Coworking Space Manager Documentation</title>
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+    <style type="text/css" media="screen">
+        p, table, hr, .box {
+            margin-bottom: 25px;
+        }
+
+        .box p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="container">
+
+    <h3 class="center alt">&ldquo;Coworking Space Manager&rdquo; Documentation by &ldquo;Guido Rus&rdquo; v1.0</h3>
+
+    <hr>
+
+    <h1 class="center">&ldquo;Coworking Space Manager&rdquo;</h1>
+
+    <div class="borderTop">
+        <div class="span-6 colborder info prepend-1">
+            <p class="prepend-top">
+                <strong>
+                    Created: 01 may 2017<br>
+                    By: Guido Rus<br>
+                    Email: <a href="mailto:info@de-rus.nl">info@de-rus.nl</a>
+                </strong>
+            </p>
+        </div><!-- end div .span-6 -->
+
+        <div class="span-12 last">
+            <p class="prepend-top append-0">Thank you for purchasing Coworking Space Manager. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a
+                    href="http://themeforest.net/user/sauruz">here</a>. Thanks so much!</p>
+        </div>
+    </div><!-- end div .borderTop -->
+
+    <hr>
+
+    <h2 id="toc" class="alt">Table of Contents</h2>
+    <ol class="alpha">
+        <li><a href="#whatsin">What’s in here and what’s not?</a></li>
+        <li><a href="#install">Installation</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#allmembers">All members</a></li>
+        <li><a href="#membersdetails">Members details</a></li>
+        <li><a href="#allmemberships">All memberships</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#settingsd">Settings</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#workplaces">Workplaces</a></li>
+        <li><a href="#membersarea">Membership Area</a></li>
+    </ol>
+
+    <hr>
+    <h3 id="whatsin"><strong>A) What’s in here and what’s not?</strong> - <a href="#toc">top</a></h3>
+    <p>Coworking Space Manager (CSM) offers a tool to manage you coworking space. You can keep track of members, workplaces and plans. All the functionalities are listed here below.
+        <br><br>
+        Currenly there is no integration with a payment provider. The plan is to include this in further releases, depending on the wishes of the users of this plugin. Also, new members can’t sign up, an admin have to add them in the plugin. This is done for security reasons and to keep the admin in control. Again, this is open for discussion. If you really need users to sign up without admin interference, send me a message.
+        Multilanguage is not supported yet, but might be in the next release.
+    </p>
+
+
+    <hr>
+    <h3 id="install"><strong>B) Installation</strong> - <a href="#toc">top</a></h3>
+    <p>Log in to your WP admin area and go to Plugins > Add New. Browse to the plugin archive. Now select the coworkingspacemanager.zip you can find in your package. Then click `Install Now` and the plugin will be installed shortly.</p>
+
+    <hr>
+    <h3 id="dashboard"><strong>C) Dashboard</strong> - <a href="#toc">top</a></h3>
+    <p>After installation you’ll see Coworking Space in the left menu in the WP admin area. If you click on the button you’ll go to the admin area. This should look similar like this:</p>
+    <img src="assets/images/dashboard.jpg">
+    <p>Here you can find all statistics of your coworking space. Also, you can find the url to the members area in the blue bar. This is the area where members can login and will be explained <a href="#membersarea">here</a>.</p>
+
+    <hr>
+    <h3 id="allmembers"><strong>D) All members</strong> - <a href="#toc">top</a></h3>
+    <p>If you click on `All members` in the admin menu, you’ll find a overview with all the registered members. CSM members are basically WP members of the type csm-members. Admins that can login to your WP member area, can make a reservation for a workplace as well. You’ll notice that admins will have a green (admin) behind their names. CSM members can be deleted, admins can not. If you would like to delete an admin you can do it the same way as usual under `Users` in the admin menu.</p>
+    <img src="assets/images/allmembers.jpg">
+    <p>`Active` members are the members that are currently in the coworking space. `Upcoming` members are members that have made a reservervation for the future and `Inactive` members have no upcoming or active memberships.</p>
+
+    <hr>
+    <h3 id="membersdetails"><strong>E) Members details</strong> - <a href="#toc">top</a></h3>
+    <p>If you click in `All members` on a name, you’ll go to the details of a member. Here you can see the membership history, register as payment, add a new membership for the user of edit his/her credentials.</p>
+    <img src="assets/images/memberdetail.jpg">
+
+    <hr>
+    <h3 id="allmemberships"><strong>F) All memberships</strong> - <a href="#toc">top</a></h3>
+    <p>Here you can see al the memberships of all members. You can add a membership for a member on this page as well. This is also possible if you go to a member detail page.</p>
+    <img src="assets/images/allmemberships.jpg">
+
+    <hr>
+    <h3 id="calendar"><strong>G) Calendar</strong> - <a href="#toc">top</a></h3>
+    <p>In the calendar you can see in a, well, calendar who is in the coworking space and when.</p>
+    <img src="assets/images/calendar.jpg">
+
+    <hr>
+    <h3 id="settingsd"><strong>H) Settings</strong> - <a href="#toc">top</a></h3>
+    <p>Edit your settings for your coworking space. If you upload a logo, this will the logo members will see if they log in to the coworking space backend.</p>
+    <img src="assets/images/settings.jpg">
+
+    <hr>
+    <h3 id="plans"><strong>I) Plans</strong> - <a href="#toc">top</a></h3>
+    <p>Plans are the prices and timespan for a `workplace`. You always need at least 1 workplace to add a plan. So let’s assume you’ve got a couple of hot desks, you can rent them out for a day, a week or whatever you’d like.</p>
+    <img src="assets/images/plans.jpg">
+
+    <hr>
+    <h3 id="workplaces"><strong>J) Workplaces</strong> - <a href="#toc">top</a></h3>
+    <p>At workplaces you can add your desk types. You can add for example hot desks, private offices or private desks. You can also specify the capacity.</p>
+    <img src="assets/images/workplaces.jpg">
+
+    <hr>
+    <h3 id="membersarea"><strong>K) Members Area</strong> - <a href="#toc">top</a></h3>
+    <p>If you look at your CSM Dashboard, you can see a blue box that contains an url. This is the link where members of your coworking space can log in. This url depends on your permalink WP settings. Here a member can login and edit his/her settings. If you have enabled ‘Users can add their own membership in the members area` in `Settings`, users can add their own membership in the members area.
+    </p>
+    <img src="assets/images/membersarea.jpg">
+
+    <hr>
+    <p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question
+        relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p>
+
+    <p class="append-bottom alt large"><strong>Guido Rus</strong></p>
+    <p><a href="#toc">Go To Table of Contents</a></p>
+
+    <hr class="space">
+</div><!-- end div .container -->
+</body>
+</html>

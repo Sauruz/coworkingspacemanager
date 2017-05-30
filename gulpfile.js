@@ -190,15 +190,16 @@ gulp.task('default', function() {
     runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images']);    
 });
 
+/**
+ * ######################################################################
+ * MAKE DISTRO
+ * ######################################################################
+ */
+
 gulp.task('distro', function() {
     runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip'], ['clean_distro']);    
 });
 
-/**
- * ######################################################################
- * COPY DISTRO
- * ######################################################################
- */
 gulp.task('make_distro', function () {
     return gulp.src([
         'app/**/*',
