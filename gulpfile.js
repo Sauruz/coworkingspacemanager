@@ -54,7 +54,12 @@ gulp.task('clean', function () {
 });
 
 gulp.task('clean_distro', function () {
-    return gulp.src(['_coworkingspacemanager'], {read: false})
+    return gulp.src(['coworkingspacemanagere-codecanyon-pack/_coworkingspacemanager'], {read: false})
+        .pipe(clean());
+});
+
+gulp.task('clean_codecayon_package', function () {
+    return gulp.src(['coworkingspacemanagere-codecanyon-pack'], {read: false})
         .pipe(clean());
 });
 
@@ -78,6 +83,11 @@ gulp.task('calendar-locales', function() {
 gulp.task('copy-images', function() {
     gulp.src('./src/img/**/*')
     .pipe(gulp.dest('./dist/img'));
+});
+
+gulp.task('copy-documentation', function() {
+    gulp.src('./codecanyon-files/documentation/**/*')
+        .pipe(gulp.dest('./coworkingspacemanagere-codecanyon-pack/documentation'));
 });
 
 /**
@@ -197,7 +207,7 @@ gulp.task('default', function() {
  */
 
 gulp.task('distro', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip'], ['clean_distro']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip-plugin'], ['clean_distro'], ['copy-documentation'], ['zip-codecayon-package'], ['clean_codecayon_package']);
 });
 
 gulp.task('make_distro', function () {
@@ -209,7 +219,7 @@ gulp.task('make_distro', function () {
         'coworkingspacemanager.php',
         'routing.php'
     ], {base:"."})
-            .pipe(gulp.dest('_coworkingspacemanager/'));
+            .pipe(gulp.dest('coworkingspacemanagere-codecanyon-pack/_coworkingspacemanager/'));
 });
 
 /**
@@ -217,8 +227,14 @@ gulp.task('make_distro', function () {
  * ZIP PLUGIN
  * ######################################################################
  */
-gulp.task('zip', function () {
-    return gulp.src('_coworkingspacemanager/**/*')
-        .pipe(zip('coworkingspacemanager.zip'))
+gulp.task('zip-plugin', function () {
+    return gulp.src('coworkingspacemanagere-codecanyon-pack/_coworkingspacemanager/**/*')
+        .pipe(zip('coworkingspacemanagere-codecanyon-pack/coworkingspacemanager.zip'))
+        .pipe(gulp.dest('.'));
+});
+
+gulp.task('zip-codecayon-package', function () {
+    return gulp.src('coworkingspacemanagere-codecanyon-pack/**/*')
+        .pipe(zip('coworkingspacemanagere-codecanyon-pack.zip'))
         .pipe(gulp.dest('.'));
 });
