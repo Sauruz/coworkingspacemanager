@@ -54,12 +54,12 @@ gulp.task('clean', function () {
 });
 
 gulp.task('clean_distro', function () {
-    return gulp.src(['coworkingspacemanager-codecanyon-pack/_coworkingspacemanager'], {read: false})
+    return gulp.src(['csm-codecanyon-pack/_coworkingspacemanager'], {read: false})
         .pipe(clean());
 });
 
 gulp.task('clean_codecayon_package', function () {
-    return gulp.src(['coworkingspacemanager-codecanyon-pack'], {read: false})
+    return gulp.src(['csm-codecanyon-pack'], {read: false})
         .pipe(clean());
 });
 
@@ -87,7 +87,7 @@ gulp.task('copy-images', function() {
 
 gulp.task('copy-documentation', function() {
     gulp.src('./codecanyon-files/documentation/**/*')
-        .pipe(gulp.dest('./coworkingspacemanager-codecanyon-pack/documentation'));
+        .pipe(gulp.dest('./csm-codecanyon-pack/documentation'));
 });
 
 /**
@@ -109,7 +109,7 @@ gulp.task('css', function () {
 
     return merge(scssStream, cssStream)
             .pipe(concat('styles.css'))
-            
+
             //only uglify if gulp is ran with '--type production'
             .pipe(gutil.env.type === 'production' ? minify() : gutil.noop())
             .pipe(gulp.dest('dist/css'))
@@ -147,7 +147,7 @@ gulp.task('js', function () {
     ]))
             .pipe(plumber({errorHandler: onError}))
             .pipe(concat('app.js'))
-    
+
             //only uglify if gulp is ran with '--type production'
             .pipe(gutil.env.type === 'production' ? stripDebug() : gutil.noop())
             .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
@@ -197,7 +197,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images']);    
+    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images']);
 });
 
 /**
@@ -207,7 +207,7 @@ gulp.task('default', function() {
  */
 
 gulp.task('distro', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip-plugin'], ['clean_distro'], ['copy-documentation'], ['zip-codecayon-package'], ['clean_codecayon_package']);
+    runSequence('clean', ['copy-documentation'], ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip-plugin'], ['clean_distro'], ['zip-codecayon-package'], ['clean_codecayon_package']);
 });
 
 gulp.task('make_distro', function () {
@@ -219,7 +219,7 @@ gulp.task('make_distro', function () {
         'coworkingspacemanager.php',
         'routing.php'
     ], {base:"."})
-            .pipe(gulp.dest('coworkingspacemanager-codecanyon-pack/_coworkingspacemanager/'));
+            .pipe(gulp.dest('csm-codecanyon-pack/_coworkingspacemanager/'));
 });
 
 /**
@@ -228,13 +228,13 @@ gulp.task('make_distro', function () {
  * ######################################################################
  */
 gulp.task('zip-plugin', function () {
-    return gulp.src('coworkingspacemanager-codecanyon-pack/_coworkingspacemanager/**/*')
-        .pipe(zip('coworkingspacemanager-codecanyon-pack/coworkingspacemanager.zip'))
+    return gulp.src('csm-codecanyon-pack/_coworkingspacemanager/**/*')
+        .pipe(zip('csm-codecanyon-pack/coworkingspacemanager.zip'))
         .pipe(gulp.dest('.'));
 });
 
 gulp.task('zip-codecayon-package', function () {
-    return gulp.src('coworkingspacemanager-codecanyon-pack/**/*')
-        .pipe(zip('coworkingspacemanager-codecanyon-pack.zip'))
+    return gulp.src('csm-codecanyon-pack/**/*')
+        .pipe(zip('csm-codecanyon-pack.zip'))
         .pipe(gulp.dest('.'));
 });

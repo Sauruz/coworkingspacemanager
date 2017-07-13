@@ -12,11 +12,14 @@
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
+$csm_version = '102';
+
 
 
 global $csm_db_version;
 $csm_db_version = '1.0';
 define('PLUGIN_SLUG', 'coworking-space-manager');
+define('CSM_VERSION', $csm_version);
 define('CMS_LOCALE', str_replace('_', '-', strtolower(get_locale())));
 define('CMS_SIMPLE_LOCALE', (explode('-', CMS_LOCALE)[0]));
 define('CSM_PLUGIN_PATH', plugin_dir_path(__FILE__));
@@ -36,7 +39,7 @@ if (!class_exists('WP_List_Table_Custom')) {
 function csm_style() {
     wp_register_style('csm_style', plugins_url('dist/css/styles.css', __FILE__));
     wp_enqueue_style('csm_style');
-    wp_register_script('csm_js', plugins_url('dist/js/app.js', __FILE__));
+    wp_register_script('csm_js', plugins_url('dist/js/app.js?v=' . CSM_VERSION, __FILE__));
     wp_enqueue_script('csm_js');
     wp_register_script('i18n', plugins_url('dist/js/i18n/angular-locale_' . CMS_LOCALE . '.js', __FILE__));
     wp_enqueue_script('i18n');
