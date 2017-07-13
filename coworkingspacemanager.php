@@ -37,7 +37,7 @@ if (!class_exists('WP_List_Table_Custom')) {
 
 //Styles & javascript
 function csm_style() {
-    wp_register_style('csm_style', plugins_url('dist/css/styles.css', __FILE__));
+    wp_register_style('csm_style', plugins_url('dist/css/styles.css?v=' . CSM_VERSION, __FILE__));
     wp_enqueue_style('csm_style');
     wp_register_script('csm_js', plugins_url('dist/js/app.js?v=' . CSM_VERSION, __FILE__));
     wp_enqueue_script('csm_js');
@@ -47,6 +47,8 @@ function csm_style() {
         wp_register_script('calendar-locale', plugins_url('dist/js/calendar-locale/' . CMS_SIMPLE_LOCALE . '.js', __FILE__));
         wp_enqueue_script('calendar-locale');
     }
+    wp_register_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', array(), '4.2.0' );
+    wp_enqueue_style( 'fontawesome' );
 }
 
 add_action('admin_init', 'csm_style');
