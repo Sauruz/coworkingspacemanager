@@ -237,9 +237,6 @@ gulp.task('distro', function () {
             'zip-plugin'
         ],
         [
-            'distro_version'
-        ],
-        [
             'clean_distro'
         ],
         [
@@ -265,30 +262,19 @@ gulp.task('make_distro', function () {
 
 /**
  * ######################################################################
- * SET DISTRO VERSION
- * ######################################################################
- */
-
-gulp.task('distro_version', function () {
-    var newFileName = getLatestVersionName();
-    return gulp.src('csm-codecanyon-pack/' + newFileName)
-        .pipe(gulp.dest('releases/'));
-});
-
-/**
- * ######################################################################
  * ZIP PLUGIN
  * ######################################################################
  */
 gulp.task('zip-plugin', function () {
-    var newFileName = getLatestVersionName();
     return gulp.src('csm-codecanyon-pack/_coworkingspacemanager/**/*')
-        .pipe(zip('csm-codecanyon-pack/' + newFileName))
+        .pipe(zip('csm-codecanyon-pack/coworkingspacemanager.zip'))
         .pipe(gulp.dest('.'));
 });
 
 gulp.task('zip-codecayon-package', function () {
+    var newFileName = getLatestVersionName();
+
     return gulp.src('csm-codecanyon-pack/**/*')
-        .pipe(zip('csm-codecanyon-pack.zip'))
+        .pipe(zip('releases/' + newFileName))
         .pipe(gulp.dest('.'));
 });
