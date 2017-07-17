@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Settings</strong></h1>
+    <h1 class="wp-heading-inline"><strong><?php echo __('Settings', 'csm');?></strong></h1>
 
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/settings.tabbar.php'; ?>
@@ -16,52 +16,52 @@
                                     <?php if($data['csm_logo']) { ?>
                                         <img src="<?php echo $data['csm_logo']; ?>" class="coworking-space-logo">
                                     <?php } else { ?>
-                                    <div class="form-control-static"><i><br>No logo uploaded yet</i></div>
+                                    <div class="form-control-static"><i><br><?php echo __('No logo uploaded yet', 'csm');?></i></div>
                                     <?php } ?>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="csm_logo">Logo Coworking Space</label><br>
-                                    <input name="csm_logo" placeholder="Logo Coworking Space" type="file" id="csm_logo" value="<?php form_value($data, 'csm_logo'); ?>"><br>
+                                    <label for="csm_logo"><?php echo __('Logo Coworking Space', 'csm');?></label><br>
+                                    <input name="csm_logo" placeholder="<?php echo __('Logo Coworking Space', 'csm');?>" type="file" id="csm_logo" value="<?php form_value($data, 'csm_logo'); ?>"><br>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="csm_name">Name Coworking Space <span class="description">(required)</span></label><br>
-                                    <input name="csm_name" class="form-control" placeholder="Name Coworking Space" type="text" id="csm_name" value="<?php form_value($data, 'csm_name'); ?>"><br>
+                                    <label for="csm_name"><?php echo __('Name Coworking Space', 'csm');?> <span class="description">(required)</span></label><br>
+                                    <input name="csm_name" class="form-control" placeholder="<?php echo __('Name Coworking Space', 'csm');?>" type="text" id="csm_name" value="<?php form_value($data, 'csm_name'); ?>"><br>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="csm_address">Address <span class="description">(required)</span></label><br>
-                                    <input name="csm_address" class="form-control" placeholder="Address"  type="text" id="csm_address" value="<?php form_value($data, 'csm_address'); ?>"><br>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="csm_zipcode">Zipcode</label><br>
-                                    <input name="csm_zipcode" class="form-control" placeholder="Zipcode" type="text" id="csm_zipcode" value="<?php form_value($data, 'csm_zipcode'); ?>"><br>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="csm_locality">City, State/Province <span class="description">(required)</span></label><br>
-                                    <input name="csm_locality" class="form-control" placeholder="City, State/Province"  type="text" id="csm_locality" value="<?php form_value($data, 'csm_locality'); ?>"><br>
+                                    <label for="csm_address"><?php echo __('Address', 'csm');?> <span class="description">(required)</span></label><br>
+                                    <input name="csm_address" class="form-control" placeholder="<?php echo __('Address', 'csm');?>"  type="text" id="csm_address" value="<?php form_value($data, 'csm_address'); ?>"><br>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="csm_country">Country</label><br>
-                                    <input name="csm_country" class="form-control" placeholder="Country" type="text" id="csm_country" value="<?php form_value($data, 'csm_country'); ?>"><br>
+                                    <label for="csm_zipcode"><?php echo __('Zipcode', 'csm');?></label><br>
+                                    <input name="csm_zipcode" class="form-control" placeholder="<?php echo __('Zipcode', 'csm');?>" type="text" id="csm_zipcode" value="<?php form_value($data, 'csm_zipcode'); ?>"><br>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="csm_email">Email <span class="description">(required)</span></label><br>
-                                    <input name="csm_email" class="form-control" placeholder="Email" type="text" id="csm_email" value="<?php form_value($data, 'csm_email'); ?>"><br>
+                                    <label for="csm_locality"><?php echo __('City, State/Province', 'csm');?> <span class="description">(required)</span></label><br>
+                                    <input name="csm_locality" class="form-control" placeholder="<?php echo __('City, State/Province', 'csm');?>"  type="text" id="csm_locality" value="<?php form_value($data, 'csm_locality'); ?>"><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="csm_country"><?php echo __('Country', 'csm');?></label><br>
+                                    <input name="csm_country" class="form-control" placeholder="<?php echo __('Country', 'csm');?>" type="text" id="csm_country" value="<?php form_value($data, 'csm_country'); ?>"><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="csm_email"><?php echo __('Email', 'csm');?> <span class="description">(required)</span></label><br>
+                                    <input name="csm_email" class="form-control" placeholder="<?php echo __('Email', 'csm');?>" type="text" id="csm_email" value="<?php form_value($data, 'csm_email'); ?>"><br>
                                 </div>
                             </div>
                             <div class="row">
                                  <div class="col-md-6">
-                                    <label for="csm_website">Website</label><br>
-                                    <input name="csm_website" class="form-control" placeholder="Website" type="text" id="csm_website" value="<?php form_value($data, 'csm_website'); ?>"><br>
+                                    <label for="csm_website"><?php echo __('Website', 'csm');?></label><br>
+                                    <input name="csm_website" class="form-control" placeholder="<?php echo __('Website', 'csm');?>" type="text" id="csm_website" value="<?php form_value($data, 'csm_website'); ?>"><br>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="csm_currency">Currency</label><br>
+                                    <label for="csm_currency"><?php echo __('Currency', 'csm');?></label><br>
                                     <select name="csm_currency" id="csm_currency" class="form-control">
                                         <?php
                                         foreach ($currency_symbols as $k => $symbol) {
@@ -75,16 +75,16 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="csm_frontend_membership">Users can add their own membership in the members area</label><br>
+                                    <label for="csm_frontend_membership"><?php echo __('Users can add their own membership in the members area', 'csm');?></label><br>
                                     <select name="csm_frontend_membership" id="csm_frontend_membership" class="form-control">
-                                        <option value="true" <?php echo $data['csm_frontend_membership'] ? "selected" : ""; ?>>Yes</option>
-                                        <option value="false" <?php echo !$data['csm_frontend_membership'] ? "selected" : ""; ?>>No</option>
+                                        <option value="true" <?php echo $data['csm_frontend_membership'] ? "selected" : ""; ?>><?php echo __('Yes', 'csm');?></option>
+                                        <option value="false" <?php echo !$data['csm_frontend_membership'] ? "selected" : ""; ?>><?php echo __('No', 'csm');?></option>
                                     </select><br>
                                 </div>
                             </div>
 
                             <p class="submit">
-                                <input type="submit" id="createusersub" class="btn btn-success btn-block" value="Update settings">
+                                <input type="submit" id="createusersub" class="btn btn-success btn-block" value="<?php echo __('Update settings', 'csm');?>">
                             </p>
                         </form>
                     </div>

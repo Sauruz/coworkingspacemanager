@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Memberships</strong></h1>
+    <h1 class="wp-heading-inline"><strong><?php echo __('Memberships', 'csm');?></strong></h1>
 
     <div class="bootstrap-wrapper">
 

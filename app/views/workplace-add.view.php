@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Add Workplace</strong></h1>
+    <h1 class="wp-heading-inline"><strong><?php echo __('Add Workplace', 'csm');?></strong></h1>
 
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/workplaces.tabbar.php'; ?>
@@ -13,18 +13,18 @@
                                 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label for="name">Name of the workplace <span class="description">(required)</span></label><br>
-                                    <input name="name" class="form-control" placeholder="eg. Hot Desk, Private Office, Shed, etc." type="text" id="name" value="<?php form_value($data, 'name'); ?>"><br>
+                                    <label for="name"><?php echo __('Name of the workplace', 'csm');?> <span class="description">(required)</span></label><br>
+                                    <input name="name" class="form-control" placeholder="<?php echo __('eg. Hot Desk, Private Office, Shed, etc.', 'csm');?>" type="text" id="name" value="<?php form_value($data, 'name'); ?>"><br>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="capacity">Capacity <span class="description">(required)</span></label><br>
-                                    <input name="capacity" class="form-control" placeholder="Capacity" type="number" min="1" id="capacity" value="<?php form_value($data, 'capacity'); ?>"><br>
+                                    <label for="capacity"><?php echo __('Capacity', 'csm');?> <span class="description">(required)</span></label><br>
+                                    <input name="capacity" class="form-control" placeholder="<?php echo __('Capacity', 'csm');?>" type="number" min="1" id="capacity" value="<?php form_value($data, 'capacity'); ?>"><br>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="color">Calendar background <span class="description">(required)</span></label><br>
+                                    <label for="color"><?php echo __('Calendar background', 'csm');?> <span class="description">(required)</span></label><br>
                                      <select name="color" id="color" class="form-control">
                                         <?php
                                         foreach ($colors as $k => $v) {
@@ -38,7 +38,7 @@
 
 
                             <p class="submit">
-                                <input type="submit"class="btn btn-success btn-block" value="Add Workplace">
+                                <input type="submit"class="btn btn-success btn-block" value="<?php echo __('Add Workplace', 'csm');?>">
                             </p>
                         </form>
                     </div>

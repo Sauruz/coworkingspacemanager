@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Add Member</strong></h1>
+    <h1 class="wp-heading-inline"><strong><?php echo __('Add Member', 'csm');?></strong></h1>
 
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/members.tabbar.php'; ?>

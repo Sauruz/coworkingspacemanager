@@ -11,27 +11,27 @@
                 <div class="modal-body" id="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                         <label>Membership Nr.</label><br>
+                         <label><?php echo __('Membership Nr.', 'csm');?></label><br>
                          <span class="default-control" ng-bind="Ctrl.membership.identifier"></span><br><br>
                         </div>
                         <div class="col-md-6">
-                         <label>Price</label><br>
+                         <label><?php echo __('Price', 'csm');?></label><br>
                          <span class="default-control" ng-bind="Ctrl.membership.price | currency : '<?php echo CSM_CURRENCY_SYMBOL;?>'"></span><br><br>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                         <label>Membership starts at</label><br>
+                         <label><?php echo __('Membership starts at', 'csm');?></label><br>
                          <span class="default-control" ng-bind="Ctrl.membership.start | date : 'mediumDate'"></span><br><br>
                         </div>
                         <div class="col-md-6">
-                         <label>Membership ends at</label><br>
+                         <label><?php echo __('Membership ends at', 'csm');?></label><br>
                          <span class="default-control" ng-bind="Ctrl.membership.end | date : 'mediumDate'"></span><br><br>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                         <label>Membership paid at</label><br>
+                         <label><?php echo __('Membership paid at', 'csm');?></label><br>
                          <input id="payment_at" name="payment_at" type="text" class="form-control">
                         </div>
                         <div class="col-md-6">

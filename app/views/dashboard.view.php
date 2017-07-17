@@ -4,12 +4,14 @@
 
         <div class="row">
             <div class="col-sm-12">
-            <h4><span class="label label-info">Members can login at <a target="_blank" href="<?php echo csm_permalink_url('login');?>"><?php echo csm_permalink_url('login');?></a></span>
+            <h4><span class="label label-info">
+                    <?php echo __('Members can login at ', 'csm');?>
+                    <a target="_blank" href="<?php echo csm_permalink_url('login');?>"><?php echo csm_permalink_url('login');?></a></span>
             </h4>
             </div>
             </div>
 
-        <h3>Capacity stats</h3>
+        <h3><?php echo __('Capacity stats', 'csm');?></h3>
         <div class="row">
             <?php foreach($capacity as $k => $v) { ?>
                 <div class="col-md-3">
@@ -32,13 +34,13 @@
         </div>
 
 
-        <h3>Member stats</h3>
+        <h3><?php echo __('Member stats', 'csm');?></h3>
         <div class="row">
             <div class="col-md-3">
                 <div class="panel">
                     <div class="panel-body text-center">
                         <div class="dashboard-circle bg-success"><?php echo $CsmDashboard->countActiveUsers(); ?></div>
-                        <h4>Active members</h4>
+                        <h4><?php echo __('Active members', 'csm');?></h4>
                     </div>
                 </div>
             </div>
@@ -47,7 +49,7 @@
                 <div class="panel">
                     <div class="panel-body text-center">
                         <div class="dashboard-circle"><?php echo $CsmDashboard->countUsers(); ?></div>
-                        <h4>Total members</h4>
+                        <h4><?php echo __('Total members', 'csm');?></h4>
                     </div>
                 </div>
             </div>
@@ -56,7 +58,7 @@
                 <div class="panel">
                     <div class="panel-body text-center">
                         <div class="dashboard-circle bg-warning"><?php echo $CsmDashboard->countPaymentsToReceive(); ?></div>
-                        <h4>Payments to receive</h4>
+                        <h4><?php echo __('Payments to receive', 'csm');?></h4>
                     </div>
                 </div>
             </div>

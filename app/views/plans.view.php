@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><strong>Plans</strong></h1>
+    <h1 class="wp-heading-inline"><strong><?php echo __('Plans', 'csm');?></strong></h1>
 
     <div class="bootstrap-wrapper">
         <?php include CSM_PLUGIN_PATH . 'app/views/tabbar/plans.tabbar.php'; ?>
