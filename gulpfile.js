@@ -21,11 +21,12 @@ var clean = require('gulp-clean');
 var htmlmin = require('gulp-htmlmin');
 var stripDebug = require('gulp-strip-debug');
 var zip = require('gulp-zip');
+var fs = require("fs");
 
 
 var paths = {
     scripts: 'src/js/**/*.js',
-    sass: 'src/scss/**/*.scss'
+    sass: 'src/scss/**/*.scss',
 };
 
 function handleError(err) {
@@ -42,6 +43,16 @@ var onError = function (err) {
     })(err);
     this.emit('end');
 };
+
+function getLatestVersionName() {
+    var files = fs.readdirSync('releases');
+    var lastFile = files[files.length - 1];
+    var lastFileArr = lastFile.split(".");
+    var subVersion = parseInt(lastFileArr[lastFileArr.length - 2]);
+    lastFileArr[lastFileArr.length - 2] = subVersion + 1;
+    var newFileName = lastFileArr.join('.');
+    return newFileName;
+}
 
 /**
  * ######################################################################
@@ -68,27 +79,28 @@ gulp.task('clean_codecayon_package', function () {
  * COPY
  * ######################################################################
  */
-gulp.task('copy-i18n', function() {
+gulp.task('copy-i18n', function () {
     gulp.src('./bower_components/angular-i18n/**/*')
     // Perform minification tasks, etc here
-    .pipe(gulp.dest('./dist/js/i18n'));
+        .pipe(gulp.dest('./dist/js/i18n'));
 });
 
-gulp.task('calendar-locales', function() {
+gulp.task('calendar-locales', function () {
     gulp.src('./bower_components/fullcalendar/dist/locale/**/*')
     // Perform minification tasks, etc here
-    .pipe(gulp.dest('./dist/js/calendar-locale'));
+        .pipe(gulp.dest('./dist/js/calendar-locale'));
 });
 
-gulp.task('copy-images', function() {
+gulp.task('copy-images', function () {
     gulp.src('./src/img/**/*')
-    .pipe(gulp.dest('./dist/img'));
+        .pipe(gulp.dest('./dist/img'));
 });
 
-gulp.task('copy-documentation', function() {
+gulp.task('copy-documentation', function () {
     gulp.src('./codecanyon-files/documentation/**/*')
         .pipe(gulp.dest('./csm-codecanyon-pack/documentation'));
 });
+
 
 /**
  * ######################################################################
@@ -98,27 +110,27 @@ gulp.task('copy-documentation', function() {
 
 gulp.task('css', function () {
     var scssStream = gulp.src(['./src/scss/**/*.scss'])
-            .pipe(plumber({errorHandler: onError}))
-            .pipe(sass())
-            .pipe(concat('scss-files.scss'));
+        .pipe(plumber({errorHandler: onError}))
+        .pipe(sass())
+        .pipe(concat('scss-files.scss'));
 
     var cssStream = gulp.src([
         'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
     ])
-            .pipe(concat('css-files.css'));
+        .pipe(concat('css-files.css'));
 
     return merge(scssStream, cssStream)
-            .pipe(concat('styles.css'))
+        .pipe(concat('styles.css'))
 
-            //only uglify if gulp is ran with '--type production'
-            .pipe(gutil.env.type === 'production' ? minify() : gutil.noop())
-            .pipe(gulp.dest('dist/css'))
-            .pipe(notify({
-                'title': 'SASS',
-                'message': 'Sass compiled and compressed',
-                'icon': 'gulp_img/sass.png',
-                'sound': true
-            }));
+        //only uglify if gulp is ran with '--type production'
+        .pipe(gutil.env.type === 'production' ? minify() : gutil.noop())
+        .pipe(gulp.dest('dist/css'))
+        .pipe(notify({
+            'title': 'SASS',
+            'message': 'Sass compiled and compressed',
+            'icon': 'gulp_img/sass.png',
+            'sound': true
+        }));
 });
 
 
@@ -145,19 +157,19 @@ gulp.task('js', function () {
         'src/js/Ctrl.js',
         paths.scripts
     ]))
-            .pipe(plumber({errorHandler: onError}))
-            .pipe(concat('app.js'))
+        .pipe(plumber({errorHandler: onError}))
+        .pipe(concat('app.js'))
 
-            //only uglify if gulp is ran with '--type production'
-            .pipe(gutil.env.type === 'production' ? stripDebug() : gutil.noop())
-            .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
-            .pipe(gulp.dest('dist/js'))
-            .pipe(notify({
-                'title': 'Javascript',
-                'message': 'Javascript compiled and compressed',
-                'icon': 'gulp_img/js.png',
-                'sound': true
-            }));
+        //only uglify if gulp is ran with '--type production'
+        .pipe(gutil.env.type === 'production' ? stripDebug() : gutil.noop())
+        .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+        .pipe(gulp.dest('dist/js'))
+        .pipe(notify({
+            'title': 'Javascript',
+            'message': 'Javascript compiled and compressed',
+            'icon': 'gulp_img/js.png',
+            'sound': true
+        }));
     ;
 });
 
@@ -173,14 +185,14 @@ gulp.task('fonts', function () {
         'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
         'bower_components/font-awesome/fonts/*'
     ])
-            .pipe(flatten())
-            .pipe(gulp.dest('dist/fonts'))
-            .pipe(notify({
-                'title': 'Fonts',
-                'message': 'Fonts copied',
-                'icon': 'gulp_img/fonts.png',
-                'sound': true
-            }));
+        .pipe(flatten())
+        .pipe(gulp.dest('dist/fonts'))
+        .pipe(notify({
+            'title': 'Fonts',
+            'message': 'Fonts copied',
+            'icon': 'gulp_img/fonts.png',
+            'sound': true
+        }));
 });
 
 
@@ -196,8 +208,8 @@ gulp.task('watch', function () {
     gulp.watch(paths.sass, ['css']);
 });
 
-gulp.task('default', function() {
-    runSequence('clean', ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images']);
+gulp.task('default', function () {
+    runSequence('clean', ['js', 'fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images']);
 });
 
 /**
@@ -206,8 +218,37 @@ gulp.task('default', function() {
  * ######################################################################
  */
 
-gulp.task('distro', function() {
-    runSequence('clean', ['copy-documentation'], ['js','fonts', 'css', 'copy-i18n', 'calendar-locales', 'copy-images'], ['make_distro'], ['zip-plugin'], ['clean_distro'], ['zip-codecayon-package'], ['clean_codecayon_package']);
+gulp.task('distro', function () {
+    runSequence('clean',
+        [
+            'copy-documentation'
+        ], [
+            'js',
+            'fonts',
+            'css',
+            'copy-i18n',
+            'calendar-locales',
+            'copy-images'
+        ],
+        [
+            'make_distro'
+        ],
+        [
+            'zip-plugin'
+        ],
+        [
+            'distro_version'
+        ],
+        [
+            'clean_distro'
+        ],
+        [
+            'zip-codecayon-package'
+        ],
+        [
+            'clean_codecayon_package'
+        ]
+    );
 });
 
 gulp.task('make_distro', function () {
@@ -218,8 +259,20 @@ gulp.task('make_distro', function () {
         'vendor/**/*',
         'coworkingspacemanager.php',
         'routing.php'
-    ], {base:"."})
-            .pipe(gulp.dest('csm-codecanyon-pack/_coworkingspacemanager/'));
+    ], {base: "."})
+        .pipe(gulp.dest('csm-codecanyon-pack/_coworkingspacemanager/'));
+});
+
+/**
+ * ######################################################################
+ * SET DISTRO VERSION
+ * ######################################################################
+ */
+
+gulp.task('distro_version', function () {
+    var newFileName = getLatestVersionName();
+    return gulp.src('csm-codecanyon-pack/' + newFileName)
+        .pipe(gulp.dest('releases/'));
 });
 
 /**
@@ -228,8 +281,9 @@ gulp.task('make_distro', function () {
  * ######################################################################
  */
 gulp.task('zip-plugin', function () {
+    var newFileName = getLatestVersionName();
     return gulp.src('csm-codecanyon-pack/_coworkingspacemanager/**/*')
-        .pipe(zip('csm-codecanyon-pack/coworkingspacemanager.zip'))
+        .pipe(zip('csm-codecanyon-pack/' + newFileName))
         .pipe(gulp.dest('.'));
 });
 
