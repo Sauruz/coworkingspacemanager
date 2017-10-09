@@ -243,7 +243,7 @@ gulp.task('distro', function () {
             'zip-codecayon-package'
         ],
         [
-//             'clean_codecayon_package'
+             'clean_codecayon_package'
         ]
     );
 });
