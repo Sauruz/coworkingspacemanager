@@ -58,16 +58,16 @@ class CsmDashboard
     public function capacity()
     {
         return $this->db->get_results("SELECT "
-            . "wp_csm_plans.id AS plan_id, "
-            . "wp_csm_plans.name as plan_name, "
-            . "wp_csm_workplaces.id AS workplace_id, "
-            . "wp_csm_workplaces.name AS workplace_name, "
-            . "wp_csm_workplaces.capacity AS workplace_capacity, "
-            . "SUM((SELECT count(*) FROM wp_csm_memberships WHERE plan_start <= CURDATE() AND plan_id = wp_csm_plans.id)) AS memberships_count, "
-            . "ROUND((SUM((SELECT count(*) FROM wp_csm_memberships WHERE plan_start <= CURDATE() AND plan_id = wp_csm_plans.id)) / wp_csm_workplaces.capacity) * 100) AS percentage "
-            . "FROM wp_csm_plans "
-            . "RIGHT JOIN wp_csm_workplaces "
-            . "ON wp_csm_plans.workplace_id = wp_csm_workplaces.id "
+            . $this->db->prefix . "csm_plans.id AS plan_id, "
+            . $this->db->prefix . "csm_plans.name as plan_name, "
+            . $this->db->prefix . "csm_workplaces.id AS workplace_id, "
+            . $this->db->prefix . "csm_workplaces.name AS workplace_name, "
+            . $this->db->prefix . "csm_workplaces.capacity AS workplace_capacity, "
+            . "SUM((SELECT count(*) FROM " . $this->db->prefix . "csm_memberships WHERE plan_start <= CURDATE() AND plan_id = " . $this->db->prefix . "csm_plans.id)) AS memberships_count, "
+            . "ROUND((SUM((SELECT count(*) FROM " . $this->db->prefix . "csm_memberships WHERE plan_start <= CURDATE() AND plan_id = " . $this->db->prefix . "csm_plans.id)) / " . $this->db->prefix . "csm_workplaces.capacity) * 100) AS percentage "
+            . "FROM " . $this->db->prefix . "csm_plans "
+            . "RIGHT JOIN " . $this->db->prefix . "csm_workplaces "
+            . "ON " . $this->db->prefix . "csm_plans.workplace_id = " . $this->db->prefix . "csm_workplaces.id "
             . "GROUP BY workplace_id", ARRAY_A);
     }
 

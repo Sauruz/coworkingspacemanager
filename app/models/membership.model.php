@@ -129,8 +129,8 @@ class CsmMembership {
                 . $query_count_string
                 . $this->db->prefix . "csm_workplaces.name AS workplace_name, "
                 . $this->db->prefix . "csm_workplaces.capacity "
-                . "FROM wp_csm_workplaces "
-                . "WHERE wp_csm_workplaces.id = " . $plan['workplace_id'];
+                . "FROM " .$this->db->prefix . "csm_workplaces "
+                . "WHERE " . $this->db->prefix . "csm_workplaces.id = " . $plan['workplace_id'];
 
         $result = $this->db->get_row($query, ARRAY_A);
 
